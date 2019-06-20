@@ -3,6 +3,10 @@
 #include "Game.h"
 
 
+void Player::Move()
+{
+}
+
 Player::Player(VECTOR initPos)
 {
 	pos = initPos;
@@ -10,6 +14,10 @@ Player::Player(VECTOR initPos)
 	playerModel = new int;
 	*playerModel = NULL;
 	*playerModel = MV1LoadModel("model/whiteBall.mqo");
+
+	pos = VGet(0, 0, 0);
+	targetPos = pos.x;
+	needDis = 0;
 }
 
 
@@ -23,13 +31,32 @@ Player::~Player()
 
 void Player::Update()
 {
-	
+	if (Game::GetInstance()->GetAllInputKey()[KEY_INPUT_RETURN]==1)
+	{
+		 targetPos = pos.x + MovingDistance;
+	     needDis = MovingDistance / movingRequiredTime;
+
+	}
+	if (Game::GetInstance()->GetAllInputKey()[KEY_INPUT_SPACE] == 1)
+	{
+		targetPos = pos.x - MovingDistance;
+		needDis = -MovingDistance / movingRequiredTime;
+	}
+	if ((int)pos.x != (int)targetPos)
+	{
+		pos.x += needDis;
+	}
+	else
+	{
+		targetPos = pos.x;
+		needDis = 0;
+	}
 }
 
 void Player::Render()
 {
 
 	//中央にプレイヤーモデルを描画
-	MV1SetPosition(*playerModel, VGet(0, 0, 0));
+	MV1SetPosition(*playerModel,pos);
 	MV1DrawModel(*playerModel);
 }
