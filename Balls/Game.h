@@ -1,14 +1,18 @@
 #pragma once
 
+class Scene;
+
 //ゲーム全体の処理
 class Game
 {
 private:
 	Game() {};
 	static Game *game;
+	Scene *scene;
 
 	bool ScreenUpdate();
 	void SetUpdateKey(char* control);
+	void SceneChange(char* key);
 
 	//スクリーンサイズ
 	const int ScreenWidth = 500;

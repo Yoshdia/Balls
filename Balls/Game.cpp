@@ -1,5 +1,10 @@
 #include "DxLib.h"
 #include "Game.h"
+#include "Scene.h"
+#include "Title.h"
+#include "Play.h"
+#include "Clear.h"
+
 
 Game *Game::game = NULL;
 
@@ -50,6 +55,25 @@ void Game::SetUpdateKey(char * control)
 	}
 }
 
+void Game::SceneChange(char * key)
+{
+	sceneName nextScene= scene->SceneChange(key);
+	switch (nextScene)
+	{
+	case(sceneName::title):
+		delete scene;
+		scene = new Title;
+		break;
+	case(sceneName::play):
+		delete scene;
+		scene = new Play;
+		break;
+	case(sceneName::clear):
+		scene = new Clear;
+		break;
+	}
+}
+
 void Game::Update()
 {
 	//dxlib期化処理
@@ -66,11 +90,16 @@ void Game::Update()
 	//キー情報の取得と初期化
 	char* key=new char[ControlKeyNum];
 	SetUpdateKey(key);
+	
+    scene = new Title();
 
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && key[KEY_INPUT_ESCAPE]==0)
 	{
 		SetUpdateKey(key);
+		scene->Update();
+		scene->Render();
+		SceneChange(key);
 	}
 
 	delete[] key;
