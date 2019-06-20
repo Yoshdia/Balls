@@ -1,13 +1,15 @@
 #pragma once
 #include "Scene.h"
 
+class Player;
+
 //Playシーン
 class Play :
 	public Scene
 {
 private:
-	//プレイヤーモデル
-	int *playerModel;
+	Player *player;
+	const VECTOR playerPos=VGet(0,0,0);
 public:
 	Play();
 	~Play();
