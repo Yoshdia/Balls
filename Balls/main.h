@@ -13,7 +13,7 @@
 camelCase
  メソッド名や変数名
 PascalCase
- const変数や関数名
+ const変数や関数名、クラス名など
 アンダースコアを使用した命名は禁止
 
 ・ブーリアンとの比較は禁止
@@ -30,6 +30,6 @@ NOTE	コメント確認を推奨	通常コメントより目立たせることが主目的であり、使途は自由
 不可解な実装の経緯や背景などで利用
 */
 
-const int ScreenWidth = 500;
-const int ScreenHeight = 500;
+
+
 
