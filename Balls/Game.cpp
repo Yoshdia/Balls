@@ -4,6 +4,7 @@
 #include "Title.h"
 #include "Play.h"
 #include "Clear.h"
+#include "Camera.h"
 
 
 Game *Game::game = NULL;
@@ -91,11 +92,13 @@ void Game::Update()
 	char* key=new char[ControlKeyNum];
 	SetUpdateKey(key);
 	
-    scene = new Title();
+    scene = new Play;
+	camera = new Camera;
 
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && key[KEY_INPUT_ESCAPE]==0)
 	{
+		camera->Update();
 		SetUpdateKey(key);
 		scene->Update();
 		scene->Render();
@@ -103,6 +106,8 @@ void Game::Update()
 	}
 
 	delete[] key;
+	delete scene;
+	delete camera;
 
 	DxLib_End();				// ＤＸライブラリ使用の終了処理
 

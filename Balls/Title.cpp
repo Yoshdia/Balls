@@ -12,6 +12,7 @@ Title::~Title()
 
 void Title::Update()
 {
+	
 }
 
 void Title::Render()
