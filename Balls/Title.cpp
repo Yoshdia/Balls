@@ -20,9 +20,9 @@ void Title::Render()
 	DrawFormatString(0,0,GetColor(255,255,255),"Title");
 }
 
-sceneName Title::SceneChange(char* key)
+sceneName Title::SceneChange()
 {
-	if (key[KEY_INPUT_0] == 1)
+	if (Game::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1)
 	{
 		return sceneName::play;
 	}

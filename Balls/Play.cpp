@@ -1,6 +1,7 @@
 #include"DxLib.h"
 #include "Play.h"
 #include "Player.h"
+#include "Game.h"
 
 Play::Play()
 {
@@ -27,9 +28,9 @@ void Play::Render()
 	player->Render();
 }
 
-sceneName Play::SceneChange(char* key)
+sceneName Play::SceneChange()
 {
-	if (key[KEY_INPUT_0] == 1)
+	if (Game::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1)
 	{
 		return sceneName::clear;
 	}

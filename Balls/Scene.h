@@ -19,5 +19,5 @@ public:
 	//描画
 	virtual void Render() {};
 	//それぞれのSceneで別シーンに移動する条件と名前を指定できる
-	virtual sceneName SceneChange(char* key) = 0;
+	virtual sceneName SceneChange() = 0;
 };

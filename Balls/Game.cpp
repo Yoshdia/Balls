@@ -4,7 +4,6 @@
 #include "Title.h"
 #include "Play.h"
 #include "Clear.h"
-#include "Camera.h"
 
 
 Game *Game::game = NULL;
@@ -23,6 +22,11 @@ void Game::Delete()
 	game = NULL;
 }
 
+char * Game::GetAllInputKey()
+{
+	return key;
+}
+
 bool Game::ScreenUpdate()
 {
 	if (ProcessMessage() != 0) return false;
@@ -33,12 +37,11 @@ bool Game::ScreenUpdate()
 	return true;
 }
 
-void Game::SetUpdateKey(char * control)
+void Game::SetUpdateKey()
 {
-	//現在の入力状態をtmpKeyにコピー
-	char tmpKey[256];
 
 	//全ての入力状態をtmpKeyに格納
+	char tmpKey[256];
 	GetHitKeyStateAll(tmpKey);
 
 	//num番目のキーが押されていたら加算
@@ -46,19 +49,19 @@ void Game::SetUpdateKey(char * control)
 	{
 		if (tmpKey[num] != 0)
 		{
-			control[num]++;
+			key[num]++;
 		}
 		else
 		{
 			//押されていないキーは0にする
-			control[num] = 0;
+			key[num] = 0;
 		}
 	}
 }
 
-void Game::SceneChange(char * key)
+void Game::SceneChange()
 {
-	sceneName nextScene= scene->SceneChange(key);
+	sceneName nextScene = scene->SceneChange();
 	switch (nextScene)
 	{
 	case(sceneName::title):
@@ -78,7 +81,7 @@ void Game::SceneChange(char * key)
 void Game::Update()
 {
 	//dxlib期化処理
-	if (DxLib_Init() == -1)		
+	if (DxLib_Init() == -1)
 	{
 		return;
 	}
@@ -89,25 +92,32 @@ void Game::Update()
 	//描画先グラフィック領域を裏に
 	SetDrawScreen(DX_SCREEN_BACK);
 	//キー情報の取得と初期化
-	char* key=new char[ControlKeyNum];
-	SetUpdateKey(key);
-	
-    scene = new Play;
-	camera = new Camera;
+	key = new char[ControlKeyNum];
+	SetUpdateKey();
+
+	scene = new Play;
+
+	//カメラの視野範囲を設定
+	SetCameraNearFar(nearCameraPos, farCameraPos);
+	//カメラの場所を設定
+	SetCameraPositionAndTarget_UpVecY(CameraPos, VGet(0, 0, 0));
+	//ライトの場所をカメラと同じ位置に設定
+	SetLightPosition(CameraPos);
+	//ライトの向きをカメラから0,0,0を見るように設定
+	SetLightDirection(VGet(0, 0, 1));
+
 
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
-	while (ScreenUpdate() && key[KEY_INPUT_ESCAPE]==0)
+	while (ScreenUpdate() && key[KEY_INPUT_ESCAPE] == 0)
 	{
-		camera->Update();
-		SetUpdateKey(key);
+		SetUpdateKey();
 		scene->Update();
 		scene->Render();
-		SceneChange(key);
+		SceneChange();
 	}
 
 	delete[] key;
 	delete scene;
-	delete camera;
 
 	DxLib_End();				// ＤＸライブラリ使用の終了処理
 

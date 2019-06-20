@@ -16,7 +16,7 @@ public:
 
 	void Update();
 	void Render();
-	sceneName SceneChange(char* key);
+	sceneName SceneChange();
 
 };
 

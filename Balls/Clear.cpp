@@ -1,5 +1,7 @@
 #include"DxLib.h"
 #include "Clear.h"
+#include "Game.h"
+
 
 
 Clear::Clear()
@@ -20,9 +22,9 @@ void Clear::Render()
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "Clear");
 }
 
-sceneName Clear::SceneChange(char* key)
+sceneName Clear::SceneChange()
 {
-	if (key[KEY_INPUT_0] == 1)
+	if (Game::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1)
 	{
 		return sceneName::title;
 	}

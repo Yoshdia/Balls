@@ -1,6 +1,6 @@
 #include"DxLib.h"
 #include "Player.h"
-
+#include "Game.h"
 
 
 Player::Player(VECTOR initPos)
@@ -18,10 +18,12 @@ Player::~Player()
 	//‰ð•ú
 	MV1DeleteModel(*playerModel);
 	delete playerModel;
+	playerModel = NULL;
 }
 
 void Player::Update()
 {
+	
 }
 
 void Player::Render()
