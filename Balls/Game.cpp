@@ -28,6 +28,65 @@ char * Game::GetAllInputKey()
 	return key;
 }
 
+void Game::Update()
+{
+	//dxlib期化処理
+	if (DxLib_Init() == -1)
+	{
+		return;
+	}
+	//スクリーンモードの変更。true=ウィンドウモード
+	ChangeWindowMode(true);
+	//画面モードの変更
+	SetGraphMode(ScreenWidth, ScreenHeight, 32);
+	//描画先グラフィック領域を裏に
+	SetDrawScreen(DX_SCREEN_BACK);
+	//キー情報の取得と初期化
+	key = new char[ControlKeyNum];
+	SetUpdateKey();
+
+	//最初のシーンを作成
+	scene = new Play;
+
+	//カメラの視野範囲を設定
+	SetCameraNearFar(nearCameraPos, farCameraPos);
+	//カメラの場所を設定
+	SetCameraPositionAndTarget_UpVecY(CameraPos, VGet(0, 0, 0));
+	//ライトの場所をカメラと同じ位置に設定
+	SetLightPosition(CameraPos);
+	//ライトの向きをカメラから0,0,0を見るように設定
+	SetLightDirection(VGet(0, 0, 1));
+
+	Player *leftPlayer = new Player(leftPlayerPos,Player::PlayerMoveDirection::LeftMove,KEY_INPUT_SPACE);
+	Player *rightPlayer = new Player(rightPlayerPos, Player::PlayerMoveDirection::RightMove,KEY_INPUT_RETURN);
+
+	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
+	while (ScreenUpdate() && key[KEY_INPUT_ESCAPE] == 0)
+	{
+		SetUpdateKey();
+
+		scene->Update();
+		leftPlayer->Update();
+		rightPlayer->Update();
+
+		scene->Render();
+		leftPlayer->Render();
+		rightPlayer->Render();
+
+		SceneChange();
+	}
+
+	delete[] key;
+	delete scene;
+	delete leftPlayer;
+	delete rightPlayer;
+
+
+	DxLib_End();				// ＤＸライブラリ使用の終了処理
+
+	return;
+}
+
 bool Game::ScreenUpdate()
 {
 	if (ProcessMessage() != 0) return false;
@@ -77,58 +136,4 @@ void Game::SceneChange()
 		scene = new Clear;
 		break;
 	}
-}
-
-void Game::Update()
-{
-	//dxlib期化処理
-	if (DxLib_Init() == -1)
-	{
-		return;
-	}
-	//スクリーンモードの変更。true=ウィンドウモード
-	ChangeWindowMode(true);
-	//画面モードの変更
-	SetGraphMode(ScreenWidth, ScreenHeight, 32);
-	//描画先グラフィック領域を裏に
-	SetDrawScreen(DX_SCREEN_BACK);
-	//キー情報の取得と初期化
-	key = new char[ControlKeyNum];
-	SetUpdateKey();
-
-	//最初のシーンを作成
-	scene = new Play;
-
-	//カメラの視野範囲を設定
-	SetCameraNearFar(nearCameraPos, farCameraPos);
-	//カメラの場所を設定
-	SetCameraPositionAndTarget_UpVecY(CameraPos, VGet(0, 0, 0));
-	//ライトの場所をカメラと同じ位置に設定
-	SetLightPosition(CameraPos);
-	//ライトの向きをカメラから0,0,0を見るように設定
-	SetLightDirection(VGet(0, 0, 1));
-
-	Player *player = new Player(playerPos);
-
-	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
-	while (ScreenUpdate() && key[KEY_INPUT_ESCAPE] == 0)
-	{
-		SetUpdateKey();
-
-		player->Update();
-		scene->Update();
-		player->Render();
-		scene->Render();
-
-		SceneChange();
-	}
-
-	delete[] key;
-	delete scene;
-	delete player;
-
-
-	DxLib_End();				// ＤＸライブラリ使用の終了処理
-
-	return;
 }

@@ -1,29 +1,32 @@
 #include"DxLib.h"
 #include "Player.h"
+#include <math.h>
 #include "Game.h"
 
-
-void Player::Move()
-{
-}
-
-Player::Player(VECTOR initPos)
+Player::Player(VECTOR initPos, PlayerMoveDirection next, char moveKey)
 {
 	pos = initPos;
-	//プレイヤーモデルにint型の3dモデルを読み込む
+	moveInThisKey = moveKey;
+	nextMoveDirection = next;
+
+	//playerModelに3dモデルを読み込む
 	playerModel = new int;
 	*playerModel = NULL;
 	*playerModel = MV1LoadModel("model/whiteBall.mqo");
 
-	pos = VGet(0, 0, 0);
+	//モデルを縮小
+	float scale = 0.1f;
+	MV1SetScale(*playerModel, VGet(scale, scale, scale));
+
+	//移動予定地点と移動する距離の初期化
 	targetPos = pos.x;
-	needDis = 0;
+	moveDistance = 0;
 }
 
 
 Player::~Player()
 {
-	//解放
+	//playerModelの解放
 	MV1DeleteModel(*playerModel);
 	delete playerModel;
 	playerModel = NULL;
@@ -31,32 +34,38 @@ Player::~Player()
 
 void Player::Update()
 {
-	if (Game::GetInstance()->GetAllInputKey()[KEY_INPUT_RETURN]==1)
-	{
-		 targetPos = pos.x + MovingDistance;
-	     needDis = MovingDistance / movingRequiredTime;
+	Move();
+}
 
-	}
-	if (Game::GetInstance()->GetAllInputKey()[KEY_INPUT_SPACE] == 1)
+void Player::Move()
+{
+	//移動中でない場合のみ入力を受け付ける
+	if (pos.x == targetPos)
 	{
-		targetPos = pos.x - MovingDistance;
-		needDis = -MovingDistance / movingRequiredTime;
-	}
-	if ((int)pos.x != (int)targetPos)
-	{
-		pos.x += needDis;
+		//生成時に受け取ったキーが入力されたとき
+		if (Game::GetInstance()->GetAllInputKey()[moveInThisKey] == 1)
+		{
+			//移動予定地
+			targetPos = pos.x + (MovingDistance*nextMoveDirection);
+			//1Fで移動する距離
+			moveDistance = (((pos.x + nextMoveDirection) - pos.x) / MovingDistance);
+			//右に移動していた場合左に　のように左右切り替えられるようにする
+			switch (nextMoveDirection)
+			{
+			case(RightMove):nextMoveDirection = LeftMove; break;
+			case(LeftMove):nextMoveDirection = RightMove; break;
+			}
+		}
 	}
 	else
 	{
-		targetPos = pos.x;
-		needDis = 0;
+		pos.x += moveDistance;
 	}
 }
 
 void Player::Render()
 {
-
-	//中央にプレイヤーモデルを描画
-	MV1SetPosition(*playerModel,pos);
+	//posに描画
+	MV1SetPosition(*playerModel, pos);
 	MV1DrawModel(*playerModel);
 }
