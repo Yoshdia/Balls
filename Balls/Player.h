@@ -17,12 +17,12 @@ public:
 	void Update();
 	void Render();
 private:
-
 	PlayerMoveDirection nextMoveDirection;
 
 	VECTOR pos;
 	//プレイヤーモデル
 	int *playerModel;
+	int *playerModelTexture;
 	//移動予定地点
 	float targetPos;
 	//毎F移動する距離
@@ -31,6 +31,8 @@ private:
 	char moveInThisKey;
 	//移動処理関数
 	void Move();
+	//回転する速度
+	VECTOR rotate;
 
 	//移動時間
 	const float movingRequiredTime = 10;

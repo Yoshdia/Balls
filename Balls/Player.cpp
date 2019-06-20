@@ -14,13 +14,21 @@ Player::Player(VECTOR initPos, PlayerMoveDirection next, char moveKey)
 	*playerModel = NULL;
 	*playerModel = MV1LoadModel("model/whiteBall.mqo");
 
+	playerModelTexture = new int;
+	*playerModelTexture = NULL;
+	*playerModelTexture = LoadGraph("model/grade.JPG");
+
 	//モデルを縮小
 	float scale = 0.1f;
 	MV1SetScale(*playerModel, VGet(scale, scale, scale));
+	//モデルにテクスチャを張り付ける
+	MV1SetTextureGraphHandle(*playerModel, 0,*playerModelTexture, FALSE);
 
 	//移動予定地点と移動する距離の初期化
 	targetPos = pos.x;
 	moveDistance = 0;
+
+	rotate = VGet(-1,0,0);
 }
 
 
@@ -30,10 +38,14 @@ Player::~Player()
 	MV1DeleteModel(*playerModel);
 	delete playerModel;
 	playerModel = NULL;
+	delete playerModelTexture;
+	playerModelTexture = NULL;
 }
 
 void Player::Update()
 {
+	//回転させる
+	rotate=VAdd(rotate, VGet(0.1, 0, 0));
 	Move();
 }
 
@@ -67,5 +79,6 @@ void Player::Render()
 {
 	//posに描画
 	MV1SetPosition(*playerModel, pos);
+	MV1SetRotationXYZ(*playerModel, rotate);
 	MV1DrawModel(*playerModel);
 }

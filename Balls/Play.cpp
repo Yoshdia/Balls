@@ -4,7 +4,7 @@
 
 Play::Play()
 {
-
+	
 }
 
 
@@ -23,7 +23,6 @@ void Play::Render()
 	//3D‹óŠÔ‚Ì”F¯‚ÆƒJƒƒ‰‚Ì³í“®ì‚Ì‚½‚ß‚É’†‰›‚É10‚Ìü‚ğ•`‚­
 	DrawLine3D(VGet(-5, 0, 0), VGet(5, 0, 0), GetColor(255, 255, 255));
 	DrawLine3D(VGet(0, -5, 0), VGet(0, 5, 0), GetColor(255, 255, 255));
-	
 }
 
 sceneName Play::SceneChange()
