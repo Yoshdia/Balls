@@ -4,6 +4,7 @@
 #include "Title.h"
 #include "Play.h"
 #include "Clear.h"
+#include "Player.h"
 
 
 Game *Game::game = NULL;
@@ -95,6 +96,7 @@ void Game::Update()
 	key = new char[ControlKeyNum];
 	SetUpdateKey();
 
+	//最初のシーンを作成
 	scene = new Play;
 
 	//カメラの視野範囲を設定
@@ -106,18 +108,25 @@ void Game::Update()
 	//ライトの向きをカメラから0,0,0を見るように設定
 	SetLightDirection(VGet(0, 0, 1));
 
+	Player *player = new Player(playerPos);
 
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && key[KEY_INPUT_ESCAPE] == 0)
 	{
 		SetUpdateKey();
+
+		player->Update();
 		scene->Update();
+		player->Render();
 		scene->Render();
+
 		SceneChange();
 	}
 
 	delete[] key;
 	delete scene;
+	delete player;
+
 
 	DxLib_End();				// ＤＸライブラリ使用の終了処理
 
