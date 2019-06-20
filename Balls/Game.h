@@ -8,10 +8,12 @@ private:
 	static Game *game;
 
 	bool ScreenUpdate();
+	void SetUpdateKey(char* control);
 
 	//スクリーンサイズ
 	const int ScreenWidth = 500;
 	const int ScreenHeight = 500;
+	const int ControlKeyNum = 256;
 public:
 	static Game *GetInstance() { return game; }
 

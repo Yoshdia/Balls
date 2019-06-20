@@ -27,6 +27,29 @@ bool Game::ScreenUpdate()
 	return true;
 }
 
+void Game::SetUpdateKey(char * control)
+{
+	//現在の入力状態をtmpKeyにコピー
+	char tmpKey[256];
+
+	//全ての入力状態をtmpKeyに格納
+	GetHitKeyStateAll(tmpKey);
+
+	//num番目のキーが押されていたら加算
+	for (int num = 0; num < ControlKeyNum; num++)
+	{
+		if (tmpKey[num] != 0)
+		{
+			control[num]++;
+		}
+		else
+		{
+			//押されていないキーは0にする
+			control[num] = 0;
+		}
+	}
+}
+
 void Game::Update()
 {
 	//dxlib期化処理
@@ -40,12 +63,17 @@ void Game::Update()
 	SetGraphMode(ScreenWidth, ScreenHeight, 32);
 	//描画先グラフィック領域を裏に
 	SetDrawScreen(DX_SCREEN_BACK);
+	//キー情報の取得と初期化
+	char* key=new char[ControlKeyNum];
+	SetUpdateKey(key);
 
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
-	while (ScreenUpdate() && !CheckHitKey(KEY_INPUT_ESCAPE))
+	while (ScreenUpdate() && key[KEY_INPUT_ESCAPE]==0)
 	{
-
+		SetUpdateKey(key);
 	}
+
+	delete[] key;
 
 	DxLib_End();				// ＤＸライブラリ使用の終了処理
 
