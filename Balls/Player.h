@@ -20,8 +20,10 @@ private:
 	PlayerMoveDirection nextMoveDirection;
 
 	VECTOR pos;
-	//プレイヤーモデル
+
 	int *playerModel;
+	//Playerモデルのコピー
+	int *playerDuplicateModel;
 	int *playerModelTexture;
 	//移動予定地点
 	float targetPos;
