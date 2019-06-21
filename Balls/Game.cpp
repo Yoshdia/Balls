@@ -5,6 +5,8 @@
 #include "Play.h"
 #include "Clear.h"
 #include "Player.h"
+#include "Wall.h"
+
 
 
 Game *Game::game = NULL;
@@ -59,6 +61,7 @@ void Game::Update()
 
 	Player *leftPlayer = new Player(leftPlayerPos,Player::PlayerMoveDirection::LeftMove,KEY_INPUT_SPACE);
 	Player *rightPlayer = new Player(rightPlayerPos, Player::PlayerMoveDirection::RightMove,KEY_INPUT_RETURN);
+	Wall *wall = new Wall;
 
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && key[KEY_INPUT_ESCAPE] == 0)
@@ -68,10 +71,12 @@ void Game::Update()
 		scene->Update();
 		leftPlayer->Update();
 		rightPlayer->Update();
+		wall->Update();
 
 		scene->Render();
 		leftPlayer->Render();
 		rightPlayer->Render();
+		wall->Render();
 
 		SceneChange();
 	}
@@ -80,6 +85,7 @@ void Game::Update()
 	delete scene;
 	delete leftPlayer;
 	delete rightPlayer;
+	delete wall;
 
 
 	DxLib_End();				// ＤＸライブラリ使用の終了処理

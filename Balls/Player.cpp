@@ -1,4 +1,3 @@
-#include"DxLib.h"
 #include "Player.h"
 #include <math.h>
 #include "Game.h"
@@ -10,23 +9,15 @@ Player::Player(VECTOR initPos, PlayerMoveDirection next, char moveKey)
 	nextMoveDirection = next;
 
 	//playerModelに3dモデルを読み込む
-	playerModel = new int;
-	*playerModel = NULL;
-	*playerModel = MV1LoadModel("model/whiteBall.mqo");
-	
-	playerDuplicateModel = new int;
-	*playerDuplicateModel = NULL;
-	*playerDuplicateModel = MV1DuplicateModel(*playerModel);
-
-	playerModelTexture = new int;
-	*playerModelTexture = NULL;
-	*playerModelTexture = LoadGraph("model/grade.JPG");
+	*model = MV1LoadModel("model/whiteBall.mqo");
+	*duplicateModel = MV1DuplicateModel(*model);
+	*modelTexture = LoadGraph("model/grade.JPG");
 
 	//モデルを縮小
 	float scale = 0.1f;
-	MV1SetScale(*playerDuplicateModel, VGet(scale, scale, scale));
+	MV1SetScale(*duplicateModel, VGet(scale, scale, scale));
 	//モデルにテクスチャを張り付ける
-	MV1SetTextureGraphHandle(*playerDuplicateModel, 0,*playerModelTexture, FALSE);
+	MV1SetTextureGraphHandle(*duplicateModel, 0,*modelTexture, FALSE);
 
 	//移動予定地点と移動する距離の初期化
 	targetPos = pos.x;
@@ -38,16 +29,6 @@ Player::Player(VECTOR initPos, PlayerMoveDirection next, char moveKey)
 
 Player::~Player()
 {
-	//playerModelの解放
-	MV1DeleteModel(*playerModel);
-	delete playerModel;
-	playerModel = NULL;
-	MV1DeleteModel(*playerDuplicateModel);
-	delete playerDuplicateModel;
-	playerDuplicateModel = NULL;
-
-	delete playerModelTexture;
-	playerModelTexture = NULL;
 }
 
 void Player::Update()
@@ -86,7 +67,7 @@ void Player::Move()
 void Player::Render()
 {
 	//posに描画
-	MV1SetPosition(*playerDuplicateModel, pos);
-	MV1SetRotationXYZ(*playerDuplicateModel, rotate);
-	MV1DrawModel(*playerDuplicateModel);
+	MV1SetPosition(*duplicateModel, pos);
+	MV1SetRotationXYZ(*duplicateModel, rotate);
+	MV1DrawModel(*duplicateModel);
 }

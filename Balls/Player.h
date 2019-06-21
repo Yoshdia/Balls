@@ -1,7 +1,9 @@
 #pragma once
 
+#include "Object.h"
 //画面手前で左右に移動する球。二つ生成される
-class Player
+class Player:
+	protected Object
 {
 public:
 	//このオブジェクトがどちらの向きへ進むのかの列挙体。移動距離MovingDistanceに直接乗算する
@@ -19,12 +21,6 @@ public:
 private:
 	PlayerMoveDirection nextMoveDirection;
 
-	VECTOR pos;
-
-	int *playerModel;
-	//Playerモデルのコピー
-	int *playerDuplicateModel;
-	int *playerModelTexture;
 	//移動予定地点
 	float targetPos;
 	//毎F移動する距離
