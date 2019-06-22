@@ -1,25 +1,22 @@
 #pragma once
 
 #include "Object.h"
+#include "Game.h"
+
 //画面手前で左右に移動する球。二つ生成される
 class Player:
 	protected Object
 {
 public:
-	//このオブジェクトがどちらの向きへ進むのかの列挙体。移動距離MovingDistanceに直接乗算する
-	enum PlayerMoveDirection
-	{
-		RightMove = 1,
-		LeftMove = -1,
-	};
+
 	//初期座標、初めに進む方向(左右)、移動のトリガーになるキーを受け取り保存する
-	Player(VECTOR initPos, PlayerMoveDirection next, char moveKey);
+	Player(VECTOR initPos, Game::MoveDirection next, char moveKey,int model,int texture);
 	~Player();
 
 	void Update();
 	void Render();
 private:
-	PlayerMoveDirection nextMoveDirection;
+	Game::MoveDirection nextMoveDirection;
 
 	//移動予定地点
 	float targetPos;
@@ -31,6 +28,11 @@ private:
 	void Move();
 	//回転する速度
 	VECTOR rotate;
+
+	VECTOR pos;
+
+	int *duplicateModel;
+
 
 	//移動時間
 	const float movingRequiredTime = 10;

@@ -1,23 +1,23 @@
 #include "Player.h"
 #include <math.h>
-#include "Game.h"
+//#include "Game.h"
 
-Player::Player(VECTOR initPos, PlayerMoveDirection next, char moveKey)
+Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey, int model, int texture)
 {
 	pos = initPos;
 	moveInThisKey = moveKey;
 	nextMoveDirection = next;
 
 	//playerModelに3dモデルを読み込む
-	*model = MV1LoadModel("model/whiteBall.mqo");
-	*duplicateModel = MV1DuplicateModel(*model);
-	*modelTexture = LoadGraph("model/grade.JPG");
+	duplicateModel = new int;
+	*duplicateModel = NULL;
+	*duplicateModel = MV1DuplicateModel(model);
 
 	//モデルを縮小
 	float scale = 0.1f;
 	MV1SetScale(*duplicateModel, VGet(scale, scale, scale));
 	//モデルにテクスチャを張り付ける
-	MV1SetTextureGraphHandle(*duplicateModel, 0,*modelTexture, FALSE);
+	MV1SetTextureGraphHandle(*duplicateModel, 0, texture, FALSE);
 
 	//移動予定地点と移動する距離の初期化
 	targetPos = pos.x;
@@ -29,6 +29,11 @@ Player::Player(VECTOR initPos, PlayerMoveDirection next, char moveKey)
 
 Player::~Player()
 {
+
+	MV1DeleteModel(*duplicateModel);
+	delete duplicateModel;
+	duplicateModel = NULL;
+
 }
 
 void Player::Update()
@@ -53,8 +58,8 @@ void Player::Move()
 			//右に移動していた場合左に　のように左右切り替えられるようにする
 			switch (nextMoveDirection)
 			{
-			case(RightMove):nextMoveDirection = LeftMove; break;
-			case(LeftMove):nextMoveDirection = RightMove; break;
+			case(Game::MoveDirection::Right):nextMoveDirection = Game::MoveDirection::Left; break;
+			case(Game::MoveDirection::Left):nextMoveDirection = Game::MoveDirection::Right; break;
 			}
 		}
 	}

@@ -18,6 +18,13 @@ public:
 	//全体の処理を行う関数
 	void Update();
 
+	//オブジェクトがどちらの向きへ進むのかの列挙体。移動距離MovingDistanceに直接乗算する
+	enum MoveDirection
+	{
+		Right = 1,
+		Left = -1,
+	};
+
 private:
 	Game() {};
 	static Game *game;
