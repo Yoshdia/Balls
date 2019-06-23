@@ -4,6 +4,7 @@
 #include "Title.h"
 #include "Play.h"
 #include "Clear.h"
+#include "Wall.h"
 #include "WallSetter.h"
 
 Game *Game::game = NULL;
@@ -67,9 +68,10 @@ void Game::Update()
 	Player *leftPlayer = new Player(leftPlayerPos, Game::MoveDirection::Left,KEY_INPUT_SPACE,*playerModel, *playerModelTexture);
 	Player *rightPlayer = new Player(rightPlayerPos, Game::MoveDirection::Right,KEY_INPUT_RETURN,*playerModel, *playerModelTexture);
 
-	WallSetter *wallSetter = new WallSetter;
+	//WallSetter *wallSetter = new WallSetter;
+	//wallSetter->SetWall();
+	Wall *wall = new Wall;
 
-	wallSetter->SetWall();
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && key[KEY_INPUT_ESCAPE] == 0)
 	{
@@ -78,12 +80,14 @@ void Game::Update()
 		scene->Update();
 		leftPlayer->Update();
 		rightPlayer->Update();
-		wallSetter->Update();
+		wall->Update();
+		//wallSetter->Update();
 
 		scene->Render();
 		leftPlayer->Render();
 		rightPlayer->Render();
-		wallSetter->Render();
+		wall->Render();
+		//wallSetter->Render();
 
 		SceneChange();
 	}
@@ -92,7 +96,8 @@ void Game::Update()
 	delete scene;
 	delete leftPlayer;
 	delete rightPlayer;
-	delete wallSetter;
+	delete wall;
+	//delete wallSetter;
 
 	MV1DeleteModel(*playerModel);
 	delete playerModel;
