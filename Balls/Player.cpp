@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <math.h>
+#include "ModelComponent.h"
 //#include "Game.h"
 
 Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey, int model, int texture)
@@ -24,6 +25,12 @@ Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey, int model
 	moveDistance = 0;
 
 	rotate = VGet(-1,0,0);
+
+	ModelComponent * sc;
+	sc = new ModelComponent(this);
+
+	int id = Game::GetInstance()->GetTexture("model/whiteBall.mqo");
+	sc->SetModel(id);
 }
 
 
@@ -34,13 +41,6 @@ Player::~Player()
 	delete duplicateModel;
 	duplicateModel = NULL;
 
-}
-
-void Player::Update()
-{
-	//‰ñ“]‚³‚¹‚é
-	rotate=VAdd(rotate, VGet(0.1f, 0, 0));
-	Move();
 }
 
 void Player::Move()
@@ -69,10 +69,17 @@ void Player::Move()
 	}
 }
 
+void Player::UpdateActor(float deltaTime)
+{
+	//‰ñ“]‚³‚¹‚é
+	rotate = VAdd(rotate, VGet(0.1f, 0, 0));
+	Move();
+}
+
 void Player::Render()
 {
 	//pos‚É•`‰æ
-	MV1SetPosition(*duplicateModel, pos);
-	MV1SetRotationXYZ(*duplicateModel, rotate);
-	MV1DrawModel(*duplicateModel);
+	//MV1SetPosition(*duplicateModel, pos);
+	//MV1SetRotationXYZ(*duplicateModel, rotate);
+	//MV1DrawModel(*duplicateModel);
 }

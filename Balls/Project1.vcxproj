@@ -149,9 +149,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Clear.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ModelComponent.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Play.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -160,9 +163,12 @@
     <ClCompile Include="WallSetter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor.h" />
     <ClInclude Include="Clear.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="ModelComponent.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Play.h" />
     <ClInclude Include="Player.h" />

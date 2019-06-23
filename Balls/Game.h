@@ -2,6 +2,12 @@
 
 class Scene;
 class Camera;
+class Actor;
+#include <vector>
+#include"DxLib.h"
+#include<unordered_map>
+
+class ModelComponent;
 
 //ゲーム全体の処理
 class Game
@@ -24,6 +30,18 @@ public:
 		Right = 1,
 		Left = -1,
 	};
+
+	void AddActor(Actor *actor);
+	void RemoveActor(Actor *actor);
+	void ActorUpdate();
+	void ShowActor();
+
+	void ShutDown();
+
+	int GetTexture(const std::string &fileName);
+	//void AddModel(ModelComponent* sprite);
+	//void RemoveModel(ModelComponent* sprite);
+	//void DrawSprite();
 
 private:
 	Game() {};
@@ -54,4 +72,11 @@ private:
 	//プレイヤーの初期座標
 	const VECTOR leftPlayerPos = VGet(-1, 0, 0);
 	const VECTOR rightPlayerPos = VGet(1, 0, 0);
+	std::vector<class Actor*> mPendingActors;
+	std::vector<class Actor*> mActors;
+
+	std::unordered_map<std::string, int> mTextures; // テクスチャ連想配列 
+	float      mDeltaTime;
+
+
 };

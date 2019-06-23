@@ -1,11 +1,12 @@
 #pragma once
 
-#include "Object.h"
+#include "Dxlib.h"
 #include "Game.h"
+#include "Actor.h"
 
 //‰æ–Êè‘O‚Å¶‰E‚ÉˆÚ“®‚·‚é‹…B“ñ‚Â¶¬‚³‚ê‚é
 class Player:
-	protected Object
+	public Actor
 {
 public:
 
@@ -13,7 +14,7 @@ public:
 	Player(VECTOR initPos, Game::MoveDirection next, char moveKey,int model,int texture);
 	~Player();
 
-	void Update();
+	void UpdateActor(float deltaTime);
 	void Render();
 private:
 	Game::MoveDirection nextMoveDirection;

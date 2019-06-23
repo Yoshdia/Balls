@@ -6,6 +6,9 @@
 #include "Clear.h"
 #include "Wall.h"
 #include "WallSetter.h"
+#include "Actor.h"
+#include"ModelComponent.h"
+
 
 Game *Game::game = NULL;
 
@@ -72,14 +75,16 @@ void Game::Update()
 	//wallSetter->SetWall();
 	Wall *wall = new Wall;
 
+	mDeltaTime = 0;
+
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && key[KEY_INPUT_ESCAPE] == 0)
 	{
 		SetUpdateKey();
 
+		ActorUpdate();
 		scene->Update();
-		leftPlayer->Update();
-		rightPlayer->Update();
+
 		wall->Update();
 		//wallSetter->Update();
 
@@ -91,11 +96,11 @@ void Game::Update()
 
 		SceneChange();
 	}
-
+	 
 	delete[] key;
 	delete scene;
-	delete leftPlayer;
-	delete rightPlayer;
+	//delete leftPlayer;
+	//delete rightPlayer;
 	delete wall;
 	//delete wallSetter;
 
@@ -105,6 +110,7 @@ void Game::Update()
 	DeleteGraph(*playerModelTexture);
 	delete playerModelTexture;
 	playerModelTexture = NULL;
+	ShutDown();
 
 	DxLib_End();				// ＤＸライブラリ使用の終了処理
 
@@ -161,3 +167,112 @@ void Game::SceneChange()
 		break;
 	}
 }
+
+void Game::AddActor(Actor * actor)
+{
+	mPendingActors.emplace_back(actor);
+}
+
+void Game::RemoveActor(Actor * actor)
+{
+	auto iter = std::find(mPendingActors.begin(), mPendingActors.end(), actor);
+	if (iter != mPendingActors.end())
+	{
+		std::iter_swap(iter, mPendingActors.end() - 1);
+		mPendingActors.pop_back();
+	}
+	// それはアクティブアクター内にいる？
+	iter = std::find(mActors.begin(), mActors.end(), actor);
+	if (iter != mActors.end())
+	{
+		std::iter_swap(iter, mActors.end() - 1);
+		mActors.pop_back();
+	}
+}
+
+void Game::ActorUpdate()
+{
+	// すべてのアクターの更新処理
+	for (auto actor : mActors)
+	{
+		actor->Update(mDeltaTime);
+	}
+	// ペンディング中アクター
+	for (auto pending : mPendingActors)
+	{
+		mActors.emplace_back(pending);
+	}
+	mPendingActors.clear();
+
+	//　すべてのアクター中から死んでいるアクターをdeadActorsに
+	std::vector<Actor *>deadActors;
+	for (auto actor : mActors)
+	{
+		if (actor->GetState() == Actor::EDead)
+		{
+			deadActors.emplace_back(actor);
+		}
+	}
+	//すべてのアクターをdeleteする
+	for (auto actor : deadActors)
+	{
+		delete actor;
+	}
+}
+
+void Game::ShowActor()
+{
+	//printf("\n\n<-----------------Actor List---------------->\n");
+	//printf("--------> Active Actor(%4d) <----------\n", mActors.size());
+	//for (auto i : mActors)
+	//{
+	//	printf("mem[%p] : id %d ", i, i->GetID());
+	//	std::cout << typeid(*i).name() << "\n";
+	//}
+	//printf("\n--------> Pending Actor(%4d) <----------\n", mPendingActors.size());
+	//for (auto i : mPendingActors)
+	//{
+	//	printf("mem[%p] : id %d ", i, i->GetID());
+	//	std::cout << typeid(*i).name() << "\n";
+	//}
+}
+
+void Game::ShutDown()
+{
+	//スプライトコンポーネントの削除
+
+
+	//アクターの削除
+	while (!mActors.empty())
+	{
+		delete mActors.back();
+	}
+	mActors.clear();
+
+	//ペンディングアクターの削除
+	while (!mPendingActors.empty())
+	{
+		delete mPendingActors.back();
+	}
+	mPendingActors.clear();
+
+	DxLib::DxLib_End();
+}
+
+int Game::GetTexture(const std::string & fileName)
+{
+	int retID;
+	auto iter = mTextures.find(fileName);
+	if (iter != mTextures.end())
+	{
+		retID = iter->second;
+	}
+	else
+	{
+		retID = LoadGraph(fileName.c_str());
+
+		mTextures.emplace(fileName.c_str(), retID);
+	}
+	return retID;
+}
+
