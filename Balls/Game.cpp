@@ -92,9 +92,13 @@ void Game::Update()
 		leftPlayer->Render();
 		rightPlayer->Render();
 		wall->Render();
+		Game::GetInstance()->DrawModel();
 		//wallSetter->Render();
+		DrawGraph(10,10,*playerModelTexture,TRUE);
 
 		SceneChange();
+
+
 	}
 	 
 	delete[] key;
@@ -274,5 +278,40 @@ int Game::GetTexture(const std::string & fileName)
 		mTextures.emplace(fileName.c_str(), retID);
 	}
 	return retID;
+}
+
+void Game::AddModel(ModelComponent * model)
+{
+	//ƒ\[ƒg‚³‚ê‚½ƒxƒNƒgƒ‹“à‚Ì‘}“ü“_‚ðŒ©‚Â‚¯‚é
+	//‚»‚Ìƒ‚ƒfƒ‹‚ª–]‚ñ‚¾•`‰æ‡”Ô‚Ì’Ê‚è‚É‘}“ü‚µ‚Ä‚â‚é
+	int myDrawOrder = model->GetDrawOrder();
+	auto iter = mModels.begin();
+	for (;
+		iter != mModels.end();
+		++iter)
+	{
+		if (myDrawOrder < (*iter)->GetDrawOrder())
+		{
+			break;
+		}
+	}
+	mModels.insert(iter, model);
+}
+
+void Game::RemoveModel(ModelComponent * model)
+{
+	auto iter = std::find(mModels.begin(), mModels.end(), model);
+	if (iter != mModels.end())
+	{
+		mModels.erase(iter);
+	}
+}
+
+void Game::DrawModel()
+{
+	for (auto model : mModels)
+	{
+		model->Draw();
+	}
 }
 

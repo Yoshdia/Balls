@@ -39,9 +39,9 @@ public:
 	void ShutDown();
 
 	int GetTexture(const std::string &fileName);
-	//void AddModel(ModelComponent* sprite);
-	//void RemoveModel(ModelComponent* sprite);
-	//void DrawSprite();
+	void AddModel(ModelComponent* model);
+	void RemoveModel(ModelComponent* model);
+	void DrawModel();
 
 private:
 	Game() {};
@@ -75,6 +75,7 @@ private:
 	std::vector<class Actor*> mPendingActors;
 	std::vector<class Actor*> mActors;
 
+	std::vector<class ModelComponent*>  mModels; // スプライトコンポーネント
 	std::unordered_map<std::string, int> mTextures; // テクスチャ連想配列 
 	float      mDeltaTime;
 

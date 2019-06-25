@@ -28,6 +28,7 @@ Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey, int model
 
 	ModelComponent * sc;
 	sc = new ModelComponent(this);
+	Game::GetInstance()->AddModel(sc);
 
 	int id = Game::GetInstance()->GetTexture("model/whiteBall.mqo");
 	sc->SetModel(id);
@@ -36,11 +37,9 @@ Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey, int model
 
 Player::~Player()
 {
-
 	MV1DeleteModel(*duplicateModel);
 	delete duplicateModel;
 	duplicateModel = NULL;
-
 }
 
 void Player::Move()
@@ -73,7 +72,6 @@ void Player::UpdateActor(float deltaTime)
 {
 	//‰ñ“]‚³‚¹‚é
 	rotate = VAdd(rotate, VGet(0.1f, 0, 0));
-	Move();
 }
 
 void Player::Render()

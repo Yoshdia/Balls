@@ -1,10 +1,7 @@
 #pragma once
-
-#include "Object.h"
 #include "Game.h"
 
-class Wall :
-	protected Object
+class Wall 
 {
 public:
 	Wall();
