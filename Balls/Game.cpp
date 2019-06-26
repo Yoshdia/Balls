@@ -1,3 +1,4 @@
+//#include <iostream>
 #include "DxLib.h"
 #include "Scene.h"
 #include "Player.h"
@@ -26,14 +27,9 @@ void Game::Delete()
 	game = NULL;
 }
 
-char * Game::GetAllInputKey()
+void Game::MainProcess()
 {
-	return key;
-}
-
-void Game::Update()
-{
-	//dxlib期化処理
+	//Dxlib初期化処理
 	if (DxLib_Init() == -1)
 	{
 		return;
@@ -46,7 +42,7 @@ void Game::Update()
 	SetDrawScreen(DX_SCREEN_BACK);
 	//キー情報の取得と初期化
 	key = new char[ControlKeyNum];
-	SetUpdateKey();
+	UpdateKey();
 
 	//最初のシーンを作成
 	scene = new Play;
@@ -60,63 +56,49 @@ void Game::Update()
 	//ライトの向きをカメラから0,0,0を見るように設定
 	SetLightDirection(VGet(0, 0, 1));
 
-	int *playerModel;
-	playerModel = new int;
-	*playerModel=MV1LoadModel("model/whiteBall.mqo");
 	int *playerModelTexture;
 	playerModelTexture = new int;
 	*playerModelTexture = NULL;
 	*playerModelTexture = LoadGraph("model/grade.JPG");
 
-	Player *leftPlayer = new Player(leftPlayerPos, Game::MoveDirection::Left,KEY_INPUT_SPACE,*playerModel, *playerModelTexture);
-	Player *rightPlayer = new Player(rightPlayerPos, Game::MoveDirection::Right,KEY_INPUT_RETURN,*playerModel, *playerModelTexture);
+	new Player(leftPlayerPos, Game::MoveDirection::Left,KEY_INPUT_SPACE, *playerModelTexture);
+	new Player(rightPlayerPos, Game::MoveDirection::Right,KEY_INPUT_RETURN, *playerModelTexture);
 
-	//WallSetter *wallSetter = new WallSetter;
-	//wallSetter->SetWall();
 	Wall *wall = new Wall;
-
-	mDeltaTime = 0;
+	
+	//DWORD nowTick, prevTick;
+	//prevTick = timeGetTime();
+	deltaTime = 1.0f;
 
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && key[KEY_INPUT_ESCAPE] == 0)
 	{
-		SetUpdateKey();
+		//DeltaTimeSet(&nowTick,&prevTick);
+		UpdateKey();
 
 		ActorUpdate();
 		scene->Update();
 
 		wall->Update();
-		//wallSetter->Update();
 
-		scene->Render();
-		leftPlayer->Render();
-		rightPlayer->Render();
-		wall->Render();
 		Game::GetInstance()->DrawModel();
-		//wallSetter->Render();
-		DrawGraph(10,10,*playerModelTexture,TRUE);
+		wall->Render();
+		scene->Render();
 
 		SceneChange();
-
-
 	}
 	 
 	delete[] key;
 	delete scene;
-	//delete leftPlayer;
-	//delete rightPlayer;
 	delete wall;
-	//delete wallSetter;
 
-	MV1DeleteModel(*playerModel);
-	delete playerModel;
-	playerModel = NULL;
 	DeleteGraph(*playerModelTexture);
 	delete playerModelTexture;
 	playerModelTexture = NULL;
-	ShutDown();
 
-	DxLib_End();				// ＤＸライブラリ使用の終了処理
+	ShutDown();
+	//Dxlibの終了
+	DxLib_End();
 
 	return;
 }
@@ -131,7 +113,7 @@ bool Game::ScreenUpdate()
 	return true;
 }
 
-void Game::SetUpdateKey()
+void Game::UpdateKey()
 {
 
 	//全ての入力状態をtmpKeyに格納
@@ -172,57 +154,67 @@ void Game::SceneChange()
 	}
 }
 
+void Game::DeltaTimeSet(DWORD * nowTick, DWORD * prevTick)
+{
+	//*nowTick = timeGetTime();
+	//DWORD mTicks = DWORD(nowTick - prevTick);
+	//*prevTick = timeGetTime();
+
+	//deltaTime = mTicks / 1000.0f;
+	//*prevTick = *nowTick;
+}
+
 void Game::AddActor(Actor * actor)
 {
-	mPendingActors.emplace_back(actor);
+	pendingActors.emplace_back(actor);
 }
 
 void Game::RemoveActor(Actor * actor)
 {
-	auto iter = std::find(mPendingActors.begin(), mPendingActors.end(), actor);
-	if (iter != mPendingActors.end())
+	//actorをupDateingActorsとpendingActorsの中から削除する
+	auto iter = std::find(pendingActors.begin(), pendingActors.end(), actor);
+	if (iter != pendingActors.end())
 	{
-		std::iter_swap(iter, mPendingActors.end() - 1);
-		mPendingActors.pop_back();
+		std::iter_swap(iter, pendingActors.end() - 1);
+		pendingActors.pop_back();
 	}
-	// それはアクティブアクター内にいる？
-	iter = std::find(mActors.begin(), mActors.end(), actor);
-	if (iter != mActors.end())
+	iter = std::find(upDateActors.begin(), upDateActors.end(), actor);
+	if (iter != upDateActors.end())
 	{
-		std::iter_swap(iter, mActors.end() - 1);
-		mActors.pop_back();
+		std::iter_swap(iter, upDateActors.end() - 1);
+		upDateActors.pop_back();
 	}
 }
 
 void Game::ActorUpdate()
 {
-	// すべてのアクターの更新処理
-	for (auto actor : mActors)
+	//全てのActorの更新処理
+	for (auto actor : upDateActors)
 	{
-		actor->Update(mDeltaTime);
+		actor->Update(deltaTime);
 	}
-	// ペンディング中アクター
-	for (auto pending : mPendingActors)
+	//このF中で更新すべきActorの処理が全て終わった後にactorに挿入する
+	for (auto actor : pendingActors)
 	{
-		mActors.emplace_back(pending);
+		upDateActors.emplace_back(actor);
 	}
-	mPendingActors.clear();
+	pendingActors.clear();
 
-	//　すべてのアクター中から死んでいるアクターをdeadActorsに
-	std::vector<Actor *>deadActors;
-	for (auto actor : mActors)
+	//全てのActorの中からStateがNoActiveのActorをdeleteActorsに移し削除する
+	std::vector<Actor *> deleteActors;
+	for (auto actor : upDateActors)
 	{
-		if (actor->GetState() == Actor::EDead)
+		if (actor->GetState() == Actor::ActiveState::NoActive)
 		{
-			deadActors.emplace_back(actor);
+			deleteActors.emplace_back(actor);
 		}
 	}
 	//すべてのアクターをdeleteする
-	for (auto actor : deadActors)
+	for (auto actor : deleteActors)
 	{
 		delete actor;
 	}
-}
+} 
 
 void Game::ShowActor()
 {
@@ -243,80 +235,77 @@ void Game::ShowActor()
 
 void Game::ShutDown()
 {
-	//スプライトコンポーネントの削除
-
-
-	//アクターの削除
-	while (!mActors.empty())
+	//upDateActorsの削除
+	while (!upDateActors.empty())
 	{
-		delete mActors.back();
+		delete upDateActors.back();
 	}
-	mActors.clear();
+	upDateActors.clear();
 
-	//ペンディングアクターの削除
-	while (!mPendingActors.empty())
+	//pendingActorsの削除
+	while (!pendingActors.empty())
 	{
-		delete mPendingActors.back();
+		delete pendingActors.back();
 	}
-	mPendingActors.clear();
+	pendingActors.clear();
+
+	//modelsの削除
+	for (auto model : models)
+	{
+		MV1DeleteModel(model.second);
+	}
+	models.clear();
 
 	DxLib::DxLib_End();
 }
 
-int Game::GetTexture(const std::string & fileName)
+int Game::LoadModel(const std::string & fileName)
 {
-	int retID;
-	auto iter = mTextures.find(fileName);
-	if (iter != mTextures.end())
+	int modelId;
+	auto iter = models.find(fileName);
+	if (iter != models.end())
 	{
-		retID = iter->second;
+		modelId = iter->second;
 	}
 	else
 	{
-		/*retID = LoadGraph(fileName.c_str());*/
-		retID=MV1LoadModel(fileName.c_str());
-
-		//モデルを縮小
-		float scale = 0.1f;
-		MV1SetScale(retID, VGet(scale, scale, scale));
-
-		mTextures.emplace(fileName.c_str(), retID);
+		modelId =MV1LoadModel(fileName.c_str());
+		models.emplace(fileName.c_str(), modelId);
 	}
-	return retID;
+	return modelId;
 }
 
 void Game::AddModel(ModelComponent * model)
 {
-	//ソートされたベクトル内の挿入点を見つける
-	//そのモデルが望んだ描画順番の通りに挿入してやる
-	int myDrawOrder = model->GetDrawOrder();
-	auto iter = mModels.begin();
-	for (;
-		iter != mModels.end();
-		++iter)
+	//そのModelの更新順序を取得し、その順序より大きい値を見つけたらその前に挿入する
+	int drawNumber = model->getProccesNumber();
+	auto iter = modelComponents.begin();
+	for (;iter != modelComponents.end();++iter)
 	{
-		if (myDrawOrder < (*iter)->GetDrawOrder())
+		int iterDrawNumber = (*iter)->getProccesNumber();
+		if (drawNumber < iterDrawNumber||
+			drawNumber== iterDrawNumber)
 		{
 			break;
 		}
 	}
-	mModels.insert(iter, model);
+	modelComponents.insert(iter, model);
 }
 
 void Game::RemoveModel(ModelComponent * model)
 {
-	auto iter = std::find(mModels.begin(), mModels.end(), model);
-	if (iter != mModels.end())
+	auto iter = std::find(modelComponents.begin(), modelComponents.end(), model);
+	if (iter != modelComponents.end())
 	{
-		mModels.erase(iter);
+		modelComponents.erase(iter);
 	}
 }
 
 void Game::DrawModel()
 {
-	for (auto model : mModels)
+	for (auto model : modelComponents)
 	{
-		model->Draw();
+		model->DrawModel();
 	}
 }
 

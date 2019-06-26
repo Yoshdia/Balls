@@ -3,10 +3,9 @@
 #include "Actor.h"
 #include "Game.h"
 
-ModelComponent::ModelComponent(Actor * owner, int drawOrder)
-	:Component(owner)
-	, mModelID(-1)
-	, mDrawOrder(drawOrder)
+ModelComponent::ModelComponent(Actor * owner, int setProcessNumber)
+	:Component(owner,setProcessNumber)
+	, modelId(-1)
 {
 	Game::GetInstance()->AddModel(this);
 }
@@ -16,29 +15,31 @@ ModelComponent::~ModelComponent()
 	Game::GetInstance()->RemoveModel(this);
 }
 
-void ModelComponent::Draw()
+void ModelComponent::SetModelScale(float scale)
 {
-	VECTOR vec;
-	float scale;
-	VECTOR rotation;
-	vec = mOwner->GetPosition();
-	scale = mOwner->GetScale();
-	rotation = mOwner->GetRotation();
-
-	if (mModelID != -1)
-	{
-		MV1SetPosition(mModelID, vec);
-		MV1SetRotationXYZ(mModelID, rotation);
-		MV1DrawModel(mModelID);
-	}
-
+	MV1SetScale(modelId, VGet(scale, scale, scale));
 }
 
-void ModelComponent::SetModel(int modelID)
+void ModelComponent::DrawModel()
 {
-	if (modelID == -1)
+	//Š—LActor‚ªŠŽ‚µ‚Ä‚éî•ñ‚ð‚à‚Æ‚ÉModel‚ð•\Ž¦‚·‚é
+	VECTOR position=ownerActor->GetPosition();
+	float scale = ownerActor->GetScale();
+	VECTOR rotation= ownerActor->GetRotation();
+
+	if (modelId != -1)
+	{
+		MV1SetPosition(modelId, position);
+		MV1SetRotationXYZ(modelId, rotation);
+		MV1DrawModel(modelId);
+	}
+}
+
+void ModelComponent::SetModel(int model)
+{
+	if (model == -1)
 	{
 		return;
 	}
-	mModelID = modelID;
+	modelId = model;
 }

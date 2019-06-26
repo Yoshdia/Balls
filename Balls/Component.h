@@ -7,13 +7,16 @@ class Component
 {
 public:
 	Component(class Actor* owner, int updateOrder = 100);
-	virtual     ~Component();
+	virtual ~Component();
 	virtual void Update(float deltaTime);                              // コンポーネントをdeltaTimeで更新
-	int          getUpdateOrder() const { return mUpdateOrder; }       // 更新順序を取得
-
+	// 更新順序を返す
+	int getProccesNumber() const { return processNumber; } //getUpdateOrder
 protected:
-	class Actor* mOwner;            // 所有アクター
-	int          mUpdateOrder;      // 更新順序
-	int          mCreateIndex;      // 作成通し番号
-	static int   mNo;               // コンポーネント作成カウンタ
+	//このComponentを所有しているActorへのアドレス
+	class Actor* ownerActor;//owner
+	// 更新順序
+	int processNumber;//mUpdateOrder
+	//int mCreateIndex;      // 作成通し番号
+	// コンポーネントが作成されると増えるカウント
+	static int componentCount;//mNo
 };

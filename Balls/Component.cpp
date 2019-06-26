@@ -2,24 +2,23 @@
 #include "Actor.h"
 
 // コンポーネント通し番号
-int Component::mNo = 10000;
+int Component::componentCount = 0;
 ///////////////////////////////////////////////////////////
 // Component システムコンストラクタ
 // 所有者のActorクラスに自分自身のコンポーネントを追加
 ///////////////////////////////////////////////////////////
-Component::Component(Actor* owner, int updateOrder)
-	:mOwner(owner)
-	, mUpdateOrder(updateOrder)
-	, mCreateIndex(mNo)
+Component::Component(Actor* owner, int setProcessNumber)
+	:ownerActor(owner)
+	, processNumber(setProcessNumber)
 {
 	//所有Actorにこのコンポーネントを追加する
-	mOwner->AddComponent(this);
-	mNo++;
+	ownerActor->AddComponent(this);
+	componentCount++;
 }
 
 Component::~Component()
 {
-	mOwner->RemoveComponent(this);
+	ownerActor->RemoveComponent(this);
 }
 
 // コンポーネントの毎フレームupdate処理 必要あればオーバーライド

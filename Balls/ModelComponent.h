@@ -6,14 +6,14 @@
 class ModelComponent : public Component
 {
 public:
-	ModelComponent(class Actor* owner, int drawOrder = 100);
+	ModelComponent(class Actor* owner,int drawNumber=100);//int drawOrder = 100
 	~ModelComponent();
-	virtual void Draw();
-	virtual void SetModel(int modelID);
-
-	int GetDrawOrder() const { return mDrawOrder; }
+	virtual void DrawModel();
+	virtual void SetModel(int model);
+	void SetModelScale(float scale) ;
 
 protected:
-	int mModelID;
-	int mDrawOrder;
+	//このComponentが所持しているモデルのポインタ(読み込みエラーの際は-1が入るため初期値にも-1を入れる)
+	int modelId;//mModelID;
+
 };

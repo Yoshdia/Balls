@@ -6,44 +6,50 @@
 class Actor
 {
 public:
-	enum State
+	enum ActiveState
 	{
-		EActive,
-		EPaused,
-		EDead
+		Active,
+		Paused,
+		NoActive
 	};
 
 	Actor();
 	virtual ~Actor();
-	void     Update(float deltaTime);
-	void     UpdateComponents(float deltaTime);
+	//ActorとComponentをまとめて更新する関数
+	void Update(float deltaTime);
+	//ActorとComponentの更新内容
+	void UpdateComponents(float deltaTime);
 	virtual void UpdateActor(float deltaTime);
 
 	// セッター
-	void     SetState(State state) { mState = state; }
-	void     SetPosition(const VECTOR& vec) { mPosition = vec; }
-	void     SetScale(float scale) { mScale = scale; }
-	void     SetRotation(VECTOR rotate) { mRotation = rotate; }
+	void SetState(ActiveState setState) { state = setState; }
+	void SetPosition(const VECTOR& pos) { position = pos; }
+	void SetScale(float setScale) { scale = setScale; }
+	void SetRotation(VECTOR rotate) { rotation = rotate; }
 
 	// ゲッター
-	State    GetState() { return mState; }
-	VECTOR& GetPosition() { return mPosition; }
+	const ActiveState GetState() { return state; }
+	const VECTOR GetPosition() { return position; }
+	const float GetScale() { return scale; }
+	const VECTOR GetRotation() { return rotation; }
 	//VECTOR  GetForward() const;
-	int      GetID() { return mIndex; }
-	float    GetScale() { return mScale; }
-	VECTOR    GetRotation() { return mRotation; }
+	//int      GetID() { return mIndex; }
 
-	void     AddComponent(class Component* component);
-	void     RemoveComponent(class Component* component);
+	void AddComponent(class Component* component);
+	void RemoveComponent(class Component* component);
 
 protected:
-	State mState;
-	VECTOR mPosition;
-	float mScale;
-	VECTOR mRotation;
+	ActiveState state;
+	VECTOR position;
+	VECTOR rotation;
+	float scale;
 
-	std::vector<class Component*> mComponents;
-	int mIndex;
-	static int mNo;
+	//Actorが所持しているComponent
+	std::vector<class Component*> myComponents;//mComponents;
+	static int actorNumber;/*mNo*/
+	//座標、向き、大きさを指定されなかった場合の初期値
+	const VECTOR originPos = VGet(0, 0, 0);
+	const VECTOR originQua = VGet(0, 0, 0);
+	const float originScale = 1.0f;
 
 };
