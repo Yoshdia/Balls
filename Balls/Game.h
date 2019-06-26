@@ -44,6 +44,8 @@ public:
 	void RemoveModel(ModelComponent* model);
 	void DrawModel();
 
+
+
 private:
 	Game() {};
 	static Game *game;

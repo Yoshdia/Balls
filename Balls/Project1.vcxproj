@@ -157,6 +157,8 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModelComponent.cpp" />
+    <ClCompile Include="MoveComponent.cpp" />
+    <ClCompile Include="MovePlayerComponent.cpp" />
     <ClCompile Include="Play.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Title.cpp" />
@@ -170,6 +172,8 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="ModelComponent.h" />
+    <ClInclude Include="MoveComponent.h" />
+    <ClInclude Include="MovePlayerComponent.h" />
     <ClInclude Include="Play.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />

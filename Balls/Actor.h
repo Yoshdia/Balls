@@ -23,13 +23,13 @@ public:
 
 	// セッター
 	void SetState(ActiveState setState) { state = setState; }
-	void SetPosition(const VECTOR& pos) { position = pos; }
+	void SetPosition(const VECTOR pos) { position = pos; }
 	void SetScale(float setScale) { scale = setScale; }
 	void SetRotation(VECTOR rotate) { rotation = rotate; }
 
 	// ゲッター
 	const ActiveState GetState() { return state; }
-	const VECTOR GetPosition() { return position; }
+	VECTOR GetPosition() { return position; }
 	const float GetScale() { return scale; }
 	const VECTOR GetRotation() { return rotation; }
 	//VECTOR  GetForward() const;
@@ -48,8 +48,8 @@ protected:
 	std::vector<class Component*> myComponents;//mComponents;
 	static int actorNumber;/*mNo*/
 	//座標、向き、大きさを指定されなかった場合の初期値
-	const VECTOR originPos = VGet(0, 0, 0);
-	const VECTOR originQua = VGet(0, 0, 0);
-	const float originScale = 1.0f;
+	const VECTOR OriginPos = VGet(0, 0, 0);
+	const VECTOR OriginQua = VGet(0, 0, 0);
+	const float OriginScale = 1.0f;
 
 };

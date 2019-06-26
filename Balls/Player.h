@@ -15,18 +15,6 @@ public:
 
 	void UpdateActor(float deltaTime);
 private:
-	Game::MoveDirection nextMoveDirection;
-	//移動予定地点
-	float targetPos;
-	//毎F移動する距離
-	float moveDistance;
-	//Gameから受け取る、このオブジェクトが動くきっかけとなるキー
-	char moveInThisKey;
-	//移動処理関数
-	void Move();
-	//移動時間
-	const float movingRequiredTime = 10;
-	//移動距離
-	const float MovingDistance = 2;
+
 };
 

@@ -8,9 +8,9 @@ int Actor::actorNumber = 0;
 
 Actor::Actor()
 	:state(ActiveState::Active)
-	, position(originPos)
-	, scale(originScale)
-	, rotation(originQua)
+	, position(OriginPos)
+	, scale(OriginScale)
+	, rotation(OriginQua)
 {
 	Game::GetInstance()->AddActor(this);
 	actorNumber++;
