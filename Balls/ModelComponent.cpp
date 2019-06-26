@@ -8,12 +8,12 @@ ModelComponent::ModelComponent(Actor * owner, int drawOrder)
 	, mModelID(-1)
 	, mDrawOrder(drawOrder)
 {
-	//Game::GetInstance()->AddSprite(this);
+	Game::GetInstance()->AddModel(this);
 }
 
 ModelComponent::~ModelComponent()
 {
-	//Game::GetInstance()->RemoveSprite(this);
+	Game::GetInstance()->RemoveModel(this);
 }
 
 void ModelComponent::Draw()

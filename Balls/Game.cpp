@@ -273,7 +273,12 @@ int Game::GetTexture(const std::string & fileName)
 	}
 	else
 	{
-		retID = LoadGraph(fileName.c_str());
+		/*retID = LoadGraph(fileName.c_str());*/
+		retID=MV1LoadModel(fileName.c_str());
+
+		//ÉÇÉfÉãÇèkè¨
+		float scale = 0.1f;
+		MV1SetScale(retID, VGet(scale, scale, scale));
 
 		mTextures.emplace(fileName.c_str(), retID);
 	}
