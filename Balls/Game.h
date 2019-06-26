@@ -39,7 +39,7 @@ public:
 	void ShutDown();
 
 	//fileNameのモデルが既に読み込まれたかどうかを検索しそうでなかった場合読み込んでそのアドレスを返す
-	int LoadModel(const std::string &fileName);
+	int LoadModel(const std::string &fileName, const std::string & textureFileName);
 	void AddModel(ModelComponent* model);
 	void RemoveModel(ModelComponent* model);
 	void DrawModel();

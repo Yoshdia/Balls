@@ -3,16 +3,11 @@
 #include "ModelComponent.h"
 //#include "Game.h"
 
-Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey,int texture)
+Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey)
 {
 	position = initPos;
 	moveInThisKey = moveKey;
 	nextMoveDirection = next;
-
-	//*duplicateModel = MV1DuplicateModel(model);
-
-	//モデルにテクスチャを張り付ける
-	//MV1SetTextureGraphHandle(*duplicateModel, 0, texture, FALSE);
 
 	//移動予定地点と移動する距離の初期化
 	targetPos = position.x;
@@ -21,8 +16,7 @@ Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey,int textur
 	//モデルを保存し描画するComponentを実装
 	ModelComponent * modelComponent;
 	modelComponent = new ModelComponent(this);
-	//Game::GetInstance()->AddModel(modelComponent);
-	int modelId = Game::GetInstance()->LoadModel("model/whiteBall.mqo");
+	int modelId = Game::GetInstance()->LoadModel("model/whiteBall.mqo","model/grade.JPG");
 	modelComponent->SetModel(modelId);
 	scale = 0.1f;
 	modelComponent->SetModelScale(scale);
@@ -31,9 +25,6 @@ Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey,int textur
 
 Player::~Player()
 {
-	//MV1DeleteModel(*duplicateModel);
-	//delete duplicateModel;
-	//duplicateModel = NULL;
 }
 
 void Player::Move()

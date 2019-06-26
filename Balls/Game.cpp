@@ -56,13 +56,8 @@ void Game::MainProcess()
 	//ライトの向きをカメラから0,0,0を見るように設定
 	SetLightDirection(VGet(0, 0, 1));
 
-	int *playerModelTexture;
-	playerModelTexture = new int;
-	*playerModelTexture = NULL;
-	*playerModelTexture = LoadGraph("model/grade.JPG");
-
-	new Player(leftPlayerPos, Game::MoveDirection::Left,KEY_INPUT_SPACE, *playerModelTexture);
-	new Player(rightPlayerPos, Game::MoveDirection::Right,KEY_INPUT_RETURN, *playerModelTexture);
+	new Player(leftPlayerPos, Game::MoveDirection::Left,KEY_INPUT_SPACE);
+	new Player(rightPlayerPos, Game::MoveDirection::Right,KEY_INPUT_RETURN);
 
 	Wall *wall = new Wall;
 	
@@ -91,10 +86,6 @@ void Game::MainProcess()
 	delete[] key;
 	delete scene;
 	delete wall;
-
-	DeleteGraph(*playerModelTexture);
-	delete playerModelTexture;
-	playerModelTexture = NULL;
 
 	ShutDown();
 	//Dxlibの終了
@@ -259,7 +250,7 @@ void Game::ShutDown()
 	DxLib::DxLib_End();
 }
 
-int Game::LoadModel(const std::string & fileName)
+int Game::LoadModel(const std::string & fileName,const std::string & textureFileName)
 {
 	int modelId;
 	auto iter = models.find(fileName);
@@ -269,7 +260,10 @@ int Game::LoadModel(const std::string & fileName)
 	}
 	else
 	{
-		modelId =MV1LoadModel(fileName.c_str());
+		int originalModelId =MV1LoadModel(fileName.c_str());
+		modelId = MV1DuplicateModel(originalModelId);
+		int modelTexture = LoadGraph(textureFileName.c_str());
+		MV1SetTextureGraphHandle(modelId, 0, modelTexture, FALSE);
 		models.emplace(fileName.c_str(), modelId);
 	}
 	return modelId;
