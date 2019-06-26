@@ -77,7 +77,7 @@ void Player::UpdateActor(float deltaTime)
 void Player::Render()
 {
 	//pos‚É•`‰æ
-	//MV1SetPosition(*duplicateModel, pos);
-	//MV1SetRotationXYZ(*duplicateModel, rotate);
-	//MV1DrawModel(*duplicateModel);
+	MV1SetPosition(*duplicateModel, pos);
+	MV1SetRotationXYZ(*duplicateModel, rotate);
+	MV1DrawModel(*duplicateModel);
 }
