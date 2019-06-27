@@ -17,5 +17,8 @@ public:
 	void Render();
 	sceneName SceneChange();
 
+private :
+	int count;
+	const int SpawnTime=100;
 };
 

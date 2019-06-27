@@ -6,7 +6,7 @@ class Wall :
 	public Actor
 {
 public:
-	Wall();
+	Wall(VECTOR initPos);
 	~Wall();
 
 	void UpdateActor(float deltaTime);

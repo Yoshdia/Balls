@@ -23,7 +23,7 @@
     <ProjectGuid>{8AD1C9C7-E2C3-4A77-8614-F957534021DF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Project1</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -155,6 +155,7 @@
     <ClCompile Include="Clear.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModelComponent.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
@@ -163,13 +164,13 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Wall.cpp" />
-    <ClCompile Include="WallSetter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Clear.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Ground.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="ModelComponent.h" />
     <ClInclude Include="MoveComponent.h" />
@@ -179,7 +180,6 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="Wall.h" />
-    <ClInclude Include="WallSetter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

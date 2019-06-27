@@ -6,9 +6,9 @@
 #include "Play.h"
 #include "Clear.h"
 #include "Wall.h"
-#include "WallSetter.h"
 #include "Actor.h"
 #include "ModelComponent.h"
+#include "Ground.h"
 
 
 Game *Game::game = NULL;
@@ -60,7 +60,7 @@ void Game::MainProcess()
 	new Player(leftPlayerPos, Game::MoveDirection::Left,KEY_INPUT_SPACE);
 	new Player(rightPlayerPos, Game::MoveDirection::Right,KEY_INPUT_RETURN);
 
-	new Wall();
+	new Ground(VGet(0,-1,0));
 	
 	//DWORD nowTick, prevTick;
 	//prevTick = timeGetTime();
@@ -103,7 +103,6 @@ bool Game::ScreenUpdate()
 
 void Game::UpdateKey()
 {
-
 	//‘S‚Ä‚Ì“ü—Íó‘Ô‚ğtmpKey‚ÉŠi”[
 	char tmpKey[256];
 	GetHitKeyStateAll(tmpKey);

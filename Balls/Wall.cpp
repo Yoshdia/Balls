@@ -2,12 +2,12 @@
 #include "ModelComponent.h"
 #include "MoveComponent.h"
 
-Wall::Wall()
+Wall::Wall(VECTOR initPos)
 {
-	position = VGet(1, 0, 10);
+	position = initPos;
 
 	ModelComponent * modelComponent;
-	modelComponent = new ModelComponent(this);
+	modelComponent = new ModelComponent(this,120);
 	int modelId = Game::GetInstance()->LoadModel("model/wall.mqo", "model/grade.JPG");
 	modelComponent->SetModel(modelId);
 	scale = 0.2f;
@@ -29,7 +29,7 @@ void Wall::UpdateActor(float deltaTime)
 {
 	if (position.z < -10)
 	{
-		comeOutCamera=true;
+		state = Actor::ActiveState::NoActive;
 	}
 }
 
