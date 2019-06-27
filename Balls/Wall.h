@@ -1,26 +1,21 @@
 #pragma once
 #include "Game.h"
+#include "Actor.h"
 
-class Wall 
+class Wall :
+	public Actor
 {
 public:
 	Wall();
 	~Wall();
 
-	void Update();
-	void Render();
+	void UpdateActor(float deltaTime);
+
 	//座標を受け取った地点にし、フラグを倒す
 	void ResetWall(float x);
-
 	bool GetComeOutCameraFlag() { return comeOutCamera; };
 private:
-	float movingSpeed;
 	//カメラの外に出たら建つフラグ。trueで待機状態に戻る
 	bool comeOutCamera;
-
-	VECTOR pos;
-	int *model;
-	int *duplicateModel;
-	int *modelTexture;
 };
 

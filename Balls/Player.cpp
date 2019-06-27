@@ -25,9 +25,6 @@ Player::~Player()
 {
 }
 
-
-
-
 void Player::UpdateActor(float deltaTime)
 {
 	//‰ñ“]‚³‚¹‚é

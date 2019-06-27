@@ -3,7 +3,7 @@
 #include "MovePlayerComponent.h"
 
 MovePlayerComponent::MovePlayerComponent(Actor * owner, int processNumber, char moveKey, Game::MoveDirection next)
-	:MoveComponent(owner,processNumber)
+	:MoveComponent(owner,processNumber,VGet(0,0,0))
 	,nextMoveDirection(next)
 	,targetPos(position.x)
 	,moveInputeKey(moveKey)

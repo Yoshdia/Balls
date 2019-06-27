@@ -69,7 +69,7 @@ private:
 	//キーボードから取得できるキーの最大数
 	const int ControlKeyNum = 256;
 	//カメラの座標
-	const VECTOR CameraPos = VGet(0, 0, -10);
+	const VECTOR CameraPos = VGet(0, 5, -10);
 	//カメラの視野範囲
 	const float nearCameraPos = 0;
 	const float farCameraPos = 50.0f;

@@ -8,7 +8,7 @@
 #include "Wall.h"
 #include "WallSetter.h"
 #include "Actor.h"
-#include"ModelComponent.h"
+#include "ModelComponent.h"
 
 
 Game *Game::game = NULL;
@@ -51,6 +51,7 @@ void Game::MainProcess()
 	SetCameraNearFar(nearCameraPos, farCameraPos);
 	//カメラの場所を設定
 	SetCameraPositionAndTarget_UpVecY(CameraPos, VGet(0, 0, 0));
+
 	//ライトの場所をカメラと同じ位置に設定
 	SetLightPosition(CameraPos);
 	//ライトの向きをカメラから0,0,0を見るように設定
@@ -59,7 +60,7 @@ void Game::MainProcess()
 	new Player(leftPlayerPos, Game::MoveDirection::Left,KEY_INPUT_SPACE);
 	new Player(rightPlayerPos, Game::MoveDirection::Right,KEY_INPUT_RETURN);
 
-	Wall *wall = new Wall;
+	new Wall();
 	
 	//DWORD nowTick, prevTick;
 	//prevTick = timeGetTime();
@@ -74,10 +75,7 @@ void Game::MainProcess()
 		ActorUpdate();
 		scene->Update();
 
-		wall->Update();
-
 		Game::GetInstance()->DrawModel();
-		wall->Render();
 		scene->Render();
 
 		SceneChange();
@@ -85,7 +83,6 @@ void Game::MainProcess()
 	 
 	delete[] key;
 	delete scene;
-	delete wall;
 
 	ShutDown();
 	//Dxlibの終了

@@ -6,12 +6,13 @@ class MoveComponent :
 	public Component
 {
 public:
-	MoveComponent(Actor* owner ,int processNumber);
+	MoveComponent(Actor* owner ,int processNumber, VECTOR distance);
 	~MoveComponent();
+	void Update(float deltaTime);
 protected:
+	void Move(float deltaTime);
 	VECTOR position;
 	//–ˆFˆÚ“®‚·‚é‹——£
 	VECTOR moveDistance;
-	void Move(float deltaTime);
 };
 
