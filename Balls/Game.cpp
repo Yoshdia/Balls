@@ -50,22 +50,25 @@ void Game::MainProcess()
 	//カメラの視野範囲を設定
 	SetCameraNearFar(nearCameraPos, farCameraPos);
 	//カメラの場所を設定
-	SetCameraPositionAndTarget_UpVecY(CameraPos, VGet(0,0,0));
-	
+	SetCameraPositionAndTarget_UpVecY(CameraPos, VGet(0, 0, 0));
+
 	//ライトの場所をカメラと同じ位置に設定
 	//SetLightPosition(LightPos);
 	//ライトの向きをカメラから0,0,0を見るように設定
 
-	SetLightDirection(VGet(0,-1,2));
-	int secondLight = CreateDirLightHandle(VGet(1,-1,2));
-	int thirdLight = CreateDirLightHandle(VGet(-1, -1, 2));
+	SetLightDirection(VGet(0, -1, 2));
+	//int secondLight = CreateDirLightHandle(VGet(1,-1,2));
+	//int thirdLight = CreateDirLightHandle(VGet(-1, -1, 2));
 
+	new Player(leftPlayerPos, Game::MoveDirection::Left, KEY_INPUT_SPACE);
+	new Player(rightPlayerPos, Game::MoveDirection::Right, KEY_INPUT_RETURN);
 
-	new Player(leftPlayerPos, Game::MoveDirection::Left,KEY_INPUT_SPACE);
-	new Player(rightPlayerPos, Game::MoveDirection::Right,KEY_INPUT_RETURN);
-
-	new Ground(VGet(0,-1.5f,0));
-	
+	//new Ground(VGet(0,-1.5f,0));
+	int testModel = MV1LoadModel("Resouce/model/ball.mv1");
+	int testTex = LoadGraph("Resouce/img/box.png");
+	MV1SetTextureGraphHandle(testModel, 0, testTex, FALSE);
+	MV1SetPosition(testModel, VGet(0, 0, 0));
+	MV1GetTextureName(testModel, 0);
 	//DWORD nowTick, prevTick;
 	//prevTick = timeGetTime();
 	deltaTime = 1.0f;
@@ -73,7 +76,7 @@ void Game::MainProcess()
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && key[KEY_INPUT_ESCAPE] == 0)
 	{
-	DrawBox(0, 0, ScreenWidth - 1, ScreenHeight - 1, GetColor(125, 125, 125),TRUE);
+		DrawBox(0, 0, ScreenWidth - 1, ScreenHeight - 1, GetColor(125, 125, 125), TRUE);
 		//DeltaTimeSet(&nowTick,&prevTick);
 		UpdateKey();
 
@@ -83,11 +86,17 @@ void Game::MainProcess()
 		Game::GetInstance()->DrawModel();
 		scene->Render();
 
+		MV1DrawModel(testModel);
+		DrawGraph(50, 50, testTex, FALSE);
+
 		SceneChange();
 	}
-	 
+
 	delete[] key;
 	delete scene;
+
+	MV1DeleteModel(testModel);
+	DeleteGraph(testTex);
 
 	ShutDown();
 	DeleteLightHandleAll();
@@ -207,7 +216,7 @@ void Game::ActorUpdate()
 	{
 		delete actor;
 	}
-} 
+}
 
 void Game::ShowActor()
 {
@@ -242,32 +251,60 @@ void Game::ShutDown()
 	}
 	pendingActors.clear();
 
-	//modelsの削除
-	for (auto model : models)
+	//model関連の解放
+	for (auto model : originalModel)
+	{
+		MV1DeleteModel(model);
+	}
+	originalModel.clear();
+	for (auto model : duplicateModel)
 	{
 		MV1DeleteModel(model.second);
 	}
-	models.clear();
+	duplicateModel.clear();
+	for (auto model : modelTexture)
+	{
+		DeleteGraph(model.second);
+	}
+	modelTexture.clear();
 
 	DxLib::DxLib_End();
 }
 
-int Game::LoadModel(const std::string & fileName,const std::string & textureFileName)
+int Game::LoadModel(const std::string & fileName, const std::string & textureFileName)
 {
+	/*fileNameのモデルを既に読み込んでいないか
+	真の場合dupricateModel内のそのモデルアドレスを返し、
+	偽の場合新たに読み込んでモデルアドレスを格納する*/
 	int modelId;
-	auto iter = models.find(fileName);
-	if (iter != models.end())
+	auto iter = duplicateModel.find(fileName);
+	if (iter != duplicateModel.end())
 	{
 		modelId = iter->second;
 	}
 	else
 	{
-		int originalModelId =MV1LoadModel(fileName.c_str());
+		int originalModelId = MV1LoadModel(fileName.c_str());
+		originalModel.push_back(originalModelId);
+
 		modelId = MV1DuplicateModel(originalModelId);
-		int modelTexture = LoadGraph(textureFileName.c_str());
-		MV1SetTextureGraphHandle(modelId, 0, modelTexture, FALSE);
-		models.emplace(fileName.c_str(), modelId);
+		duplicateModel.emplace(fileName.c_str(), modelId);
+
 	}
+	//テクスチャでも同じことをし最後にmodelIdにtextureIdを張り付ける
+	int textureId;
+	auto textureIter = modelTexture.find(textureFileName);
+	if (textureIter != modelTexture.end())
+	{
+		textureId = textureIter->second;
+	}
+	else
+	{
+		textureId = LoadGraph(textureFileName.c_str());
+		modelTexture.emplace(textureFileName.c_str(), textureId);
+	}
+	MV1SetTextureGraphHandle(modelId, 0, textureId, FALSE);
+
 	return modelId;
 }
 
@@ -276,11 +313,11 @@ void Game::AddModel(ModelComponent * model)
 	//そのModelの更新順序を取得し、その順序より大きい値を見つけたらその前に挿入する
 	int drawNumber = model->getProccesNumber();
 	auto iter = modelComponents.begin();
-	for (;iter != modelComponents.end();++iter)
+	for (; iter != modelComponents.end(); ++iter)
 	{
 		int iterDrawNumber = (*iter)->getProccesNumber();
-		if (drawNumber < iterDrawNumber||
-			drawNumber== iterDrawNumber)
+		if (drawNumber < iterDrawNumber ||
+			drawNumber == iterDrawNumber)
 		{
 			break;
 		}
@@ -302,6 +339,10 @@ void Game::DrawModel()
 	for (auto model : modelComponents)
 	{
 		model->DrawModel();
+	}
+	for (auto tex : modelTexture)
+	{
+		DrawGraph(0, 0, tex.second, TRUE);
 	}
 }
 

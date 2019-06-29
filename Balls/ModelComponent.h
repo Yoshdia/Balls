@@ -11,6 +11,7 @@ public:
 	virtual void DrawModel();
 	virtual void SetModel(int model);
 	void SetModelScale(VECTOR scale) ;
+	void SetModel(int model, int tex);
 
 protected:
 	//このComponentが所持しているモデルのポインタ(読み込みエラーの際は-1が入るため初期値にも-1を入れる)

@@ -44,8 +44,6 @@ public:
 	void RemoveModel(ModelComponent* model);
 	void DrawModel();
 
-
-
 private:
 	Game() {};
 	static Game *game;
@@ -69,7 +67,7 @@ private:
 	//キーボードから取得できるキーの最大数
 	const int ControlKeyNum = 256;
 	//カメラの座標
-	const VECTOR CameraPos = VGet(0, 5, -10);
+	const VECTOR CameraPos = VGet(0, 5, -1000);
 	//カメラの視野範囲
 	const float nearCameraPos = 1;
 	const float farCameraPos = 1000;
@@ -85,8 +83,14 @@ private:
 	std::vector<class Actor*> pendingActors;
 	//ModelComponent
 	std::vector<class ModelComponent*>  modelComponents;//mModel 
-	//modelのアドレスが格納
-	std::unordered_map<std::string, int> models; // テクスチャ連想配列 
+
+
+	//modelへのアドレス(解放を最後に行うためのvector)
+	std::vector<int> originalModel;
+	//アドレスの複製
+	std::unordered_map<std::string, int> duplicateModel;
+	//モデルに張り付けるテクスチャ
+	std::unordered_map<std::string, int> modelTexture;
 	//時間
 	float deltaTime;
 

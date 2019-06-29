@@ -20,6 +20,12 @@ void ModelComponent::SetModelScale(VECTOR scale)
 	MV1SetScale(modelId, scale);
 }
 
+void ModelComponent::SetModel(int model, int tex)
+{
+	MV1SetTextureGraphHandle(model, 0, tex, FALSE);
+	modelId = model;
+}
+
 void ModelComponent::DrawModel()
 {
 	//Š—LActor‚ªŠ‚µ‚Ä‚éî•ñ‚ğ‚à‚Æ‚ÉModel‚ğ•\¦‚·‚é

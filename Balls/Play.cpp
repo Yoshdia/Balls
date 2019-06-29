@@ -22,13 +22,13 @@ void Play::Update()
 		VECTOR wallPos = VGet(1, 0, 30);
 		
 		wallPos.x += (rand * 2);
-		new Wall(wallPos);
+		//new Wall(wallPos);
 		
 		rand = GetRand(1);
 		wallPos = VGet(1, 0, 30);
 		wallPos.x += (rand * 2);
 		wallPos.x *= -1;
-		new Wall(wallPos);
+		//new Wall(wallPos);
 		count = 0;
 	}
 }
