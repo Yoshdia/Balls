@@ -8,9 +8,9 @@ Ground::Ground(VECTOR initPos)
 
 	ModelComponent * modelComponent;
 	modelComponent = new ModelComponent(this, 90);
-	int modelId = Game::GetInstance()->LoadModel("model/ground.mqo", "model/grade.JPG");
+	int modelId = Game::GetInstance()->LoadModel("Resouce/model/box.mqo", "Resouce/img/ground.png");
 	modelComponent->SetModel(modelId);
-	scale = 0.1f;
+	scale = VGet(0.4f,0.01f,1.0f);
 	modelComponent->SetModelScale(scale);
 
 }

@@ -15,16 +15,15 @@ ModelComponent::~ModelComponent()
 	Game::GetInstance()->RemoveModel(this);
 }
 
-void ModelComponent::SetModelScale(float scale)
+void ModelComponent::SetModelScale(VECTOR scale)
 {
-	MV1SetScale(modelId, VGet(scale, scale, scale));
+	MV1SetScale(modelId, scale);
 }
 
 void ModelComponent::DrawModel()
 {
 	//Š—LActor‚ªŠŽ‚µ‚Ä‚éî•ñ‚ð‚à‚Æ‚ÉModel‚ð•\Ž¦‚·‚é
 	const VECTOR position=ownerActor->GetPosition();
-	float scale = ownerActor->GetScale();
 	VECTOR rotation= ownerActor->GetRotation();
 
 	if (modelId != -1)

@@ -10,7 +10,7 @@ public:
 	~ModelComponent();
 	virtual void DrawModel();
 	virtual void SetModel(int model);
-	void SetModelScale(float scale) ;
+	void SetModelScale(VECTOR scale) ;
 
 protected:
 	//このComponentが所持しているモデルのポインタ(読み込みエラーの際は-1が入るため初期値にも-1を入れる)

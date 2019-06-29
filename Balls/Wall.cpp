@@ -8,9 +8,9 @@ Wall::Wall(VECTOR initPos)
 
 	ModelComponent * modelComponent;
 	modelComponent = new ModelComponent(this,120);
-	int modelId = Game::GetInstance()->LoadModel("model/wall.mqo", "model/grade.JPG");
+	int modelId = Game::GetInstance()->LoadModel("Resouce/model/wall.mqo", "Resouce/img/wall.png");
 	modelComponent->SetModel(modelId);
-	scale = 0.2f;
+	scale = VGet(0.02f, 0.02f, 0.01f);
 	modelComponent->SetModelScale(scale);
 
 	MoveComponent * moveComponent;

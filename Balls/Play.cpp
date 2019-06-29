@@ -18,13 +18,15 @@ void Play::Update()
 	count++;
 	if (count >= SpawnTime)
 	{
-		int rand = GetRand(1)+1;
-		VECTOR wallPos = VGet(1, 0, 10);
+		int rand = GetRand(1);
+		VECTOR wallPos = VGet(1, 0, 30);
 		
-		wallPos.x *= rand;
+		wallPos.x += (rand * 2);
 		new Wall(wallPos);
 		
-		wallPos.x *= rand;
+		rand = GetRand(1);
+		wallPos = VGet(1, 0, 30);
+		wallPos.x += (rand * 2);
 		wallPos.x *= -1;
 		new Wall(wallPos);
 		count = 0;

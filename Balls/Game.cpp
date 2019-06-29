@@ -50,17 +50,21 @@ void Game::MainProcess()
 	//カメラの視野範囲を設定
 	SetCameraNearFar(nearCameraPos, farCameraPos);
 	//カメラの場所を設定
-	SetCameraPositionAndTarget_UpVecY(CameraPos, VGet(0, 0, 0));
-
+	SetCameraPositionAndTarget_UpVecY(CameraPos, VGet(0,0,0));
+	
 	//ライトの場所をカメラと同じ位置に設定
-	SetLightPosition(CameraPos);
+	//SetLightPosition(LightPos);
 	//ライトの向きをカメラから0,0,0を見るように設定
-	SetLightDirection(VGet(0, 0, 1));
+
+	SetLightDirection(VGet(0,-1,2));
+	int secondLight = CreateDirLightHandle(VGet(1,-1,2));
+	int thirdLight = CreateDirLightHandle(VGet(-1, -1, 2));
+
 
 	new Player(leftPlayerPos, Game::MoveDirection::Left,KEY_INPUT_SPACE);
 	new Player(rightPlayerPos, Game::MoveDirection::Right,KEY_INPUT_RETURN);
 
-	new Ground(VGet(0,-1,0));
+	new Ground(VGet(0,-1.5f,0));
 	
 	//DWORD nowTick, prevTick;
 	//prevTick = timeGetTime();
@@ -69,6 +73,7 @@ void Game::MainProcess()
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && key[KEY_INPUT_ESCAPE] == 0)
 	{
+	DrawBox(0, 0, ScreenWidth - 1, ScreenHeight - 1, GetColor(125, 125, 125),TRUE);
 		//DeltaTimeSet(&nowTick,&prevTick);
 		UpdateKey();
 
@@ -85,6 +90,7 @@ void Game::MainProcess()
 	delete scene;
 
 	ShutDown();
+	DeleteLightHandleAll();
 	//Dxlibの終了
 	DxLib_End();
 

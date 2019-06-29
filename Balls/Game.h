@@ -71,12 +71,14 @@ private:
 	//カメラの座標
 	const VECTOR CameraPos = VGet(0, 5, -10);
 	//カメラの視野範囲
-	const float nearCameraPos = 0;
-	const float farCameraPos = 50.0f;
+	const float nearCameraPos = 1;
+	const float farCameraPos = 1000;
+	const VECTOR LightPos = CameraPos;//VGet(0,CameraPos.y*10,CameraPos.z*10);
 
 	//プレイヤーの初期座標
 	const VECTOR leftPlayerPos = VGet(-1, 0, 0);
 	const VECTOR rightPlayerPos = VGet(1, 0, 0);
+	
 	//更新中のActor
 	std::vector<class Actor*> upDateActors;
 	//保留中のActor
@@ -87,4 +89,5 @@ private:
 	std::unordered_map<std::string, int> models; // テクスチャ連想配列 
 	//時間
 	float deltaTime;
+
 };
