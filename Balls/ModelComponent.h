@@ -7,7 +7,7 @@ class ModelComponent : public Component
 {
 public:
 	ModelComponent(class Actor* owner,int drawNumber=100);//int drawOrder = 100
-	~ModelComponent();
+	virtual ~ModelComponent();
 	virtual void DrawModel();
 	virtual void SetModel(int model);
 	void SetModelScale(VECTOR scale) ;
@@ -15,6 +15,6 @@ public:
 
 protected:
 	//このComponentが所持しているモデルのポインタ(読み込みエラーの際は-1が入るため初期値にも-1を入れる)
-	int modelId;//mModelID;
-
+	int modelId;
+	
 };
