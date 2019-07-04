@@ -9,6 +9,7 @@ Play::Play()
 {
 	count = 0;
 	wallSpawner = new WallSpawner;
+	gameEnd = false;
 }
 
 
@@ -20,6 +21,7 @@ Play::~Play()
 void Play::Update()
 {
 	wallSpawner->WallSpawn();
+	gameEnd = Game::GetInstance()->CollisionCall();
 }
 
 void Play::Render()
@@ -32,7 +34,7 @@ void Play::Render()
 
 sceneName Play::SceneChange()
 {
-	if (Game::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1)
+	if (Game::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1||gameEnd)
 	{
 		return sceneName::clear;
 	}

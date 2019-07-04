@@ -8,6 +8,8 @@ class Actor;
 #include<unordered_map>
 
 class ModelComponent;
+class BoxColliderComponent;
+class SphereColliderComponent;
 
 //ゲーム全体の処理
 class Game
@@ -44,6 +46,12 @@ public:
 	void RemoveModel(ModelComponent* model);
 	void DrawModel();
 
+	void AddBoxCollider(BoxColliderComponent* box);
+	void RemoveCollider(BoxColliderComponent* box);
+	void AddSphereCollider(SphereColliderComponent* sphere);
+	void RemoveSphereCollider(SphereColliderComponent* sphere);
+	//衝突判定を行う関数を呼ぶ関数。戻り値は同じ　Playから呼ばれる
+	bool CollisionCall();
 private:
 	Game() {};
 	static Game *game;
@@ -91,6 +99,13 @@ private:
 	std::unordered_map<std::string, int> duplicateModel;
 	//モデルに張り付けるテクスチャ
 	std::unordered_map<std::string, int> modelTexture;
+	//球(Player)と壁(wall)を格納しているVector
+	std::vector<SphereColliderComponent*> sphereCollider;
+	std::vector<BoxColliderComponent*> boxCollider;
+	//衝突判定を行うフレンド関数
+	 bool CollisionBallWall(SphereColliderComponent * player, BoxColliderComponent * wall);
+
+
 	//時間
 	float deltaTime;
 

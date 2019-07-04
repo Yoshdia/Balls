@@ -3,6 +3,7 @@
 #include "ModelComponent.h"
 #include "MovePlayerComponent.h"
 #include "Game.h"
+#include "SphereColliderComponent.h"
 
 Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey)
 {
@@ -18,11 +19,15 @@ Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey)
 
 	MovePlayerComponent * movePlayerComponent;
 	movePlayerComponent = new MovePlayerComponent(this, 101, moveKey, next);
+
+	sphereCollider = new SphereColliderComponent(this, 150, 0.01f);
+	Game::GetInstance()->AddSphereCollider(sphereCollider);
 }
 
 
 Player::~Player()
 {
+	Game::GetInstance()->RemoveSphereCollider(sphereCollider);
 }
 
 void Player::UpdateActor(float deltaTime)

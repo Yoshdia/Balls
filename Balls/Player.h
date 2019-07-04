@@ -4,6 +4,7 @@
 #include "Game.h"
 #include "Actor.h"
 
+class 	SphereColliderComponent;
 //‰æ–Êè‘O‚Å¶‰E‚ÉˆÚ“®‚·‚é‹…B“ñ‚Â¶¬‚³‚ê‚é
 class Player:
 	public Actor
@@ -15,6 +16,7 @@ public:
 
 	void UpdateActor(float deltaTime);
 private:
+	SphereColliderComponent* sphereCollider;
 
 };
 

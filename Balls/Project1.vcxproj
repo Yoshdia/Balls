@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="BoxColliderComponent.cpp" />
     <ClCompile Include="Clear.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -162,12 +163,14 @@
     <ClCompile Include="MovePlayerComponent.cpp" />
     <ClCompile Include="Play.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SphereColliderComponent.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="WallSpawner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="BoxColliderComponent.h" />
     <ClInclude Include="Clear.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Game.h" />
@@ -179,6 +182,7 @@
     <ClInclude Include="Play.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SphereColliderComponent.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="WallSpawner.h" />

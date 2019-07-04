@@ -21,5 +21,6 @@ private :
 	int count;
 	const int SpawnTime=100;
 	WallSpawner *wallSpawner;
+	bool gameEnd;
 };
 

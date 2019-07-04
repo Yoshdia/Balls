@@ -3,6 +3,8 @@
 #include "Actor.h"
 #include "DxLib.h"
 
+class BoxColliderComponent;
+
 class Wall :
 	public Actor
 {
@@ -16,6 +18,7 @@ public:
 	void ResetWall(VECTOR pos);
 	bool GetComeOutCameraFlag() { return comeOutCamera; };
 private:
+	BoxColliderComponent* boxCollider;
 	//カメラの外に出たら建つフラグ。trueで待機状態に戻る
 	bool comeOutCamera;
 };
