@@ -52,8 +52,6 @@ void Game::MainProcess()
 	//カメラの場所を設定
 	SetCameraPositionAndTarget_UpVecY(CameraPos, VGet(0, 0, 0));
 
-	//ライトの場所をカメラと同じ位置に設定
-	//SetLightPosition(LightPos);
 	//ライトの向きをカメラから0,0,0を見るように設定
 
 	SetLightDirection(VGet(0, -1, 2));
@@ -63,12 +61,8 @@ void Game::MainProcess()
 	new Player(leftPlayerPos, Game::MoveDirection::Left, KEY_INPUT_SPACE);
 	new Player(rightPlayerPos, Game::MoveDirection::Right, KEY_INPUT_RETURN);
 
-	//new Ground(VGet(0,-1.5f,0));
-	int testModel = MV1LoadModel("Resouce/model/ball.mv1");
-	int testTex = LoadGraph("Resouce/img/box.png");
-	MV1SetTextureGraphHandle(testModel, 0, testTex, FALSE);
-	MV1SetPosition(testModel, VGet(0, 0, 0));
-	MV1GetTextureName(testModel, 0);
+	new Ground(VGet(0,-1.5f,0));
+
 	//DWORD nowTick, prevTick;
 	//prevTick = timeGetTime();
 	deltaTime = 1.0f;
@@ -86,17 +80,11 @@ void Game::MainProcess()
 		Game::GetInstance()->DrawModel();
 		scene->Render();
 
-		MV1DrawModel(testModel);
-		DrawGraph(50, 50, testTex, FALSE);
-
 		SceneChange();
 	}
 
 	delete[] key;
 	delete scene;
-
-	MV1DeleteModel(testModel);
-	DeleteGraph(testTex);
 
 	ShutDown();
 	DeleteLightHandleAll();

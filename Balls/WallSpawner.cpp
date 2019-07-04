@@ -3,7 +3,6 @@
 #include "DxLib.h"
 #include "Wall.h"
 #include "Actor.h"
-#include "Collision.h"
 
 WallSpawner::WallSpawner()
 {
@@ -42,18 +41,6 @@ void WallSpawner::WallSpawn()
 
 		count = 0;
 	}
-}
-
-bool WallSpawner::ballWallCollision(Actor* ball)
-{
-	for (auto wall : walls)
-	{
-		if (wall->GetCollisionFlag())
-		{
-			CollisionCheck(ball, wall);
-		}
-	}
-	return false;
 }
 
 Wall * WallSpawner::GetPausingWall()

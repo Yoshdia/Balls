@@ -2,35 +2,24 @@
 #include "Play.h"
 #include "Game.h"
 #include "Wall.h"
+#include "WallSpawner.h"
+
 
 Play::Play()
 {
 	count = 0;
+	wallSpawner = new WallSpawner;
 }
 
 
 Play::~Play()
 {
+	delete wallSpawner;
 }
 
 void Play::Update()
 {
-	count++;
-	if (count >= SpawnTime)
-	{
-		int rand = GetRand(1);
-		VECTOR wallPos = VGet(1, 0, 30);
-		
-		wallPos.x += (rand * 2);
-		//new Wall(wallPos);
-		
-		rand = GetRand(1);
-		wallPos = VGet(1, 0, 30);
-		wallPos.x += (rand * 2);
-		wallPos.x *= -1;
-		//new Wall(wallPos);
-		count = 0;
-	}
+	wallSpawner->WallSpawn();
 }
 
 void Play::Render()

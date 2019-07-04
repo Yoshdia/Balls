@@ -11,7 +11,6 @@ public:
 	WallSpawner();
 	~WallSpawner();
 	void WallSpawn();
-	bool ballWallCollision(Actor* ball);
 private:
 	int count;
 	const int SpawnTime = 50;

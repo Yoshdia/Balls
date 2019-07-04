@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-
+class WallSpawner;
 class Player;
 
 //PlayÉVÅ[Éì
@@ -20,5 +20,6 @@ public:
 private :
 	int count;
 	const int SpawnTime=100;
+	WallSpawner *wallSpawner;
 };
 

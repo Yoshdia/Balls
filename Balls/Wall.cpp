@@ -14,7 +14,7 @@ Wall::Wall(VECTOR initPos)
 	modelComponent->SetModelScale(scale);
 
 	MoveComponent * moveComponent;
-	moveComponent = new MoveComponent(this, 102, VGet(0, 0, -0.1f));
+	moveComponent = new MoveComponent(this, 102, VGet(0, 0, -1.0f));
 	
 
 	comeOutCamera = false;
@@ -34,9 +34,8 @@ void Wall::UpdateActor(float deltaTime)
 }
 
 
-void Wall::ResetWall(float x)
+void Wall::ResetWall(VECTOR pos)
 {
-	//pos = VGet(x, 0, 10);
-	//comeOutCamera = false;
-
+	position=pos;
+	state = Actor::ActiveState::Active;
 }
