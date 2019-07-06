@@ -20,14 +20,13 @@ Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey)
 	MovePlayerComponent * movePlayerComponent;
 	movePlayerComponent = new MovePlayerComponent(this, 101, moveKey, next);
 
+	SphereColliderComponent* sphereCollider;
 	sphereCollider = new SphereColliderComponent(this, 150, 0.01f);
-	Game::GetInstance()->AddSphereCollider(sphereCollider);
 }
 
 
 Player::~Player()
 {
-	Game::GetInstance()->RemoveSphereCollider(sphereCollider);
 }
 
 void Player::UpdateActor(float deltaTime)

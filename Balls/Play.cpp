@@ -22,6 +22,10 @@ void Play::Update()
 {
 	wallSpawner->WallSpawn();
 	gameEnd = Game::GetInstance()->CollisionCall();
+	if (gameEnd)
+	{
+		wallSpawner->WallStop();
+	}
 }
 
 void Play::Render()

@@ -16,7 +16,6 @@ public:
 
 	void UpdateActor(float deltaTime);
 private:
-	SphereColliderComponent* sphereCollider;
 
 };
 

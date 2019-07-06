@@ -43,6 +43,14 @@ void WallSpawner::WallSpawn()
 	}
 }
 
+void WallSpawner::WallStop()
+{
+	for (auto wall : walls)
+	{
+		wall->SetState(Actor::ActiveState::Paused);
+	}
+}
+
 Wall * WallSpawner::GetPausingWall()
 {
 	for (int num = 0; num < 50; num++)

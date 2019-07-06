@@ -62,7 +62,7 @@ void Game::MainProcess()
 	new Player(leftPlayerPos, Game::MoveDirection::Left, KEY_INPUT_SPACE);
 	new Player(rightPlayerPos, Game::MoveDirection::Right, KEY_INPUT_RETURN);
 
-	new Ground(VGet(0,-1.5f,0));
+	new Ground(VGet(0, -1.5f, 0));
 
 	//DWORD nowTick, prevTick;
 	//prevTick = timeGetTime();
@@ -372,8 +372,16 @@ bool Game::CollisionCall()
 	{
 		for (auto box : boxCollider)
 		{
+			//壁の衝突準備フラグが立っていない場合ここで終了する
+			if (!box->GetIsCollision())
+			{
+				continue;
+			}
 			bool end = CollisionBallWall(ball, box);
-			return end;
+			if (end)
+			{
+				return end;
+			}
 		}
 	}
 	return false;
@@ -381,32 +389,28 @@ bool Game::CollisionCall()
 
 bool Game::CollisionBallWall(SphereColliderComponent * ball, BoxColliderComponent * wall)
 {
-	//壁の衝突準備フラグが立っていない場合ここで終了する
-	if (!wall->GetIsCollision())
-	{
-		return false;
-	}
 	SphereInfo sphere = ball->GetInfo();
 	BoxInfo box = wall->GetIndo();
 
-	//円 ： 中心点C(xc, yc)、半径r
-	//	点 ： P(pointX, pointY)
-	//	(pointX - xc) ^ 2 + (pointY - yc) ^ 2 ≦ r ^ 2ならば衝突している
-
 	float sphereLengh = sphere.length*sphere.length;
 
-	VECTOR boxLeftUp = VGet(box.position.x - box.length,box.position.y-box.length,0);
+	if (box.position.x == sphere.position.x)
+	{
+		return true;
+	}
+
+	VECTOR boxLeftUp = VGet(box.position.x - box.length, box.position.y + box.length, 0);
 
 	if (((boxLeftUp.x - sphere.position.x)*(boxLeftUp.x - sphere.position.x)) +
 		((boxLeftUp.y - sphere.position.y)*(boxLeftUp.y - sphere.position.y)) <= sphereLengh)
 	{
 		return true;
 	}
-	
-	VECTOR boxRightUp = VGet(box.position.x + box.length,box.position.y+box.length,0);
+
+	VECTOR boxRightDown = VGet(box.position.x + box.length, box.position.y - box.length, 0);
 	{
-		if (((boxRightUp.x - sphere.position.x)*(boxRightUp.x - sphere.position.x)) +
-			((boxRightUp.y - sphere.position.y)*(boxRightUp.y - sphere.position.y)) <= sphereLengh)
+		if (((boxRightDown.x - sphere.position.x)*(boxRightDown.x - sphere.position.x)) +
+			((boxRightDown.y - sphere.position.y)*(boxRightDown.y - sphere.position.y)) <= sphereLengh)
 		{
 			return true;
 		}

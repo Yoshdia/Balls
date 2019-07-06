@@ -11,6 +11,7 @@ public:
 	WallSpawner();
 	~WallSpawner();
 	void WallSpawn();
+	void WallStop();
 private:
 	int count;
 	const int SpawnTime = 50;
