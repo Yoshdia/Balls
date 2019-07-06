@@ -65,7 +65,7 @@ void Game::MainProcess()
 	new Player(leftPlayerPos, Game::MoveDirection::Left, KEY_INPUT_SPACE);
 	new Player(rightPlayerPos, Game::MoveDirection::Right, KEY_INPUT_RETURN);
 
-	new Ground(VGet(0, -1.5f, 0));
+	new Ground(VGet(0, -2.0f, 0));
 
 	DWORD nowTick, prevTick;
 	prevTick = timeGetTime();
@@ -401,6 +401,9 @@ bool Game::CollisionBallWall(SphereColliderComponent * ball, BoxColliderComponen
 	BoxInfo box = wall->GetIndo();
 
 	float sphereLengh = sphere.length*sphere.length;
+	sphereLengh = 1;
+	box.length = 1;
+
 
 	if (box.position.x == sphere.position.x)
 	{

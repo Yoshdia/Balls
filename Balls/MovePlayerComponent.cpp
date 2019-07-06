@@ -10,6 +10,7 @@ MovePlayerComponent::MovePlayerComponent(Actor * owner, int processNumber, char 
 	, moveInputeKey(moveKey)
 	, moving(false)
 	,movement(MovingDistance)
+	,middlePos((float)2*next)
 {
 }
 
@@ -26,11 +27,11 @@ void MovePlayerComponent::Update(float deltaTime)
 		if (Game::GetInstance()->GetAllInputKey()[moveInputeKey] == 1)
 		{
 			//移動予定地の計算
-			targetPos = position.x + (MovingDistance*nextMoveDirection);
+			targetPos = middlePos + (MovingDistance/2*nextMoveDirection);
 			//残り移動距離
 			movement = targetPos-position.x;
 			//1fに移動する距離
-			moveDistance.x = movement / movingRequiredTime;
+			moveDistance.x = movement * movingRequiredTime;
 			//残り移動距離を絶対値に変換
 			movement = abs(movement);
 			//右に移動していた場合左に　のように左右切り替えられるようにする
@@ -50,6 +51,7 @@ void MovePlayerComponent::Update(float deltaTime)
 		if (movement<=0)
 		{
 			position.x = targetPos;
+			ownerActor->SetPosition(position);
 			moving = false;
 		}
 	}

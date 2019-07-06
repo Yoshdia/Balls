@@ -23,8 +23,10 @@ protected:
 	//c‚è‚ÌˆÚ“®‹——£A0‚É‚È‚é‚Æmoving‚ğ“|‚·
 	float movement;
 
+	float middlePos;
+
 	//ˆÚ“®ŠÔF
-	const float movingRequiredTime = 0.1f;
+	const float movingRequiredTime = 10.0f;
 	//ˆÚ“®‹——£
 	const float MovingDistance = 2.0f;
 };
