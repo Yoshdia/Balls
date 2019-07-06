@@ -74,7 +74,7 @@ void Game::MainProcess()
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && key[KEY_INPUT_ESCAPE] == 0)
 	{
-		DrawBox(0, 0, ScreenWidth - 1, ScreenHeight - 1, GetColor(125, 125, 125), TRUE);
+		//DrawBox(0, 0, ScreenWidth - 1, ScreenHeight - 1, GetColor(125, 125, 125), TRUE);
 		DeltaTimeSet(nowTick,prevTick);
 		UpdateKey();
 
@@ -156,6 +156,11 @@ void Game::DeltaTimeSet(DWORD& nowTick, DWORD& prevTick)
 
 	deltaTime = mTicks / 1000.0f;
 	prevTick = nowTick;
+
+	if (deltaTime >= 0.07f)
+	{
+		deltaTime = 0.07f;
+	}
 }
 
 
