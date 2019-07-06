@@ -51,6 +51,14 @@ void WallSpawner::WallStop()
 	}
 }
 
+void WallSpawner::WallClear()
+{
+	for (auto wall : walls)
+	{
+		wall->ClearWall();
+	}
+}
+
 Wall * WallSpawner::GetPausingWall()
 {
 	for (int num = 0; num < 50; num++)

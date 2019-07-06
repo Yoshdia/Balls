@@ -19,7 +19,6 @@ Wall::Wall(VECTOR initPos)
 	
 	boxCollider = new BoxColliderComponent(this, 150, 0.02f);
 	boxCollider->SetIsCollision(false);
-	comeOutCamera = false;
 }
 
 Wall::~Wall()
@@ -38,7 +37,7 @@ void Wall::UpdateActor(float deltaTime)
 	}
 	if (position.z < -10)
 	{
-		state = Actor::ActiveState::NoActive;
+		state = Actor::ActiveState::Paused;
 	}
 }
 
@@ -47,5 +46,12 @@ void Wall::ResetWall(VECTOR pos)
 {
 	position=pos;
 	state = Actor::ActiveState::Active;
+	boxCollider->SetIsCollision(false);
+}
+
+void Wall::ClearWall()
+{
+	position = VGet(0, -10, 0);
+	state = Actor::ActiveState::Paused;
 	boxCollider->SetIsCollision(false);
 }

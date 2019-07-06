@@ -8,11 +8,13 @@ enum sceneName
 	clear,
 };
 
+#include "WallSpawner.h"
+
 //Scene基底クラス
 class Scene
 {
 public:
-	Scene() {};
+	Scene(WallSpawner* pSpawn) { wallSpawner = pSpawn; };
 	virtual ~Scene() {};
 	//更新
 	virtual void Update() {};
@@ -20,4 +22,6 @@ public:
 	virtual void Render() {};
 	//それぞれのSceneで別シーンに移動する条件と名前を指定できる
 	virtual sceneName SceneChange() = 0;
+protected:
+	WallSpawner* wallSpawner;
 };

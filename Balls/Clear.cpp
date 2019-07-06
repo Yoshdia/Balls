@@ -4,7 +4,8 @@
 
 
 
-Clear::Clear()
+Clear::Clear(WallSpawner* wallSpawn):
+	Scene(wallSpawn)
 {
 }
 
@@ -26,6 +27,7 @@ sceneName Clear::SceneChange()
 {
 	if (Game::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1)
 	{
+		wallSpawner->WallClear();
 		return sceneName::title;
 	}
 	return sceneName::noChange;

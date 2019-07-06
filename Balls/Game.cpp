@@ -48,8 +48,9 @@ void Game::MainProcess()
 	key = new char[ControlKeyNum];
 	UpdateKey();
 
+	wallSpawner = new WallSpawner;
 	//最初のシーンを作成
-	scene = new Play;
+	scene = new Play(wallSpawner);
 
 	//カメラの視野範囲を設定
 	SetCameraNearFar(nearCameraPos, farCameraPos);
@@ -74,7 +75,6 @@ void Game::MainProcess()
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && key[KEY_INPUT_ESCAPE] == 0)
 	{
-		//DrawBox(0, 0, ScreenWidth - 1, ScreenHeight - 1, GetColor(125, 125, 125), TRUE);
 		DeltaTimeSet(nowTick,prevTick);
 		UpdateKey();
 
@@ -89,6 +89,7 @@ void Game::MainProcess()
 
 	delete[] key;
 	delete scene;
+	delete wallSpawner;
 
 	ShutDown();
 	DeleteLightHandleAll();
@@ -136,14 +137,14 @@ void Game::SceneChange()
 	{
 	case(sceneName::title):
 		delete scene;
-		scene = new Title;
+		scene = new Title(wallSpawner);
 		break;
 	case(sceneName::play):
 		delete scene;
-		scene = new Play;
+		scene = new Play(wallSpawner);
 		break;
 	case(sceneName::clear):
-		scene = new Clear;
+		scene = new Clear(wallSpawner);
 		break;
 	}
 }

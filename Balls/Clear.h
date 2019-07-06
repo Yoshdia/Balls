@@ -6,7 +6,7 @@ class Clear :
 	public Scene
 {
 public:
-	Clear();
+	Clear(WallSpawner* wallSpawn);
 	~Clear();
 
 	void Update();

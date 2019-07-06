@@ -10,7 +10,7 @@ class Play :
 private:
 
 public:
-	Play();
+	Play(WallSpawner* wallSpawn);
 	~Play();
 
 	void Update();
@@ -20,7 +20,6 @@ public:
 private :
 	int count;
 	const int SpawnTime=100;
-	WallSpawner *wallSpawner;
 	bool gameEnd;
 };
 

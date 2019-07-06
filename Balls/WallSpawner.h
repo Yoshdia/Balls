@@ -3,15 +3,18 @@
 #include "DxLib.h"
 
 class Wall;
-class Actor;
 
 class WallSpawner
 {
 public:
 	WallSpawner();
 	~WallSpawner();
+	//SpawnTime‚²‚Æ‚ÉWall‚ğ¶¬‚·‚éŠÖ”
 	void WallSpawn();
+	//‚·‚×‚Ä‚Ìwall‚ÌˆÚ“®‚ğ’â~‚³‚¹¶¬‚à‚â‚ß‚³‚¹‚é
 	void WallStop();
+	//‚·‚×‚Ä‚Ìwall‚ğ‰Šúó‘Ô‚É–ß‚·
+	void WallClear();
 private:
 	int count;
 	const int SpawnTime = 50;

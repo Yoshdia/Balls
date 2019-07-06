@@ -10,6 +10,7 @@ class Actor;
 class ModelComponent;
 class BoxColliderComponent;
 class SphereColliderComponent;
+class WallSpawner;
 
 //ゲーム全体の処理
 class Game
@@ -105,6 +106,7 @@ private:
 	//衝突判定を行うフレンド関数
 	 bool CollisionBallWall(SphereColliderComponent * player, BoxColliderComponent * wall);
 
+	 WallSpawner* wallSpawner;
 
 	//時間
 	float deltaTime;

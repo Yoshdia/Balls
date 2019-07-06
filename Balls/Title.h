@@ -6,7 +6,7 @@ class Title :
 	public Scene
 {
 public:
-	Title();
+	Title(WallSpawner* wallSpawn);
 	~Title();
 
 	void Update();

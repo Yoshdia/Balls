@@ -5,17 +5,16 @@
 #include "WallSpawner.h"
 
 
-Play::Play()
+Play::Play(WallSpawner* wallSpawn):
+	Scene(wallSpawn)
 {
 	count = 0;
-	wallSpawner = new WallSpawner;
 	gameEnd = false;
 }
 
 
 Play::~Play()
 {
-	delete wallSpawner;
 }
 
 void Play::Update()

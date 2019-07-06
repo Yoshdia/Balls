@@ -2,7 +2,8 @@
 #include "Game.h"
 #include "Title.h"
 
-Title::Title()
+Title::Title(WallSpawner* wallSpawn):
+	Scene(wallSpawn)
 {
 }
 
