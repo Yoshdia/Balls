@@ -11,6 +11,9 @@
 #include "Ground.h"
 #include "SphereColliderComponent.h"
 #include "BoxColliderComponent.h"
+//#include <windows.h>
+#include <mmsystem.h>
+#pragma comment (lib, "winmm.lib") 
 
 Game *Game::game = NULL;
 
@@ -64,15 +67,15 @@ void Game::MainProcess()
 
 	new Ground(VGet(0, -1.5f, 0));
 
-	//DWORD nowTick, prevTick;
-	//prevTick = timeGetTime();
+	DWORD nowTick, prevTick;
+	prevTick = timeGetTime();
 	deltaTime = 1.0f;
 
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && key[KEY_INPUT_ESCAPE] == 0)
 	{
 		DrawBox(0, 0, ScreenWidth - 1, ScreenHeight - 1, GetColor(125, 125, 125), TRUE);
-		//DeltaTimeSet(&nowTick,&prevTick);
+		DeltaTimeSet(nowTick,prevTick);
 		UpdateKey();
 
 		ActorUpdate();
@@ -145,14 +148,14 @@ void Game::SceneChange()
 	}
 }
 
-void Game::DeltaTimeSet(DWORD * nowTick, DWORD * prevTick)
+void Game::DeltaTimeSet(DWORD& nowTick, DWORD& prevTick)
 {
-	//*nowTick = timeGetTime();
-	//DWORD mTicks = DWORD(nowTick - prevTick);
-	//*prevTick = timeGetTime();
+	nowTick = timeGetTime();
+	DWORD mTicks = DWORD(nowTick - prevTick);
+	prevTick = timeGetTime();
 
-	//deltaTime = mTicks / 1000.0f;
-	//*prevTick = *nowTick;
+	deltaTime = mTicks / 1000.0f;
+	prevTick = nowTick;
 }
 
 

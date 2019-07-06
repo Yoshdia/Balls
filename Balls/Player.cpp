@@ -12,7 +12,7 @@ Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey)
 	//ƒ‚ƒfƒ‹‚ð•Û‘¶‚µ•`‰æ‚·‚éComponent‚ðŽÀ‘•
 	ModelComponent * modelComponent;
 	modelComponent = new ModelComponent(this);
-	int modelId = Game::GetInstance()->LoadModel("Resouce/model/ball.mqo","Resouce/img/box.png");
+	int modelId = Game::GetInstance()->LoadModel("Resouce/model/ball.mv1","Resouce/img/box.png");
 	modelComponent->SetModel(modelId);
 	scale = VGet(0.01f, 0.01f, 0.01f);
 	modelComponent->SetModelScale(scale);
@@ -32,5 +32,5 @@ Player::~Player()
 void Player::UpdateActor(float deltaTime)
 {
 	//‰ñ“]‚³‚¹‚é
-	rotation = VAdd(rotation, VGet(0.1f, 0, 0));
+	rotation = VAdd(rotation, VGet(5.0f*deltaTime, 0, 0));
 }

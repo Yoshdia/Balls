@@ -67,7 +67,7 @@ private:
 	//シーンチェンジ。Sceneの派生クラスから条件と遷移先を決める
 	void SceneChange();
 	//時間計測
-	void DeltaTimeSet(DWORD *nowTick, DWORD *prevTick);
+	void DeltaTimeSet(DWORD &nowTick, DWORD &prevTick);
 
 	//スクリーンサイズ
 	const int ScreenWidth = 1080;

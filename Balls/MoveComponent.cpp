@@ -8,6 +8,7 @@ MoveComponent::MoveComponent(Actor * owner, int processNumber,VECTOR distance):
 	,position(owner->GetPosition())
 	,moveDistance(distance)
 {
+
 }
 
 MoveComponent::~MoveComponent()
@@ -22,6 +23,7 @@ void MoveComponent::Update(float deltaTime)
 void MoveComponent::Move(float deltaTime)
 {
 	position=ownerActor->GetPosition();
-	position = VAdd(position,moveDistance);
+	VECTOR distance = VGet(moveDistance.x*deltaTime, moveDistance.y*deltaTime, moveDistance.z*deltaTime);
+	position = VAdd(position, distance);
 	ownerActor->SetPosition(position);
 }

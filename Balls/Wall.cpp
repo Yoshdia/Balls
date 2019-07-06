@@ -9,13 +9,13 @@ Wall::Wall(VECTOR initPos)
 
 	ModelComponent * modelComponent;
 	modelComponent = new ModelComponent(this,120);
-	int modelId = Game::GetInstance()->LoadModel("Resouce/model/wall.mqo", "Resouce/img/wall.png");
+	int modelId = Game::GetInstance()->LoadModel("Resouce/model/wall.mv1", "Resouce/img/wall.png");
 	modelComponent->SetModel(modelId);
 	scale = VGet(0.02f, 0.02f, 0.01f);
 	modelComponent->SetModelScale(scale);
 
 	MoveComponent * moveComponent;
-	moveComponent = new MoveComponent(this, 102, VGet(0, 0, -1.0f));
+	moveComponent = new MoveComponent(this, 102, VGet(0, 0, -60.0f));
 	
 	boxCollider = new BoxColliderComponent(this, 150, 0.02f);
 	boxCollider->SetIsCollision(false);
@@ -24,7 +24,6 @@ Wall::Wall(VECTOR initPos)
 
 Wall::~Wall()
 {
-
 }
 
 void Wall::UpdateActor(float deltaTime)
