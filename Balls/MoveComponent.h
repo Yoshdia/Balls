@@ -10,6 +10,7 @@ public:
 	~MoveComponent();
 	void Update(float deltaTime);
 protected:
+	static float gameSpeed;
 	void Move(float deltaTime);
 	VECTOR position;
 	//–ˆFˆÚ“®‚·‚é‹——£

@@ -11,11 +11,12 @@
 #include "Ground.h"
 #include "SphereColliderComponent.h"
 #include "BoxColliderComponent.h"
-//#include <windows.h>
+#include "MoveComponent.h"
 #include <mmsystem.h>
 #pragma comment (lib, "winmm.lib") 
 
 Game *Game::game = NULL;
+
 
 void Game::Create()
 {
