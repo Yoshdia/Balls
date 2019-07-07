@@ -4,7 +4,7 @@
 #include "Game.h"
 
 ModelComponent::ModelComponent(Actor * owner, int setProcessNumber)
-	:Component(owner,setProcessNumber)
+	:Component(owner, setProcessNumber)
 	, modelId(-1)
 {
 	Game::GetInstance()->AddModel(this);
@@ -28,15 +28,18 @@ void ModelComponent::SetModel(int model, int tex)
 
 void ModelComponent::DrawModel()
 {
-	//所有Actorが所持してる情報をもとにModelを表示する
-	const VECTOR position=ownerActor->GetPosition();
-	VECTOR rotation= ownerActor->GetRotation();
-
-	if (modelId != -1)
+	if (ownerActor->GetState() == Actor::ActiveState::Active)
 	{
-		MV1SetPosition(modelId, position);
-		MV1SetRotationXYZ(modelId, rotation);
-		MV1DrawModel(modelId);
+		//所有Actorが所持してる情報をもとにModelを表示する
+		const VECTOR position = ownerActor->GetPosition();
+		VECTOR rotation = ownerActor->GetRotation();
+
+		if (modelId != -1)
+		{
+			MV1SetPosition(modelId, position);
+			MV1SetRotationXYZ(modelId, rotation);
+			MV1DrawModel(modelId);
+		}
 	}
 }
 

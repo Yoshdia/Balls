@@ -17,7 +17,7 @@ public:
 	//座標を受け取った地点にし、フラグを倒す
 	void ResetWall(VECTOR pos);
 	void ClearWall();
-	void OnCollision() {};
+	void OnCollision() { state = Actor::ActiveState::Paused; };
 protected:
 	MoveComponent * moveComponent;
 	BoxColliderComponent* boxCollider;

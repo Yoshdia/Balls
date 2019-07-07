@@ -83,7 +83,7 @@ void Game::MainProcess()
 		ActorUpdate();
 		scene->Update();
 
-		Game::GetInstance()->DrawModel();
+		DrawModel();
 		scene->Render();
 
 		SceneChange();
@@ -344,10 +344,6 @@ void Game::DrawModel()
 	{
 		model->DrawModel();
 	}
-	for (auto tex : modelTexture)
-	{
-		DrawGraph(0, 0, tex.second, TRUE);
-	}
 }
 
 void Game::AddBoxCollider(BoxColliderComponent * box)
@@ -394,7 +390,16 @@ bool Game::CollisionCall()
 			bool end = CollisionBallWall(ball, box);
 			if (end)
 			{
+				//‰Á‘¬•Ç‚¾‚Á‚½ê‡AgameSpeed‚ð‰Á‘¬‚³‚¹‚é
 				if (box->GetTag() == BoxColliderComponent::ColliderTag::AddSpeedWall)
+				{
+					box->OnCollision();
+					ball->OnCollision();
+					
+					continue;
+				}
+				//Player‚ª‹­‰»ó‘Ô‚¾‚Á‚½ê‡A•Ç‚ðPause‚É‚·‚é
+				if (ball->GetTag() == SphereColliderComponent::CollisionTag::SuperPlayer)
 				{
 					box->OnCollision();
 					continue;

@@ -17,6 +17,7 @@ public:
 	~Player();
 
 	void UpdateActor(float deltaTime);
+
 private:
 
 };

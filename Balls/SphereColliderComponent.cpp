@@ -4,9 +4,10 @@
 
 SphereColliderComponent::SphereColliderComponent(Actor * owner, int processNumber, float length)
 	:Component(owner,processNumber)
+	,info({owner->GetPosition(),length})
+	,myTag(SphereColliderComponent::CollisionTag::NormalPlayer)
 {
 	Game::GetInstance()->AddSphereCollider(this);
-	info = { owner->GetPosition(),length };
 }
 
 SphereColliderComponent::~SphereColliderComponent()

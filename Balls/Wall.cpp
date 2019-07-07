@@ -7,7 +7,7 @@ Wall::Wall(VECTOR initPos, BoxColliderComponent::ColliderTag tag)
 	position = initPos;
 
 	ModelComponent * modelComponent;
-	modelComponent = new ModelComponent(this,120);
+	modelComponent = new ModelComponent(this,200);
 	int modelId=0;
 	switch (tag)
 	{
