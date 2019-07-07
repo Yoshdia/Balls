@@ -1,23 +1,30 @@
 #include "Wall.h"
 #include "ModelComponent.h"
 #include "MoveComponent.h"
-#include "BoxColliderComponent.h"
 
-Wall::Wall(VECTOR initPos)
+Wall::Wall(VECTOR initPos, BoxColliderComponent::ColliderTag tag)
 {
 	position = initPos;
 
 	ModelComponent * modelComponent;
 	modelComponent = new ModelComponent(this,120);
-	int modelId = Game::GetInstance()->LoadModel("Resouce/model/wall.mv1", "Resouce/img/wall.png");
+	int modelId=0;
+	switch (tag)
+	{
+	case(BoxColliderComponent::ColliderTag::AddSpeedWall):
+		modelId = Game::GetInstance()->LoadModel("Resouce/model/addSpeedWall.mv1", "Resouce/img/wall.png");
+			break;
+	case(BoxColliderComponent::ColliderTag::JammerWall):
+		modelId = Game::GetInstance()->LoadModel("Resouce/model/wall.mv1", "Resouce/img/wall.png");
+			break;
+	}
 	modelComponent->SetModel(modelId);
 	scale = VGet(0.01f, 0.01f, 0.001f);
 	modelComponent->SetModelScale(scale);
 
-	MoveComponent * moveComponent;
 	moveComponent = new MoveComponent(this, 102, VGet(0, 0, -60.0f));
-	
-	boxCollider = new BoxColliderComponent(this, 150, 0.02f);
+
+	boxCollider = new BoxColliderComponent(this, 150, 0.02f,tag);
 	boxCollider->SetIsCollision(false);
 }
 
@@ -55,3 +62,4 @@ void Wall::ClearWall()
 	state = Actor::ActiveState::Paused;
 	boxCollider->SetIsCollision(false);
 }
+

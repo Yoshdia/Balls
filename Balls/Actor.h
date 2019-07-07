@@ -38,7 +38,7 @@ public:
 	void AddComponent(class Component* component);
 	void RemoveComponent(class Component* component);
 
-	static float speed;
+	virtual void OnCollision() {};
 protected:
 	ActiveState state;
 	VECTOR position;

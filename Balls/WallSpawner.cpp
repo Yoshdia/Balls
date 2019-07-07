@@ -1,17 +1,19 @@
 #include "WallSpawner.h"
 #include "Wall.h"
+#include "AddSpeedWall.h"
 #include "DxLib.h"
 #include "Wall.h"
 #include "Actor.h"
 
 WallSpawner::WallSpawner()
 {
+	spawnTime = SpawnTime;
 	count = 0;
 
 	VECTOR initPos = VGet(0, -10, 0);
 	for (int num = 0; num < 50; num++)
 	{
-		walls[num] = new Wall(initPos);
+		walls[num] = new AddSpeedWall(initPos);
 		walls[num]->SetState(Actor::ActiveState::Paused);
 	}
 }
@@ -23,8 +25,9 @@ WallSpawner::~WallSpawner()
 
 void WallSpawner::WallSpawn()
 {
+	float gameSpeed = Game::GetInstance()->GetGameSpeed();
 	count++;
-	if (count >= SpawnTime)
+	if (count >= spawnTime-((gameSpeed-1)*10))
 	{
 		VECTOR wallPos;
 		wallPos = CreateWallPosition();
@@ -69,7 +72,7 @@ Wall * WallSpawner::GetPausingWall()
 			return walls[num];
 		}
 	}
-	return new Wall(VGet(0, -10, 0));
+	return new Wall(VGet(0, -10, 0),BoxColliderComponent::ColliderTag::JammerWall);
 }
 
 VECTOR WallSpawner::CreateWallPosition()

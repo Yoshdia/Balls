@@ -3,8 +3,9 @@
 #include "Game.h"
 
 
-BoxColliderComponent::BoxColliderComponent(Actor * owner, int processNumber, float length)
+BoxColliderComponent::BoxColliderComponent(Actor * owner, int processNumber, float length, ColliderTag tag)
 	:Component(owner, processNumber)
+	,myTag(tag)
 {
 	Game::GetInstance()->AddBoxCollider(this);
 	info = { owner->GetPosition(),length };
@@ -18,6 +19,11 @@ BoxColliderComponent::~BoxColliderComponent()
 void BoxColliderComponent::Update(float deltaTime)
 {
 	updatePosition();
+}
+
+void BoxColliderComponent::OnCollision()
+{
+	 ownerActor->OnCollision(); 
 }
 
 void BoxColliderComponent::updatePosition()

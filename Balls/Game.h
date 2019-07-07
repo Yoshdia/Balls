@@ -53,6 +53,8 @@ public:
 	void RemoveSphereCollider(SphereColliderComponent* sphere);
 	//衝突判定を行う関数を呼ぶ関数。戻り値は同じ　Playから呼ばれる
 	bool CollisionCall();
+	float GetGameSpeed() { return gameSpeed; }
+	void AddGameSpeed() { gameSpeed += PlusSpeed; }
 private:
 	Game() {};
 	static Game *game;
@@ -69,6 +71,9 @@ private:
 	void SceneChange();
 	//時間計測
 	void DeltaTimeSet(DWORD &nowTick, DWORD &prevTick);
+
+	const float PlusSpeed = 0.1f;;
+	float gameSpeed;
 
 	//スクリーンサイズ
 	const int ScreenWidth = 1080;

@@ -3,13 +3,16 @@
 #include "MovePlayerComponent.h"
 #include "Actor.h"
 
+const float MovePlayerComponent::MovingRequiredTime = 10.0f;
+const float MovePlayerComponent::MovingDistanceSum = 2.0f;
+
 MovePlayerComponent::MovePlayerComponent(Actor * owner, int processNumber, char moveKey, Game::MoveDirection next)
 	:MoveComponent(owner, processNumber, VGet(0, 0, 0))
 	, nextMoveDirection(next)
 	, targetPos(owner->GetPosition().x)
 	, moveInputeKey(moveKey)
 	, moving(false)
-	,movement(MovingDistance)
+	,movement(MovingDistanceSum)
 	,middlePos((float)2*next)
 {
 }
@@ -27,14 +30,20 @@ void MovePlayerComponent::Update(float deltaTime)
 		if (Game::GetInstance()->GetAllInputKey()[moveInputeKey] == 1)
 		{
 			//移動予定地の計算
-			targetPos = middlePos + (MovingDistance/2*nextMoveDirection);
+			targetPos = middlePos + (MovingDistanceSum/2*nextMoveDirection);
 			//残り移動距離
 			movement = targetPos-position.x;
+			float gameSpeed = Game::GetInstance()->GetGameSpeed();
 			//1fに移動する距離
-			moveDistance.x = movement * movingRequiredTime;
+			moveDistance.x = (movement * MovingRequiredTime)*deltaTime*gameSpeed;
+			//MoveComponent内のgameSpeedが一定以上まで上昇すると移動距離が合計移動距離を上回ることがあるため上限値を設定
+			if (moveDistance.x >= MovingDistanceSum)
+			{
+				moveDistance.x = MovingDistanceSum;
+			}
 			//残り移動距離を絶対値に変換
 			movement = abs(movement);
-			//右に移動していた場合左に　のように左右切り替えられるようにする
+			//移動先を左右切り替える
 			switch (nextMoveDirection)
 			{
 			case(Game::MoveDirection::Right):nextMoveDirection = Game::MoveDirection::Left; break;
@@ -45,9 +54,10 @@ void MovePlayerComponent::Update(float deltaTime)
 	}
 	else
 	{
-		Move(deltaTime);
+		//MoveComponent内の、値を計算させる関数へ
+		Move();
 		//残り移動距離が0になるまで移動を続ける
-		movement -= (moveDistance.x*deltaTime)*-nextMoveDirection;
+		movement -= moveDistance.x*-nextMoveDirection;
 		if (movement<=0)
 		{
 			position.x = targetPos;

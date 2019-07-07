@@ -72,11 +72,12 @@ void Game::MainProcess()
 	DWORD nowTick, prevTick;
 	prevTick = timeGetTime();
 	deltaTime = 1.0f;
+	gameSpeed = 1.0f;
 
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && key[KEY_INPUT_ESCAPE] == 0)
 	{
-		DeltaTimeSet(nowTick,prevTick);
+		DeltaTimeSet(nowTick, prevTick);
 		UpdateKey();
 
 		ActorUpdate();
@@ -143,6 +144,7 @@ void Game::SceneChange()
 	case(sceneName::play):
 		delete scene;
 		scene = new Play(wallSpawner);
+		gameSpeed = 1.0f;
 		break;
 	case(sceneName::clear):
 		scene = new Clear(wallSpawner);
@@ -390,6 +392,11 @@ bool Game::CollisionCall()
 			bool end = CollisionBallWall(ball, box);
 			if (end)
 			{
+				if (box->GetTag() == BoxColliderComponent::ColliderTag::AddSpeedWall)
+				{
+					box->OnCollision();
+					continue;
+				}
 				return end;
 			}
 		}

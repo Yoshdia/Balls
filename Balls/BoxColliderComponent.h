@@ -15,13 +15,21 @@ class BoxColliderComponent :
 	public Component
 {
 public:
-	BoxColliderComponent(Actor* owner,int processNumber,float length);
+	enum ColliderTag
+	{
+		JammerWall,
+		AddSpeedWall
+	};
+	BoxColliderComponent(Actor* owner,int processNumber,float length, ColliderTag tag);
 	~BoxColliderComponent();
 	void SetIsCollision(bool flag) { isCollision = flag; }
 	bool GetIsCollision() { return isCollision; }
-	 void Update(float deltaTime);
-	 BoxInfo GetIndo() { return info; }
+	void Update(float deltaTime);
+	BoxInfo GetIndo() { return info; }
+	void OnCollision() ;
+	ColliderTag GetTag() { return myTag; }
 private:
+	ColliderTag myTag;
 	BoxInfo info;
 	void updatePosition();
 	//衝突判定を行うかどうか。Boxは一定座標に来るまでこのフラグを倒す

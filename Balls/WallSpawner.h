@@ -18,6 +18,7 @@ public:
 private:
 	int count;
 	const int SpawnTime = 50;
+	int spawnTime;
 	//Wall‚ÌƒAƒhƒŒƒX‚ğ•Û‘¶‚µ‚Ä‚¨‚­
 	Wall* walls[50];
 	//Œ»İState‚ªPausing‚ÌWall‚ğæ“¾
