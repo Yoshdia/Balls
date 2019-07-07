@@ -90,8 +90,10 @@ void Game::MainProcess()
 	}
 
 	delete[] key;
-	delete scene;
 	delete wallSpawner;
+	wallSpawner = nullptr;
+	delete scene;
+	scene = nullptr;
 
 	ShutDown();
 	DeleteLightHandleAll();

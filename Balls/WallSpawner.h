@@ -3,6 +3,7 @@
 #include "DxLib.h"
 
 class Wall;
+class AddSpeedWall;
 
 class WallSpawner
 {
@@ -17,10 +18,13 @@ public:
 	void WallClear();
 private:
 	int count;
-	const int SpawnTime = 50;
+	const int SpawnTime = 60;
 	int spawnTime;
+	int AddWallRandam = 200;
 	//Wallのアドレスを保存しておく
 	Wall* walls[50];
+	//AddWallへのアドレス
+	AddSpeedWall* addWalls[5];
 	//現在StateがPausingのWallを取得
 	Wall* GetPausingWall();
 	//二つのレーンのどちらに設置するかをランダムで取得する

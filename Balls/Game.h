@@ -72,7 +72,7 @@ private:
 	//時間計測
 	void DeltaTimeSet(DWORD &nowTick, DWORD &prevTick);
 
-	const float PlusSpeed = 0.1f;;
+	const float PlusSpeed = 0.01f;;
 	float gameSpeed;
 
 	//スクリーンサイズ
