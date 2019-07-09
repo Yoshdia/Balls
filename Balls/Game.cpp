@@ -390,19 +390,25 @@ bool Game::CollisionCall()
 			bool end = CollisionBallWall(ball, box);
 			if (end)
 			{
+				BoxColliderComponent::ColliderTag boxTag = box->GetTag();
 				//加速壁だった場合、gameSpeedを加速させる
-				if (box->GetTag() == BoxColliderComponent::ColliderTag::AddSpeedWall)
+				if (boxTag== BoxColliderComponent::ColliderTag::AddSpeedWall)
 				{
 					box->OnCollision();
-					ball->OnCollision();
 					
 					continue;
 				}
 				//addPointWallだった場合、スコアを加算する
-				if (box->GetTag() == BoxColliderComponent::ColliderTag::AddPointWall)
+				if (boxTag== BoxColliderComponent::ColliderTag::AddPointWall)
 				{
 					box->OnCollision();
 
+					continue;
+				}
+				if (boxTag== BoxColliderComponent::ColliderTag::SuperWall)
+				{
+					box->OnCollision();
+ 					ball->OnCollision();
 					continue;
 				}
 				//Playerが強化状態だった場合、壁をPauseにする

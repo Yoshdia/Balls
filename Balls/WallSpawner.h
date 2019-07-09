@@ -5,6 +5,7 @@
 class Wall;
 class AddSpeedWall;
 class AddPointWall;
+class SuperWall;
 
 class WallSpawner
 {
@@ -22,16 +23,18 @@ private:
 	const int SpawnTime = 60;
 	int spawnTime;
 	int RandamSpawnWallMax = 200;
+	const VECTOR StartRunPos = VGet(1, 0, 100);
 	//Wallのアドレスを保存しておく
 	Wall* walls[50];
-	//AddSpeedWallへのアドレス
+	//特殊なWallへのアドレス
 	AddSpeedWall* addSpeedWalls[5];
-	//AddPointWall
 	AddPointWall* addPointWalls[5];
+	SuperWall* superWalls[5];
 	//現在StateがPausingのWallを取得
 	Wall* GetPausingWall();
 	//二つのレーンのどちらに設置するかをランダムで取得する
-	VECTOR CreateWallPosition();
+	VECTOR CreateWallPositionCreateSuperWall();
+	void CreateSuperWall(int rand);
 
 	static const VECTOR InitPos;
 };

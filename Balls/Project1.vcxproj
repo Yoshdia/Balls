@@ -166,6 +166,7 @@
     <ClCompile Include="Play.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SphereColliderComponent.cpp" />
+    <ClCompile Include="SuperWall.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="WallSpawner.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SphereColliderComponent.h" />
+    <ClInclude Include="SuperWall.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="WallSpawner.h" />

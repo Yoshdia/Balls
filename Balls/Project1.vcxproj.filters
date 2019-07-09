@@ -93,6 +93,9 @@
     <ClCompile Include="AddPointWall.cpp">
       <Filter>ソース ファイル\Actor\Walls</Filter>
     </ClCompile>
+    <ClCompile Include="SuperWall.cpp">
+      <Filter>ソース ファイル\Actor\Walls</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -150,6 +153,9 @@
       <Filter>ヘッダー ファイル\Actor\Walls</Filter>
     </ClInclude>
     <ClInclude Include="AddSpeedWall.h">
+      <Filter>ヘッダー ファイル\Actor\Walls</Filter>
+    </ClInclude>
+    <ClInclude Include="SuperWall.h">
       <Filter>ヘッダー ファイル\Actor\Walls</Filter>
     </ClInclude>
   </ItemGroup>

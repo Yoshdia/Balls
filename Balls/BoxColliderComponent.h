@@ -20,6 +20,7 @@ public:
 		JammerWall,
 		AddSpeedWall,
 		AddPointWall,
+		SuperWall,
 	};
 	BoxColliderComponent(Actor* owner,int processNumber,float length, ColliderTag tag);
 	~BoxColliderComponent();

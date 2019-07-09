@@ -7,18 +7,20 @@ Wall::Wall(VECTOR initPos, BoxColliderComponent::ColliderTag tag)
 	position = initPos;
 
 	ModelComponent * modelComponent;
-	modelComponent = new ModelComponent(this,200);
-	int modelId=0;
+	modelComponent = new ModelComponent(this, 200);
+	int modelId = 0;
 	switch (tag)
 	{
 	case(BoxColliderComponent::ColliderTag::AddSpeedWall):
 		modelId = Game::GetInstance()->LoadModel("Resouce/model/addSpeedWall.mv1", "Resouce/img/wall.png");
-			break;
+		break;
 	case(BoxColliderComponent::ColliderTag::JammerWall):
 		modelId = Game::GetInstance()->LoadModel("Resouce/model/wall.mv1", "Resouce/img/wall.png");
-			break;
+		break;
 	case(BoxColliderComponent::ColliderTag::AddPointWall):
 		modelId = Game::GetInstance()->LoadModel("Resouce/model/plusWall.mv1", "Resouce/img/wall.png");
+	case(BoxColliderComponent::ColliderTag::SuperWall):
+		modelId = Game::GetInstance()->LoadModel("Resouce/model/addSpeedWall.mv1", "Resouce/img/wall.png");
 		break;
 	}
 	modelComponent->SetModel(modelId);
@@ -27,7 +29,7 @@ Wall::Wall(VECTOR initPos, BoxColliderComponent::ColliderTag tag)
 
 	moveComponent = new MoveComponent(this, 102, VGet(0, 0, -60.0f));
 
-	boxCollider = new BoxColliderComponent(this, 150, 0.02f,tag);
+	boxCollider = new BoxColliderComponent(this, 150, 0.02f, tag);
 	boxCollider->SetIsCollision(false);
 }
 
@@ -54,7 +56,7 @@ void Wall::UpdateActor(float deltaTime)
 
 void Wall::ResetWall(VECTOR pos)
 {
-	position=pos;
+	position = pos;
 	state = Actor::ActiveState::Active;
 	boxCollider->SetIsCollision(false);
 }

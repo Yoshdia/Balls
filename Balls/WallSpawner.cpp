@@ -2,6 +2,7 @@
 #include "WallSpawner.h"
 #include "AddSpeedWall.h"
 #include "AddPointWall.h"
+#include "SuperWall.h"
 
 const VECTOR WallSpawner::InitPos = WallSpawner::InitPos;
 
@@ -25,6 +26,11 @@ WallSpawner::WallSpawner()
 		addPointWalls[num] = new AddPointWall(InitPos);
 		addPointWalls[num]->SetState(Actor::ActiveState::Paused);
 	}
+	for (int num = 0; num < 5; num++)
+	{
+		superWalls[num] = new SuperWall(InitPos);
+		superWalls[num]->SetState(Actor::ActiveState::Paused);
+	}
 }
 
 
@@ -45,13 +51,13 @@ void WallSpawner::WallSpawn()
 	if (count >= spawnTime - plusSpeed)
 	{
 		VECTOR wallPos;
-		wallPos = CreateWallPosition();
+		wallPos = CreateWallPositionCreateSuperWall();
 
 		Wall* posingWall = nullptr;
 		posingWall = GetPausingWall();
 		posingWall->ResetWall(wallPos);
 
-		wallPos = CreateWallPosition();
+		wallPos = CreateWallPositionCreateSuperWall();
 		//”½“]‚³‚¹‚é
 		wallPos.x *= -1;
 		posingWall = GetPausingWall();
@@ -117,12 +123,39 @@ Wall * WallSpawner::GetPausingWall()
 	return new Wall(VGet(0, -10, 0), BoxColliderComponent::ColliderTag::JammerWall);
 }
 
-VECTOR WallSpawner::CreateWallPosition()
+VECTOR WallSpawner::CreateWallPositionCreateSuperWall()
 {
 	int rand = GetRand(1);
 
-	VECTOR wallPos = VGet(1, 0, 100);
+	VECTOR wallPos = StartRunPos;
 	wallPos.x += (rand * 2);
+	CreateSuperWall(rand);
 
 	return wallPos;
+}
+
+void WallSpawner::CreateSuperWall(int rand)
+{
+	int random = GetRand(100);
+	if (random > 10)
+	{
+		return;
+	}
+	VECTOR wallPos = StartRunPos;
+	if (rand == 0)
+	{
+		wallPos.x += 2;
+	}
+
+	for (int num = 0; num < 5; num++)
+	{
+		Actor::ActiveState state = addPointWalls[num]->GetState();
+		if (state == Actor::ActiveState::Paused)
+		{
+			superWalls[num]->ResetWall(wallPos);
+			return;
+		}
+	}
+	SuperWall* super=new SuperWall(InitPos);
+	super->ResetWall(wallPos);
 }
