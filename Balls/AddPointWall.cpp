@@ -9,3 +9,9 @@ AddPointWall::AddPointWall(VECTOR initPos)
 AddPointWall::~AddPointWall()
 {
 }
+
+void AddPointWall::OnCollision()
+{
+	SetState(Actor::ActiveState::Paused);
+	ClearWall();
+}

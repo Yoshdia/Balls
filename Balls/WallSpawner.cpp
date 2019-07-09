@@ -3,25 +3,26 @@
 #include "AddSpeedWall.h"
 #include "AddPointWall.h"
 
+const VECTOR WallSpawner::InitPos = WallSpawner::InitPos;
+
 WallSpawner::WallSpawner()
 {
 	spawnTime = SpawnTime;
 	count = 0;
 
-	VECTOR initPos = VGet(0, -10, 0);
 	for (int num = 0; num < 50; num++)
 	{
-		walls[num] = new Wall(initPos, BoxColliderComponent::ColliderTag::JammerWall);
+		walls[num] = new Wall(InitPos, BoxColliderComponent::ColliderTag::JammerWall);
 		walls[num]->SetState(Actor::ActiveState::Paused);
 	}
 	for (int num = 0; num < 5; num++)
 	{
-		addSpeedWalls[num] = new AddSpeedWall(initPos);
+		addSpeedWalls[num] = new AddSpeedWall(InitPos);
 		addSpeedWalls[num]->SetState(Actor::ActiveState::Paused);
 	}
 	for (int num = 0; num < 5; num++)
 	{
-		addPointWalls[num] = new AddPointWall(initPos);
+		addPointWalls[num] = new AddPointWall(InitPos);
 		addPointWalls[num]->SetState(Actor::ActiveState::Paused);
 	}
 }
@@ -65,6 +66,7 @@ void WallSpawner::WallStop()
 	for (auto wall : walls)
 	{
 		wall->SetState(Actor::ActiveState::Paused);
+		wall->SetPosition(InitPos);
 	}
 }
 
@@ -78,8 +80,8 @@ void WallSpawner::WallClear()
 
 Wall * WallSpawner::GetPausingWall()
 {
-	int range = GetRand(AddWallRandam);
-	if (range>AddWallRandam - 3)
+	int range = GetRand(RandamSpawnWallMax);
+	if (range>RandamSpawnWallMax - 3)
 	{
 		for (int num = 0; num < 5; num++)
 		{
@@ -90,7 +92,7 @@ Wall * WallSpawner::GetPausingWall()
 			}
 		}
 	}
-	else if (range > AddWallRandam - 10)
+	else if (range > RandamSpawnWallMax - 10)
 	{
 		for (int num = 0; num < 5; num++)
 		{

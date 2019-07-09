@@ -21,7 +21,7 @@ private:
 	int count;
 	const int SpawnTime = 60;
 	int spawnTime;
-	int AddWallRandam = 200;
+	int RandamSpawnWallMax = 200;
 	//Wallのアドレスを保存しておく
 	Wall* walls[50];
 	//AddSpeedWallへのアドレス
@@ -32,5 +32,7 @@ private:
 	Wall* GetPausingWall();
 	//二つのレーンのどちらに設置するかをランダムで取得する
 	VECTOR CreateWallPosition();
+
+	static const VECTOR InitPos;
 };
 

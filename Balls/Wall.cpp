@@ -61,8 +61,13 @@ void Wall::ResetWall(VECTOR pos)
 
 void Wall::ClearWall()
 {
-	position = VGet(0, -10, 0);
+	SetPosition(InitPos);
 	state = Actor::ActiveState::Paused;
 	boxCollider->SetIsCollision(false);
+}
+
+void Wall::OnCollision()
+{
+	ClearWall();
 }
 

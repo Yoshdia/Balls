@@ -17,7 +17,8 @@ public:
 	//座標を受け取った地点にし、フラグを倒す
 	void ResetWall(VECTOR pos);
 	void ClearWall();
-	void OnCollision() { state = Actor::ActiveState::Paused; };
+	void OnCollision();
+	const VECTOR InitPos = VGet(-10, -10, -10);
 protected:
 	MoveComponent * moveComponent;
 	BoxColliderComponent* boxCollider;

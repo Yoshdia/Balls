@@ -23,7 +23,9 @@ void BoxColliderComponent::Update(float deltaTime)
 
 void BoxColliderComponent::OnCollision()
 {
-	 ownerActor->OnCollision(); 
+
+	ownerActor->OnCollision(); 
+
 }
 
 void BoxColliderComponent::UpdatePosition()

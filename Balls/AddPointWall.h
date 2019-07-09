@@ -6,5 +6,7 @@ class AddPointWall :
 public:
 	AddPointWall(VECTOR initPos);
 	~AddPointWall();
+	void OnCollision();
+
 };
 

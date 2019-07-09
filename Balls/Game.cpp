@@ -401,12 +401,15 @@ bool Game::CollisionCall()
 				//addPointWallだった場合、スコアを加算する
 				if (box->GetTag() == BoxColliderComponent::ColliderTag::AddPointWall)
 				{
+					box->OnCollision();
+
 					continue;
 				}
 				//Playerが強化状態だった場合、壁をPauseにする
 				if (ball->GetTag() == SphereColliderComponent::CollisionTag::SuperPlayer)
 				{
 					box->OnCollision();
+					
 					continue;
 				}
 				return end;
@@ -424,7 +427,6 @@ bool Game::CollisionBallWall(SphereColliderComponent * ball, BoxColliderComponen
 	float sphereLengh = sphere.length*sphere.length;
 	sphereLengh = 1;
 	box.length = 1;
-
 
 	if (box.position.x == sphere.position.x)
 	{
