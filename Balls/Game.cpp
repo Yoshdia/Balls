@@ -258,57 +258,38 @@ void Game::ShutDown()
 	//model関連の解放
 	for (auto model : originalModel)
 	{
-		MV1DeleteModel(model);
+		MV1DeleteModel(model.second);
 	}
 	originalModel.clear();
 	for (auto model : duplicateModel)
 	{
-		MV1DeleteModel(model.second);
+		MV1DeleteModel(model);
 	}
 	duplicateModel.clear();
-	for (auto model : modelTexture)
-	{
-		DeleteGraph(model.second);
-	}
-	modelTexture.clear();
 
 	DxLib::DxLib_End();
 }
 
-int Game::LoadModel(const std::string & fileName, const std::string & textureFileName)
+int Game::LoadModel(const std::string & fileName)
 {
 	/*fileNameのモデルを既に読み込んでいないか
 	真の場合dupricateModel内のそのモデルアドレスを返し、
 	偽の場合新たに読み込んでモデルアドレスを格納する*/
 	int modelId;
-	auto iter = duplicateModel.find(fileName);
-	if (iter != duplicateModel.end())
+	int originId;
+	auto iter = originalModel.find(fileName);
+	if (iter != originalModel.end())
 	{
-		modelId = iter->second;
+		originId = iter->second;
 	}
 	else
 	{
-		int originalModelId = MV1LoadModel(fileName.c_str());
-		originalModel.push_back(originalModelId);
-
-		modelId = MV1DuplicateModel(originalModelId);
-		duplicateModel.emplace(fileName.c_str(), modelId);
-
+		originId = MV1LoadModel(fileName.c_str());
+		originalModel.emplace(fileName.c_str(),originId);
 	}
-	//テクスチャでも同じことをし最後にmodelIdにtextureIdを張り付ける
-	int textureId;
-	auto textureIter = modelTexture.find(textureFileName);
-	if (textureIter != modelTexture.end())
-	{
-		textureId = textureIter->second;
-	}
-	else
-	{
-		textureId = LoadGraph(textureFileName.c_str());
-		modelTexture.emplace(textureFileName.c_str(), textureId);
-	}
-	MV1SetTextureGraphHandle(modelId, 0, textureId, FALSE);
 
+	modelId = MV1DuplicateModel(originId);
+	duplicateModel.push_back(modelId);
 	return modelId;
 }
 

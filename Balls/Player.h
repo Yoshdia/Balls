@@ -28,6 +28,6 @@ private:
 	void ChangeModel();
 	int superCount;
 	bool super;
-	const int superCountMax=20;
+	const int superCountMax=180;
 };
 

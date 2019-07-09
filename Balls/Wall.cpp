@@ -12,15 +12,15 @@ Wall::Wall(VECTOR initPos, BoxColliderComponent::ColliderTag tag)
 	switch (tag)
 	{
 	case(BoxColliderComponent::ColliderTag::AddSpeedWall):
-		modelId = Game::GetInstance()->LoadModel("Resouce/model/addSpeedWall.mv1", "Resouce/img/wall.png");
+		modelId = Game::GetInstance()->LoadModel("Resouce/model/addSpeedWall.mv1" );
 		break;
 	case(BoxColliderComponent::ColliderTag::JammerWall):
-		modelId = Game::GetInstance()->LoadModel("Resouce/model/wall.mv1", "Resouce/img/wall.png");
+		modelId = Game::GetInstance()->LoadModel("Resouce/model/wall.mv1" );
 		break;
 	case(BoxColliderComponent::ColliderTag::AddPointWall):
-		modelId = Game::GetInstance()->LoadModel("Resouce/model/plusWall.mv1", "Resouce/img/wall.png");
+		modelId = Game::GetInstance()->LoadModel("Resouce/model/plusWall.mv1" );
 	case(BoxColliderComponent::ColliderTag::SuperWall):
-		modelId = Game::GetInstance()->LoadModel("Resouce/model/superItem.mv1", "Resouce/img/wall.png");
+		modelId = Game::GetInstance()->LoadModel("Resouce/model/superItem.mv1" );
 		break;
 	}
 	modelComponent->SetModel(modelId);

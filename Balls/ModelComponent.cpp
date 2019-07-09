@@ -36,6 +36,7 @@ void ModelComponent::DrawModel()
 
 		if (modelId != -1)
 		{
+			
 			MV1SetPosition(modelId, position);
 			MV1SetRotationXYZ(modelId, rotation);
 			MV1DrawModel(modelId);

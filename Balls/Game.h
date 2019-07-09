@@ -42,7 +42,7 @@ public:
 	void ShutDown();
 
 	//fileNameのモデルが既に読み込まれたかどうかを検索しそうでなかった場合読み込んでそのアドレスを返す
-	int LoadModel(const std::string &fileName, const std::string & textureFileName);
+	int LoadModel(const std::string &fileName);
 	void AddModel(ModelComponent* model);
 	void RemoveModel(ModelComponent* model);
 	void DrawModel();
@@ -100,11 +100,9 @@ private:
 
 
 	//modelへのアドレス(解放を最後に行うためのvector)
-	std::vector<int> originalModel;
+	std::vector<int> duplicateModel;
 	//アドレスの複製
-	std::unordered_map<std::string, int> duplicateModel;
-	//モデルに張り付けるテクスチャ
-	std::unordered_map<std::string, int> modelTexture;
+	std::unordered_map<std::string, int> originalModel;
 	//球(Player)と壁(wall)を格納しているVector
 	std::vector<SphereColliderComponent*> sphereCollider;
 	std::vector<BoxColliderComponent*> boxCollider;
