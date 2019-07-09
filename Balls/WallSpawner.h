@@ -13,15 +13,15 @@ public:
 	WallSpawner();
 	~WallSpawner();
 	//SpawnTime‚²‚Æ‚ÉWall‚ğ¶¬‚·‚éŠÖ”
-	void WallSpawn();
+	void WallSpawn(float deltaTime);
 	//‚·‚×‚Ä‚Ìwall‚ÌˆÚ“®‚ğ’â~‚³‚¹¶¬‚à‚â‚ß‚³‚¹‚é
 	void WallStop();
 	//‚·‚×‚Ä‚Ìwall‚ğ‰Šúó‘Ô‚É–ß‚·
 	void WallClear();
 private:
-	int count;
-	const int SpawnTime = 60;
-	int spawnTime;
+	float count;
+	const float SpawnTime = 60;
+	float spawnTime;
 	int RandamSpawnWallMax = 200;
 	const VECTOR StartRunPos = VGet(1, 0, 100);
 	//Wall‚ÌƒAƒhƒŒƒX‚ğ•Û‘¶‚µ‚Ä‚¨‚­

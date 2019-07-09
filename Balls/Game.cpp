@@ -81,7 +81,7 @@ void Game::MainProcess()
 		UpdateKey();
 
 		ActorUpdate();
-		scene->Update();
+		scene->Update(deltaTime);
 
 		DrawModel();
 		scene->Render();

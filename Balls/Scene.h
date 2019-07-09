@@ -17,7 +17,7 @@ public:
 	Scene(WallSpawner* pSpawn) { wallSpawner = pSpawn; };
 	virtual ~Scene() {};
 	//更新
-	virtual void Update() {};
+	virtual void Update(float deltaTime) {};
 	//描画
 	virtual void Render() {};
 	//それぞれのSceneで別シーンに移動する条件と名前を指定できる

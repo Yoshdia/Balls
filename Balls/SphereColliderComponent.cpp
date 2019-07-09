@@ -15,6 +15,11 @@ SphereColliderComponent::~SphereColliderComponent()
 	Game::GetInstance()->RemoveSphereCollider(this);
 }
 
+void SphereColliderComponent::OnCollision()
+{
+	 ownerActor->OnCollision();
+}
+
 void SphereColliderComponent::Update(float deltaTime)
 {
 	UpdatePosition();

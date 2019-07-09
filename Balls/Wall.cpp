@@ -20,7 +20,7 @@ Wall::Wall(VECTOR initPos, BoxColliderComponent::ColliderTag tag)
 	case(BoxColliderComponent::ColliderTag::AddPointWall):
 		modelId = Game::GetInstance()->LoadModel("Resouce/model/plusWall.mv1", "Resouce/img/wall.png");
 	case(BoxColliderComponent::ColliderTag::SuperWall):
-		modelId = Game::GetInstance()->LoadModel("Resouce/model/addSpeedWall.mv1", "Resouce/img/wall.png");
+		modelId = Game::GetInstance()->LoadModel("Resouce/model/superItem.mv1", "Resouce/img/wall.png");
 		break;
 	}
 	modelComponent->SetModel(modelId);

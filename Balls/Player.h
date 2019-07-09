@@ -6,6 +6,7 @@
 
 class 	SphereColliderComponent;
 class 	MovePlayerComponent;
+class ModelComponent;
 
 //画面手前で左右に移動する球。二つ生成される
 class Player:
@@ -17,8 +18,16 @@ public:
 	~Player();
 
 	void UpdateActor(float deltaTime);
-
-private:
-
+	//衝突時はモデルを変更する
+	void OnCollision();
+private:	
+	ModelComponent * modelComponent;
+	SphereColliderComponent* sphereCollider;
+	int normalModelId;
+	int superModelId;
+	void ChangeModel();
+	int superCount;
+	bool super;
+	const int superCountMax=20;
 };
 

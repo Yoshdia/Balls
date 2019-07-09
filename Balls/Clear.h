@@ -9,7 +9,7 @@ public:
 	Clear(WallSpawner* wallSpawn);
 	~Clear();
 
-	void Update();
+	void Update(float deltaTime);
 	void Render();
 	sceneName SceneChange();
 };

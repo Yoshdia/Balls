@@ -17,9 +17,9 @@ Play::~Play()
 {
 }
 
-void Play::Update()
+void Play::Update(float deltaTime)
 {
-	wallSpawner->WallSpawn();
+	wallSpawner->WallSpawn(deltaTime);
 	gameEnd = Game::GetInstance()->CollisionCall();
 	if (gameEnd)
 	{

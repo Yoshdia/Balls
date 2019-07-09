@@ -23,7 +23,7 @@ public:
 	SphereInfo GetInfo() { return info; }
 	void TagChange(CollisionTag tag) { myTag = tag; };
 	CollisionTag GetTag() { return myTag; }
-	void OnCollision() { myTag = SuperPlayer; }
+	void OnCollision();
 	void Update(float deltaTime);
 private:
 	CollisionTag myTag;

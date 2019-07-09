@@ -14,7 +14,7 @@ Clear::~Clear()
 {
 }
 
-void Clear::Update()
+void Clear::Update(float deltaTime)
 {
 }
 

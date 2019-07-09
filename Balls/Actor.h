@@ -3,6 +3,7 @@
 #include "Component.h"
 #include "DxLib.h"
 
+
 class Actor
 {
 public:
@@ -40,6 +41,7 @@ public:
 
 	virtual void OnCollision() {};
 protected:
+
 	ActiveState state;
 	VECTOR position;
 	VECTOR rotation;

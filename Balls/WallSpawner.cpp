@@ -39,7 +39,7 @@ WallSpawner::~WallSpawner()
 	//Wall’B‚Ì‰ð•ú‚ÍGame“à‚Ås‚¤
 }
 
-void WallSpawner::WallSpawn()
+void WallSpawner::WallSpawn(float deltaTime)
 {
 	float gameSpeed = Game::GetInstance()->GetGameSpeed();
 	float plusSpeed = (gameSpeed - 1) * 50;
@@ -47,7 +47,7 @@ void WallSpawner::WallSpawn()
 	{
 		plusSpeed = 10;
 	}
-	count++;
+	count+=deltaTime*80;
 	if (count >= spawnTime - plusSpeed)
 	{
 		VECTOR wallPos;

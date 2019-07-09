@@ -13,7 +13,7 @@ public:
 	Play(WallSpawner* wallSpawn);
 	~Play();
 
-	void Update();
+	void Update(float deltaTime);
 	void Render();
 	sceneName SceneChange();
 
