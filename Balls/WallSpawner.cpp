@@ -54,14 +54,14 @@ void WallSpawner::WallSpawn(float deltaTime)
 		wallPos = CreateWallPositionCreateSuperWall();
 
 		Wall* posingWall = nullptr;
-		posingWall = GetPausingWall();
-		posingWall->ResetWall(wallPos);
+		//posingWall = GetPausingWall();
+		//posingWall->ResetWall(wallPos);
 
 		wallPos = CreateWallPositionCreateSuperWall();
 		//”½“]‚³‚¹‚é
 		wallPos.x *= -1;
-		posingWall = GetPausingWall();
-		posingWall->ResetWall(wallPos);
+		//posingWall = GetPausingWall();
+		//posingWall->ResetWall(wallPos);
 
 		count = 0;
 	}
@@ -136,7 +136,7 @@ VECTOR WallSpawner::CreateWallPositionCreateSuperWall()
 
 void WallSpawner::CreateSuperWall(int rand)
 {
-	int random = GetRand(100);
+	int random = GetRand(50);
 	if (random > 10)
 	{
 		return;
@@ -149,7 +149,7 @@ void WallSpawner::CreateSuperWall(int rand)
 
 	for (int num = 0; num < 5; num++)
 	{
-		Actor::ActiveState state = addPointWalls[num]->GetState();
+		Actor::ActiveState state = superWalls[num]->GetState();
 		if (state == Actor::ActiveState::Paused)
 		{
 			superWalls[num]->ResetWall(wallPos);
