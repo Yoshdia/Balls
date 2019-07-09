@@ -17,6 +17,9 @@ Wall::Wall(VECTOR initPos, BoxColliderComponent::ColliderTag tag)
 	case(BoxColliderComponent::ColliderTag::JammerWall):
 		modelId = Game::GetInstance()->LoadModel("Resouce/model/wall.mv1", "Resouce/img/wall.png");
 			break;
+	case(BoxColliderComponent::ColliderTag::AddPointWall):
+		modelId = Game::GetInstance()->LoadModel("Resouce/model/plusWall.mv1", "Resouce/img/wall.png");
+		break;
 	}
 	modelComponent->SetModel(modelId);
 	scale = VGet(0.01f, 0.01f, 0.001f);

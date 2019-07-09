@@ -211,7 +211,7 @@ void Game::ActorUpdate()
 	for (auto actor : upDateActors)
 	{
 		if (actor->GetState() == Actor::ActiveState::NoActive)
-		{
+		{	
 			deleteActors.emplace_back(actor);
 		}
 	}
@@ -396,6 +396,11 @@ bool Game::CollisionCall()
 					box->OnCollision();
 					ball->OnCollision();
 					
+					continue;
+				}
+				//addPointWallだった場合、スコアを加算する
+				if (box->GetTag() == BoxColliderComponent::ColliderTag::AddPointWall)
+				{
 					continue;
 				}
 				//Playerが強化状態だった場合、壁をPauseにする

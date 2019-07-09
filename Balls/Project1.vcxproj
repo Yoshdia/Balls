@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="AddPointWall.cpp" />
     <ClCompile Include="AddSpeedWall.cpp" />
     <ClCompile Include="BoxColliderComponent.cpp" />
     <ClCompile Include="Clear.cpp" />
@@ -171,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="AddPointWall.h" />
     <ClInclude Include="AddSpeedWall.h" />
     <ClInclude Include="BoxColliderComponent.h" />
     <ClInclude Include="Clear.h" />

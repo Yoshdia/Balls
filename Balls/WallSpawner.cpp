@@ -1,9 +1,7 @@
-#include "WallSpawner.h"
-#include "Wall.h"
-#include "AddSpeedWall.h"
 #include "DxLib.h"
-#include "Wall.h"
-#include "Actor.h"
+#include "WallSpawner.h"
+#include "AddSpeedWall.h"
+#include "AddPointWall.h"
 
 WallSpawner::WallSpawner()
 {
@@ -13,27 +11,25 @@ WallSpawner::WallSpawner()
 	VECTOR initPos = VGet(0, -10, 0);
 	for (int num = 0; num < 50; num++)
 	{
-		walls[num] = new Wall(initPos,BoxColliderComponent::ColliderTag::JammerWall);
+		walls[num] = new Wall(initPos, BoxColliderComponent::ColliderTag::JammerWall);
 		walls[num]->SetState(Actor::ActiveState::Paused);
 	}
-	for (int num = 0 ; num < 5; num++)
+	for (int num = 0; num < 5; num++)
 	{
-		addWalls[num] = new AddSpeedWall(initPos);
-		addWalls[num]->SetState(Actor::ActiveState::Paused);
+		addSpeedWalls[num] = new AddSpeedWall(initPos);
+		addSpeedWalls[num]->SetState(Actor::ActiveState::Paused);
+	}
+	for (int num = 0; num < 5; num++)
+	{
+		addPointWalls[num] = new AddPointWall(initPos);
+		addPointWalls[num]->SetState(Actor::ActiveState::Paused);
 	}
 }
 
 
 WallSpawner::~WallSpawner()
 {
-	//for (int num = 0; num < 50; num++)
-	//{
-	//	delete walls[num];
-	//}
-	//for (int num = 0; num < 10; num++)
-	//{
-	//	delete addWalls[num];
-	//}
+	//Wall’B‚Ì‰ð•ú‚ÍGame“à‚Ås‚¤
 }
 
 void WallSpawner::WallSpawn()
@@ -83,7 +79,29 @@ void WallSpawner::WallClear()
 Wall * WallSpawner::GetPausingWall()
 {
 	int range = GetRand(AddWallRandam);
-	if (range < AddWallRandam-5)
+	if (range>AddWallRandam - 3)
+	{
+		for (int num = 0; num < 5; num++)
+		{
+			Actor::ActiveState state = addSpeedWalls[num]->GetState();
+			if (state == Actor::ActiveState::Paused)
+			{
+				return addSpeedWalls[num];
+			}
+		}
+	}
+	else if (range > AddWallRandam - 10)
+	{
+		for (int num = 0; num < 5; num++)
+		{
+			Actor::ActiveState state = addPointWalls[num]->GetState();
+			if (state == Actor::ActiveState::Paused)
+			{
+				return addPointWalls[num];
+			}
+		}
+	}
+	else
 	{
 		for (int num = 0; num < 50; num++)
 		{
@@ -91,17 +109,6 @@ Wall * WallSpawner::GetPausingWall()
 			if (state == Actor::ActiveState::Paused)
 			{
 				return walls[num];
-			}
-		}
-	}
-	else
-	{
-		for (int num = 0; num < 5; num++)
-		{
-			Actor::ActiveState state = addWalls[num]->GetState();
-			if (state == Actor::ActiveState::Paused)
-			{
-				return addWalls[num];
 			}
 		}
 	}

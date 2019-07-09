@@ -31,6 +31,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ソース ファイル\Actor\Walls">
+      <UniqueIdentifier>{94c47bb3-7b9a-41a2-9e4f-8efb685a2c33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Actor\Walls">
+      <UniqueIdentifier>{067a2906-e4ca-4048-ac44-5c38e11c0adf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -66,9 +72,6 @@
     <ClCompile Include="MovePlayerComponent.cpp">
       <Filter>ソース ファイル\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Wall.cpp">
-      <Filter>ソース ファイル\Actor</Filter>
-    </ClCompile>
     <ClCompile Include="BoxColliderComponent.cpp">
       <Filter>ソース ファイル\Component</Filter>
     </ClCompile>
@@ -78,11 +81,17 @@
     <ClCompile Include="Ground.cpp">
       <Filter>ソース ファイル\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="AddSpeedWall.cpp">
-      <Filter>ソース ファイル\Actor</Filter>
+    <ClCompile Include="Wall.cpp">
+      <Filter>ソース ファイル\Actor\Walls</Filter>
     </ClCompile>
     <ClCompile Include="WallSpawner.cpp">
-      <Filter>ソース ファイル\Actor</Filter>
+      <Filter>ソース ファイル\Actor\Walls</Filter>
+    </ClCompile>
+    <ClCompile Include="AddSpeedWall.cpp">
+      <Filter>ソース ファイル\Actor\Walls</Filter>
+    </ClCompile>
+    <ClCompile Include="AddPointWall.cpp">
+      <Filter>ソース ファイル\Actor\Walls</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -122,9 +131,6 @@
     <ClInclude Include="MoveComponent.h">
       <Filter>ヘッダー ファイル\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Wall.h">
-      <Filter>ヘッダー ファイル\Actor</Filter>
-    </ClInclude>
     <ClInclude Include="Ground.h">
       <Filter>ヘッダー ファイル\Actor</Filter>
     </ClInclude>
@@ -134,11 +140,17 @@
     <ClInclude Include="SphereColliderComponent.h">
       <Filter>ヘッダー ファイル\Component</Filter>
     </ClInclude>
-    <ClInclude Include="AddSpeedWall.h">
-      <Filter>ヘッダー ファイル\Actor</Filter>
-    </ClInclude>
     <ClInclude Include="WallSpawner.h">
-      <Filter>ヘッダー ファイル\Actor</Filter>
+      <Filter>ヘッダー ファイル\Actor\Walls</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>ヘッダー ファイル\Actor\Walls</Filter>
+    </ClInclude>
+    <ClInclude Include="AddPointWall.h">
+      <Filter>ヘッダー ファイル\Actor\Walls</Filter>
+    </ClInclude>
+    <ClInclude Include="AddSpeedWall.h">
+      <Filter>ヘッダー ファイル\Actor\Walls</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

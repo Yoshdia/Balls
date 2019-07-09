@@ -18,7 +18,8 @@ public:
 	enum ColliderTag
 	{
 		JammerWall,
-		AddSpeedWall
+		AddSpeedWall,
+		AddPointWall,
 	};
 	BoxColliderComponent(Actor* owner,int processNumber,float length, ColliderTag tag);
 	~BoxColliderComponent();
@@ -31,7 +32,7 @@ public:
 private:
 	ColliderTag myTag;
 	BoxInfo info;
-	void updatePosition();
+	void UpdatePosition();
 	//衝突判定を行うかどうか。Boxは一定座標に来るまでこのフラグを倒す
 	bool isCollision;
 };

@@ -1,6 +1,7 @@
 #pragma once
-#include "Wall.h"
-//プレイヤーと接触するとMoveComponent内にある静的メンバのgameSpeedを加算する壁
+
+#include"Wall.h"
+
 class AddSpeedWall :
 	public Wall
 {
@@ -9,4 +10,3 @@ public:
 	~AddSpeedWall();
 	void OnCollision();
 };
-

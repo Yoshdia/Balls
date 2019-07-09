@@ -24,10 +24,10 @@ public:
 	void TagChange(CollisionTag tag) { myTag = tag; };
 	CollisionTag GetTag() { return myTag; }
 	void OnCollision() { myTag = SuperPlayer; }
-private:
 	void Update(float deltaTime);
+private:
+	CollisionTag myTag;
 	void UpdatePosition();
 	SphereInfo info;
-	CollisionTag myTag;
 };
 
