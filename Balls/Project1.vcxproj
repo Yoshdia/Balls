@@ -159,6 +159,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="JammerWall.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModelComponent.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="JammerWall.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="ModelComponent.h" />
     <ClInclude Include="MoveComponent.h" />

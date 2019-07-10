@@ -2,9 +2,8 @@
 #include "WallSpawner.h"
 #include "AddSpeedWall.h"
 #include "AddPointWall.h"
+#include "JammerWall.h"
 #include "SuperWall.h"
-
-const VECTOR WallSpawner::InitPos = WallSpawner::InitPos;
 
 WallSpawner::WallSpawner()
 {
@@ -13,22 +12,22 @@ WallSpawner::WallSpawner()
 
 	for (int num = 0; num < 50; num++)
 	{
-		walls[num] = new Wall(InitPos, BoxColliderComponent::ColliderTag::JammerWall);
+		walls[num] = new JammerWall();
 		walls[num]->SetState(Actor::ActiveState::Paused);
 	}
 	for (int num = 0; num < 5; num++)
 	{
-		addSpeedWalls[num] = new AddSpeedWall(InitPos);
+		addSpeedWalls[num] = new AddSpeedWall();
 		addSpeedWalls[num]->SetState(Actor::ActiveState::Paused);
 	}
 	for (int num = 0; num < 5; num++)
 	{
-		addPointWalls[num] = new AddPointWall(InitPos);
+		addPointWalls[num] = new AddPointWall();
 		addPointWalls[num]->SetState(Actor::ActiveState::Paused);
 	}
 	for (int num = 0; num < 5; num++)
 	{
-		superWalls[num] = new SuperWall(InitPos);
+		superWalls[num] = new SuperWall();
 		superWalls[num]->SetState(Actor::ActiveState::Paused);
 	}
 }
@@ -76,7 +75,6 @@ void WallSpawner::WallStop()
 	for (auto wall : walls)
 	{
 		wall->SetState(Actor::ActiveState::Paused);
-		wall->SetPosition(InitPos);
 	}
 }
 
@@ -124,7 +122,7 @@ Wall * WallSpawner::GetPausingWall()
 			}
 		}
 	}
-	return new Wall(VGet(0, -10, 0), BoxColliderComponent::ColliderTag::JammerWall);
+	return new JammerWall();
 }
 
 VECTOR WallSpawner::CreateWallPositionCreateSuperWall(int rand)
@@ -158,6 +156,6 @@ void WallSpawner::CreateSuperWall(int rand,int rightOrLeft)
 			return;
 		}
 	}
-	SuperWall* super=new SuperWall(InitPos);
+	SuperWall* super=new SuperWall();
 	super->ResetWall(wallPos);
 }

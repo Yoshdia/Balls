@@ -36,6 +36,5 @@ private:
 	VECTOR CreateWallPositionCreateSuperWall(int rand);
 	void CreateSuperWall(int rand, int rightOrLeft);
 
-	static const VECTOR InitPos;
 };
 

@@ -2,27 +2,15 @@
 #include "ModelComponent.h"
 #include "MoveComponent.h"
 
-Wall::Wall(VECTOR initPos, BoxColliderComponent::ColliderTag tag)
+Wall::Wall(BoxColliderComponent::ColliderTag tag,const std::string& modelFileName)
 {
-	position = initPos;
+	position = InitPos;
 
 	ModelComponent * modelComponent;
 	modelComponent = new ModelComponent(this, 200);
 	int modelId = 0;
-	switch (tag)
-	{
-	case(BoxColliderComponent::ColliderTag::AddSpeedWall):
-		modelId = Game::GetInstance()->LoadModel("Resouce/model/addSpeedWall.mv1" );
-		break;
-	case(BoxColliderComponent::ColliderTag::JammerWall):
-		modelId = Game::GetInstance()->LoadModel("Resouce/model/wall.mv1" );
-		break;
-	case(BoxColliderComponent::ColliderTag::AddPointWall):
-		modelId = Game::GetInstance()->LoadModel("Resouce/model/plusWall.mv1" );
-	case(BoxColliderComponent::ColliderTag::SuperWall):
-		modelId = Game::GetInstance()->LoadModel("Resouce/model/superItem.mv1" );
-		break;
-	}
+	modelId = Game::GetInstance()->LoadModel(modelFileName);
+
 	modelComponent->SetModel(modelId);
 	scale = VGet(0.01f, 0.01f, 0.001f);
 	modelComponent->SetModelScale(scale);

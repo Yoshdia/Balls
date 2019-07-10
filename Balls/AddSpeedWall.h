@@ -6,7 +6,7 @@ class AddSpeedWall :
 	public Wall
 {
 public:
-	AddSpeedWall(VECTOR initPos);
+	AddSpeedWall();
 	~AddSpeedWall();
 	void OnCollision();
 };

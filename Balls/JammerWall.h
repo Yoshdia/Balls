@@ -1,10 +1,10 @@
 #pragma once
 #include "Wall.h"
-class SuperWall :
+class JammerWall :
 	public Wall
 {
 public:
-	SuperWall();
-	~SuperWall();
+	JammerWall();
+	~JammerWall();
 };
 

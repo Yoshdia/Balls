@@ -96,6 +96,9 @@
     <ClCompile Include="SuperWall.cpp">
       <Filter>ソース ファイル\Actor\Walls</Filter>
     </ClCompile>
+    <ClCompile Include="JammerWall.cpp">
+      <Filter>ソース ファイル\Actor\Walls</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -156,6 +159,9 @@
       <Filter>ヘッダー ファイル\Actor\Walls</Filter>
     </ClInclude>
     <ClInclude Include="SuperWall.h">
+      <Filter>ヘッダー ファイル\Actor\Walls</Filter>
+    </ClInclude>
+    <ClInclude Include="JammerWall.h">
       <Filter>ヘッダー ファイル\Actor\Walls</Filter>
     </ClInclude>
   </ItemGroup>

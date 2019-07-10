@@ -9,7 +9,7 @@ class Wall :
 	public Actor
 {
 public:
-	Wall(VECTOR initPos,BoxColliderComponent::ColliderTag tag);
+	Wall(BoxColliderComponent::ColliderTag tag,const std::string& modelFileName);
 	~Wall();
 
 	void UpdateActor(float deltaTime);

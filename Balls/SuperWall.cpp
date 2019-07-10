@@ -1,7 +1,7 @@
 #include "SuperWall.h"
 
-SuperWall::SuperWall(VECTOR initPos)
-	:Wall(initPos,BoxColliderComponent::ColliderTag::SuperWall)
+SuperWall::SuperWall()
+	:Wall(BoxColliderComponent::ColliderTag::SuperWall, "Resouce/model/superItem.mv1")
 {
 }
 

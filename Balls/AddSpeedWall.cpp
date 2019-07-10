@@ -3,8 +3,8 @@
 #include "AddSpeedWall.h"
 #include "Game.h"
 
-AddSpeedWall::AddSpeedWall(VECTOR initPos)
-	:Wall(initPos, BoxColliderComponent::ColliderTag::AddSpeedWall)
+AddSpeedWall::AddSpeedWall()
+	:Wall(BoxColliderComponent::ColliderTag::AddSpeedWall, "Resouce/model/addSpeedWall.mv1")
 {
 }
 
