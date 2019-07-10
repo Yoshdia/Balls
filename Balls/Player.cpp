@@ -52,14 +52,7 @@ void Player::OnCollision()
 
 void Player::ChangeModel()
 {
-	if (sphereCollider->GetTag() == SphereColliderComponent::CollisionTag::SuperPlayer)
-	{
- 		modelComponent->SetModel(normalModelId);
-		modelComponent->SetModelScale(scale);
-
-		sphereCollider->TagChange(SphereColliderComponent::CollisionTag::NormalPlayer);
-	}
-	else
+	if (sphereCollider->GetTag() == SphereColliderComponent::CollisionTag::NormalPlayer)
 	{
 		modelComponent->SetModel(superModelId);
 		modelComponent->SetModelScale(scale);
@@ -68,5 +61,12 @@ void Player::ChangeModel()
 		superCount = superCountMax;
 
 		sphereCollider->TagChange(SphereColliderComponent::CollisionTag::SuperPlayer);
+	}
+	else if(!super)
+	{
+ 		modelComponent->SetModel(normalModelId);
+		modelComponent->SetModelScale(scale);
+
+		sphereCollider->TagChange(SphereColliderComponent::CollisionTag::NormalPlayer);
 	}
 }

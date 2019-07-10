@@ -396,7 +396,6 @@ bool Game::CollisionCall()
 				if (ball->GetTag() == SphereColliderComponent::CollisionTag::SuperPlayer)
 				{
 					box->OnCollision();
-					
 					continue;
 				}
 				return end;

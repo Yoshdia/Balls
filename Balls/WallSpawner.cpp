@@ -51,17 +51,21 @@ void WallSpawner::WallSpawn(float deltaTime)
 	if (count >= spawnTime - plusSpeed)
 	{
 		VECTOR wallPos;
-		wallPos = CreateWallPositionCreateSuperWall();
+		int rand = GetRand(1);
+		wallPos = CreateWallPositionCreateSuperWall(rand);
+		CreateSuperWall(rand,1);
 
 		Wall* posingWall = nullptr;
-		//posingWall = GetPausingWall();
-		//posingWall->ResetWall(wallPos);
+		posingWall = GetPausingWall();
+		posingWall->ResetWall(wallPos);
 
-		wallPos = CreateWallPositionCreateSuperWall();
+		rand = GetRand(1);
+		wallPos = CreateWallPositionCreateSuperWall(rand);
+		CreateSuperWall(rand,-1);
 		//”½“]‚³‚¹‚é
 		wallPos.x *= -1;
-		//posingWall = GetPausingWall();
-		//posingWall->ResetWall(wallPos);
+		posingWall = GetPausingWall();
+		posingWall->ResetWall(wallPos);
 
 		count = 0;
 	}
@@ -123,18 +127,15 @@ Wall * WallSpawner::GetPausingWall()
 	return new Wall(VGet(0, -10, 0), BoxColliderComponent::ColliderTag::JammerWall);
 }
 
-VECTOR WallSpawner::CreateWallPositionCreateSuperWall()
+VECTOR WallSpawner::CreateWallPositionCreateSuperWall(int rand)
 {
-	int rand = GetRand(1);
-
 	VECTOR wallPos = StartRunPos;
 	wallPos.x += (rand * 2);
-	CreateSuperWall(rand);
 
 	return wallPos;
 }
 
-void WallSpawner::CreateSuperWall(int rand)
+void WallSpawner::CreateSuperWall(int rand,int rightOrLeft)
 {
 	int random = GetRand(50);
 	if (random > 10)
@@ -142,9 +143,10 @@ void WallSpawner::CreateSuperWall(int rand)
 		return;
 	}
 	VECTOR wallPos = StartRunPos;
+	wallPos.x *= rightOrLeft;
 	if (rand == 0)
 	{
-		wallPos.x += 2;
+		wallPos.x += 2*rightOrLeft;
 	}
 
 	for (int num = 0; num < 5; num++)

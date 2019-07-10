@@ -33,8 +33,8 @@ private:
 	//Œ»İState‚ªPausing‚ÌWall‚ğæ“¾
 	Wall* GetPausingWall();
 	//“ñ‚Â‚ÌƒŒ[ƒ“‚Ì‚Ç‚¿‚ç‚Éİ’u‚·‚é‚©‚ğƒ‰ƒ“ƒ_ƒ€‚Åæ“¾‚·‚é
-	VECTOR CreateWallPositionCreateSuperWall();
-	void CreateSuperWall(int rand);
+	VECTOR CreateWallPositionCreateSuperWall(int rand);
+	void CreateSuperWall(int rand, int rightOrLeft);
 
 	static const VECTOR InitPos;
 };
