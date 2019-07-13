@@ -96,6 +96,18 @@ void WallSpawner::WallClear()
 	{
 		wall->ClearWall();
 	}
+	for (auto wall : addPointWalls)
+	{
+		wall->ClearWall();
+	}
+	for (auto wall : addPointWalls)
+	{
+		wall->ClearWall();
+	}
+	for (auto wall : superWalls)
+	{
+		wall->ClearWall();
+	}
 }
 
 Wall * WallSpawner::GetPausingWall()
