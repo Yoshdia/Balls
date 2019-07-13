@@ -74,7 +74,19 @@ void WallSpawner::WallStop()
 {
 	for (auto wall : walls)
 	{
-		wall->SetState(Actor::ActiveState::Paused);
+		wall->StopMove();
+	}
+	for (auto wall : addPointWalls)
+	{
+		wall->StopMove();
+	}
+	for (auto wall : addPointWalls)
+	{
+		wall->StopMove();
+	}
+	for (auto wall : superWalls)
+	{
+		wall->StopMove();
 	}
 }
 

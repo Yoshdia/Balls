@@ -15,7 +15,7 @@ Wall::Wall(BoxColliderComponent::ColliderTag tag,const std::string& modelFileNam
 	scale = VGet(0.01f, 0.01f, 0.001f);
 	modelComponent->SetModelScale(scale);
 
-	moveComponent = new MoveComponent(this, 102, VGet(0, 0, -60.0f),VGet(0,0,0));
+	moveComponent = new MoveComponent(this, 102, moveSpeed,VGet(0,0,0));
 
 	boxCollider = new BoxColliderComponent(this, 150, 0.02f, tag);
 	boxCollider->SetIsCollision(false);
@@ -47,6 +47,7 @@ void Wall::ResetWall(VECTOR pos)
 	position = pos;
 	state = Actor::ActiveState::Active;
 	boxCollider->SetIsCollision(false);
+	moveComponent->SetMoveSpeed(moveSpeed);
 }
 
 void Wall::ClearWall()
@@ -54,6 +55,11 @@ void Wall::ClearWall()
 	SetPosition(InitPos);
 	state = Actor::ActiveState::Paused;
 	boxCollider->SetIsCollision(false);
+}
+
+void Wall::StopMove()
+{
+	moveComponent->SetMoveSpeed(VGet(0,0,0));
 }
 
 void Wall::OnCollision()

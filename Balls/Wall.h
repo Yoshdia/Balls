@@ -14,13 +14,17 @@ public:
 
 	void UpdateActor(float deltaTime);
 
-	//座標を受け取った地点にし、フラグを倒す
+	//座標をセット、stateをActiveにして走らせる
 	void ResetWall(VECTOR pos);
+	//座標を画面外にセットし、stateをPauseにして待機状態にさせる
 	void ClearWall();
+
+	void StopMove() ;
 	void OnCollision();
 	const VECTOR InitPos = VGet(-10, -10, -10);
 protected:
 	MoveComponent * moveComponent;
 	BoxColliderComponent* boxCollider;
+	const VECTOR moveSpeed = VGet(0, 0, -60.0f);
 };
 

@@ -12,6 +12,7 @@ public:
 	~MoveComponent();
 	void Update(float deltaTime);
 	void SetRotationSpeed(VECTOR speed) { rotationSpeed = speed; };
+	void SetMoveSpeed(VECTOR speed) { moveDistance = speed; }
 protected:
 	//À•W‚ÉmoveDistance‚ğ‘«‚·‚¾‚¯‚ÌŠÖ”
 	void Move(float deltaTime);

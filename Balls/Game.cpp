@@ -71,7 +71,6 @@ void Game::MainProcess()
 
 	DWORD nowTick, prevTick;
 	prevTick = timeGetTime();
-	deltaTime = 1.0f;
 	gameSpeed = 1.0f;
 
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了

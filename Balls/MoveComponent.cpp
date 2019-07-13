@@ -39,10 +39,9 @@ void MoveComponent::Move(float deltaTime)
 	float gameSpeed = Game::GetInstance()->GetGameSpeed();
 	position = ownerActor->GetPosition();
 
-	//VECTOR distance = VGet(moveDistance.x*deltaTime*gameSpeed, moveDistance.y*deltaTime*gameSpeed, moveDistance.z*deltaTime*gameSpeed);
 	VECTOR distance = moveDistance;
-distance=distance*deltaTime;
-distance=distance*gameSpeed;
+	distance = distance * deltaTime;
+	distance = distance * gameSpeed;
 
 	position = VAdd(position, distance);
 	ownerActor->SetPosition(position);

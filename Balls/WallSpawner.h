@@ -16,6 +16,7 @@ public:
 	void WallSpawn(float deltaTime);
 	//すべてのwallの移動を停止させ生成もやめさせる
 	void WallStop();
+
 	//すべてのwallを初期状態に戻す
 	void WallClear();
 private:
@@ -24,6 +25,7 @@ private:
 	float spawnTime;
 	int RandamSpawnWallMax = 200;
 	const VECTOR StartRunPos = VGet(1, 0, 100);
+
 	//Wallのアドレスを保存しておく
 	Wall* walls[50];
 	//特殊なWallへのアドレス
