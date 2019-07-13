@@ -4,10 +4,11 @@
 #include "Game.h"
 
 
-MoveComponent::MoveComponent(Actor * owner, int processNumber, VECTOR distance) :
+MoveComponent::MoveComponent(Actor * owner, int processNumber, VECTOR distance, VECTOR rotateSpeed) :
 	Component(owner, processNumber)
 	, position(owner->GetPosition())
 	, moveDistance(distance)
+	, rotationSpeed(rotateSpeed)
 {
 }
 
@@ -18,6 +19,7 @@ MoveComponent::~MoveComponent()
 void MoveComponent::Update(float deltaTime)
 {
 	Move(deltaTime);
+	Rotate(deltaTime);
 }
 
 void MoveComponent::Move()
@@ -35,13 +37,19 @@ void MoveComponent::Move()
 void MoveComponent::Move(float deltaTime)
 {
 	float gameSpeed = Game::GetInstance()->GetGameSpeed();
-	position=ownerActor->GetPosition();
-	VECTOR distance = VGet(
-		moveDistance.x*deltaTime*gameSpeed,
-		moveDistance.y*deltaTime*gameSpeed,
-		moveDistance.z*deltaTime*gameSpeed
-	);
+	position = ownerActor->GetPosition();
+
+	VECTOR distance = VGet(moveDistance.x, moveDistance.y, moveDistance.z);
+	distance*deltaTime;
+	distance*gameSpeed;
 
 	position = VAdd(position, distance);
 	ownerActor->SetPosition(position);
+}
+
+void MoveComponent::Rotate(float deltaTime)
+{
+	VECTOR rotation = ownerActor->GetRotation();
+	rotation = rotation * deltaTime;
+	rotation = VAdd(rotation, rotation);
 }

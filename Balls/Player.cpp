@@ -4,26 +4,29 @@
 #include "MovePlayerComponent.h"
 #include "Game.h"
 #include "SphereColliderComponent.h"
+#include "CountDownComponent.h" 
 
 Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey)
 {
 	position = initPos;
 
-	//モデルを保存し描画するComponentを実装
+	scale = VGet(0.01f, 0.01f, 0.01f);
+	//モデルを保存し描画するComponentを実装(後々使用するsuperBallのモデルはScaleを変更するためここでSetする)
 	modelComponent = new ModelComponent(this);
 	superModelId = Game::GetInstance()->LoadModel("Resouce/model/superBall.mv1");
+	modelComponent->SetModel(normalModelId);
+	modelComponent->SetModelScale(scale);
+
 	normalModelId = Game::GetInstance()->LoadModel("Resouce/model/ball.mv1");
 	modelComponent->SetModel(normalModelId);
-	scale = VGet(0.01f, 0.01f, 0.01f);
 	modelComponent->SetModelScale(scale);
 
 	MovePlayerComponent * movePlayerComponent;
-	movePlayerComponent = new MovePlayerComponent(this, 101, moveKey, next);
+	movePlayerComponent = new MovePlayerComponent(this, 101, moveKey, next, VGet(5.0f, 0, 0));
 
 	sphereCollider = new SphereColliderComponent(this, 150, 0.01f);
 
-	superCount = 0;
-	super = false;
+	countDownComponent = new CountDownComponent(superCountMax);
 }
 
 Player::~Player()
@@ -32,41 +35,35 @@ Player::~Player()
 
 void Player::UpdateActor(float deltaTime)
 {
-	//回転させる
-	rotation = VAdd(rotation, VGet(5.0f*deltaTime, 0, 0));
-	if (super)
+	if (countDownComponent->CountEnd())
 	{
-		superCount--;
-		if (superCount < 0)
-		{
-			super = false;
-			ChangeModel();
-		}
+		ChangeNormalModel();
 	}
 }
 
 void Player::OnCollision()
 {
-	ChangeModel();
+	ChangeSuperModel();
 }
 
-void Player::ChangeModel()
+void Player::ChangeNormalModel()
 {
-	if (sphereCollider->GetTag() == SphereColliderComponent::CollisionTag::NormalPlayer)
-	{
-		modelComponent->SetModel(superModelId);
-		modelComponent->SetModelScale(scale);
-
-		super = true;
-		superCount = superCountMax;
-
-		sphereCollider->TagChange(SphereColliderComponent::CollisionTag::SuperPlayer);
-	}
-	else if(!super)
-	{
- 		modelComponent->SetModel(normalModelId);
-		modelComponent->SetModelScale(scale);
-
-		sphereCollider->TagChange(SphereColliderComponent::CollisionTag::NormalPlayer);
-	}
+	//モデルを変更
+	modelComponent->SetModel(normalModelId);
+	modelComponent->SetModelScale(scale);
+	//タグを変更
+	sphereCollider->TagChange(SphereColliderComponent::CollisionTag::NormalPlayer);
 }
+
+void Player::ChangeSuperModel()
+{
+	//モデルを変更
+	modelComponent->SetModel(superModelId);
+	modelComponent->SetModelScale(scale);
+
+	//タグを変更
+	sphereCollider->TagChange(SphereColliderComponent::CollisionTag::SuperPlayer);
+
+	countDownComponent->ResetCount();
+}
+

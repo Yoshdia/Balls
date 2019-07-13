@@ -8,16 +8,22 @@ class MoveComponent :
 	public Component
 {
 public:
-	MoveComponent(Actor* owner ,int processNumber, VECTOR distance);
+	MoveComponent(Actor* owner ,int processNumber, VECTOR distance, VECTOR rotateSpeed);
 	~MoveComponent();
 	void Update(float deltaTime);
+	void SetRotationSpeed(VECTOR speed) { rotationSpeed = speed; };
 protected:
 	//À•W‚ÉmoveDistance‚ğ‘«‚·‚¾‚¯‚ÌŠÖ”
 	void Move(float deltaTime);
+	//‰ñ“]‚·‚éŠÖ”
+	void Rotate(float deltaTime);
+
 	//Œp³æ‚©‚çŒÄ‚Î‚ê‚éAdeltaTime‚ğŒp³æ‚ÅŒvZ‚·‚é‚½‚ßˆø”‚âŠÖ”“à‚ÉdeltaTime‚ª‚È‚¢MoveŠÖ”
 	void Move();
 	VECTOR position;
 	//–ˆFˆÚ“®‚·‚é‹——£
 	VECTOR moveDistance;
+
+	VECTOR rotationSpeed;
 };
 

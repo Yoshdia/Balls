@@ -9,7 +9,7 @@ class MovePlayerComponent :
 {
 public:
 	//ˆÚ“®‚ğŒŸ’m‚·‚émoveKeyA‰‚ß‚É‚Ç‚¿‚ç‚ÖˆÚ“®‚·‚é‚©‚Ìnext‚ğw’è
-	MovePlayerComponent(Actor* owner,int processNumber, char moveKey, Game::MoveDirection next);
+	MovePlayerComponent(Actor* owner,int processNumber, char moveKey, Game::MoveDirection next,VECTOR rotateSpeed);
 	~MovePlayerComponent();
 	void Update(float deltaTime);
 protected:

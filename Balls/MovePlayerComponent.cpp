@@ -6,8 +6,8 @@
 const float MovePlayerComponent::MovingRequiredTime = 10.0f;
 const float MovePlayerComponent::MovingDistanceSum = 2.0f;
 
-MovePlayerComponent::MovePlayerComponent(Actor * owner, int processNumber, char moveKey, Game::MoveDirection next)
-	:MoveComponent(owner, processNumber, VGet(0, 0, 0))
+MovePlayerComponent::MovePlayerComponent(Actor * owner, int processNumber, char moveKey, Game::MoveDirection next, VECTOR rotateSpeed)
+	:MoveComponent(owner, processNumber, VGet(0, 0, 0),rotateSpeed)
 	, nextMoveDirection(next)
 	, targetPos(owner->GetPosition().x)
 	, moveInputeKey(moveKey)

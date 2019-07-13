@@ -7,6 +7,7 @@
 class 	SphereColliderComponent;
 class 	MovePlayerComponent;
 class ModelComponent;
+class CountDownComponent;
 
 //‰æ–Êè‘O‚Å¶‰E‚ÉˆÚ“®‚·‚é‹…B“ñ‚Â¶¬‚³‚ê‚é
 class Player:
@@ -23,11 +24,13 @@ public:
 private:	
 	ModelComponent * modelComponent;
 	SphereColliderComponent* sphereCollider;
+	CountDownComponent* countDownComponent;
 	int normalModelId;
 	int superModelId;
-	void ChangeModel();
-	int superCount;
-	bool super;
+	//Player‚Ìó‘Ô•Ï‰»
+	void ChangeNormalModel();
+	void ChangeSuperModel();
+
 	const int superCountMax=180;
 };
 

@@ -437,3 +437,11 @@ bool Game::CollisionBallWall(SphereColliderComponent * ball, BoxColliderComponen
 	}
 	return false;
 }
+
+VECTOR operator*(const VECTOR vec, const float flo)
+{
+	VECTOR vector;
+	vector = VGet(vec.x*flo,vec.y*flo,vec.z*flo);
+	return vec;
+}
+

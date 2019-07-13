@@ -15,7 +15,7 @@ Wall::Wall(BoxColliderComponent::ColliderTag tag,const std::string& modelFileNam
 	scale = VGet(0.01f, 0.01f, 0.001f);
 	modelComponent->SetModelScale(scale);
 
-	moveComponent = new MoveComponent(this, 102, VGet(0, 0, -60.0f));
+	moveComponent = new MoveComponent(this, 102, VGet(0, 0, -60.0f),VGet(0,0,0));
 
 	boxCollider = new BoxColliderComponent(this, 150, 0.02f, tag);
 	boxCollider->SetIsCollision(false);

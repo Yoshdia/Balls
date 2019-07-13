@@ -55,6 +55,7 @@ public:
 	bool CollisionCall();
 	float GetGameSpeed() { return gameSpeed; }
 	void AddGameSpeed() { gameSpeed += PlusSpeed; }
+
 private:
 	Game() {};
 	static Game *game;
@@ -115,3 +116,6 @@ private:
 	float deltaTime;
 
 };
+
+//VECTOR‚Æfloat‚ÌæZŒ‹‰Ê‚ğ•Ô‚·
+VECTOR operator*(const VECTOR vec, const float flo);
