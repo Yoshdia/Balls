@@ -99,6 +99,9 @@
     <ClCompile Include="JammerWall.cpp">
       <Filter>ソース ファイル\Actor\Walls</Filter>
     </ClCompile>
+    <ClCompile Include="CountDownComponent.cpp">
+      <Filter>ソース ファイル\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -163,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="JammerWall.h">
       <Filter>ヘッダー ファイル\Actor\Walls</Filter>
+    </ClInclude>
+    <ClInclude Include="CountDownComponent.h">
+      <Filter>ヘッダー ファイル\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -157,6 +157,7 @@
     <ClCompile Include="BoxColliderComponent.cpp" />
     <ClCompile Include="Clear.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="CountDownComponent.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="JammerWall.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="BoxColliderComponent.h" />
     <ClInclude Include="Clear.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="CountDownComponent.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="JammerWall.h" />

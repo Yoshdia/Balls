@@ -65,4 +65,5 @@ void MovePlayerComponent::Update(float deltaTime)
 			moving = false;
 		}
 	}
+	Rotate(deltaTime);
 }
