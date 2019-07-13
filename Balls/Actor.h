@@ -1,8 +1,7 @@
 #pragma once
-#include "Game.h"
 #include "Component.h"
 #include "DxLib.h"
-
+#include <vector>
 
 class Actor
 {
@@ -11,7 +10,6 @@ public:
 	{
 		Active,
 		Paused,
-		NoActive
 	};
 
 	Actor();

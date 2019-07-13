@@ -40,7 +40,8 @@ WallSpawner::~WallSpawner()
 
 void WallSpawner::WallSpawn(float deltaTime)
 {
-	float gameSpeed = Game::GetInstance()->GetGameSpeed();
+	//float gameSpeed = Game::GetInstance()->GetGameSpeed();
+	float gameSpeed = 1.0f;
 	float plusSpeed = (gameSpeed - 1) * 50;
 	if (plusSpeed > 10)
 	{

@@ -1,19 +1,15 @@
 #include "Wall.h"
 #include "ModelComponent.h"
 #include "MoveComponent.h"
+#include "Renderer.h"
 
 Wall::Wall(BoxColliderComponent::ColliderTag tag,const std::string& modelFileName)
 {
 	position = InitPos;
 
-	ModelComponent * modelComponent;
-	modelComponent = new ModelComponent(this, 200);
-	int modelId = 0;
-	modelId = Game::GetInstance()->LoadModel(modelFileName);
-
-	modelComponent->SetModel(modelId);
 	scale = VGet(0.01f, 0.01f, 0.001f);
-	modelComponent->SetModelScale(scale);
+	ModelComponent * modelComponent;
+	modelComponent = new ModelComponent(this,200, scale, modelFileName);
 
 	moveComponent = new MoveComponent(this, 102, moveSpeed,VGet(0,0,0));
 

@@ -4,9 +4,10 @@
 // プログラムは WinMain から始まります
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	Game::GetInstance()->Create();
-	Game::GetInstance()->MainProcess();
-	Game::GetInstance()->Delete();
+	Game* game;
+	game = new Game();
+	game->MainProcess();
+	delete game;
 
 	return 0;				// ソフトの終了 
 }

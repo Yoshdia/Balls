@@ -1,18 +1,27 @@
-#include "DxLib.h"
 #include "ModelComponent.h"
 #include "Actor.h"
-#include "Game.h"
+#include "Renderer.h"
 
 ModelComponent::ModelComponent(Actor * owner, int setProcessNumber)
 	:Component(owner, setProcessNumber)
 	, modelId(-1)
 {
-	Game::GetInstance()->AddModel(this);
+	Renderer::GetInstance()->AddModel(this);
+}
+
+ModelComponent::ModelComponent(Actor * owner, int setProcessNumber, VECTOR scale, const std::string & fileName)
+	:Component(owner, setProcessNumber)
+	, modelId(-1)
+{
+	Renderer::GetInstance()->AddModel(this);
+	int modeld = Renderer::GetInstance()->LoadModel(fileName);
+	SetModel(modelId);
+	SetModelScale(scale);
 }
 
 ModelComponent::~ModelComponent()
 {
-	Game::GetInstance()->RemoveModel(this);
+	Renderer::GetInstance()->RemoveModel(this);
 }
 
 void ModelComponent::SetModelScale(VECTOR scale)

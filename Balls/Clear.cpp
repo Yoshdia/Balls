@@ -1,6 +1,6 @@
 #include"DxLib.h"
 #include "Clear.h"
-#include "Game.h"
+#include "InputKey.h"
 
 
 
@@ -25,7 +25,7 @@ void Clear::Render()
 
 sceneName Clear::SceneChange()
 {
-	if (Game::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1)
+	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1)
 	{
 		wallSpawner->WallClear();
 		return sceneName::title;

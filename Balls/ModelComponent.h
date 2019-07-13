@@ -1,12 +1,16 @@
 #pragma once
 
-#include "Game.h"
+#include "DxLib.h"
 #include "component.h"
+#include <string>
+class Actor;
 
 class ModelComponent : public Component
 {
 public:
-	ModelComponent(class Actor* owner,int drawNumber=100);
+	ModelComponent(Actor* owner, int setProcessNumber);
+	//モデルに変更を加えないActorに呼ばせる、Loadやscaleを最初にまとめて設定するインスタンス
+    ModelComponent(Actor* owner, int setProcessNumber, VECTOR scale, const std::string& fileName);
 	virtual ~ModelComponent();
 	virtual void DrawModel();
 	virtual void SetModel(int model);

@@ -16,6 +16,6 @@ AddSpeedWall::~AddSpeedWall()
 
 void AddSpeedWall::OnCollision()
 {
-	Game::GetInstance()->AddGameSpeed();
+	//Game::GetInstance()->AddGameSpeed();
 	ClearWall();
 }

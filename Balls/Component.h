@@ -8,7 +8,7 @@ class Component
 public:
 	Component(class Actor* owner, int updateOrder = 100);
 	virtual ~Component();
-	virtual void Update(float deltaTime);                              // コンポーネントをdeltaTimeで更新
+	virtual void Update(float deltaTime);
 	// 更新順序を返す
 	int getProccesNumber() const { return processNumber; } //getUpdateOrder
 protected:

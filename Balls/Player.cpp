@@ -2,7 +2,7 @@
 #include <math.h>
 #include "ModelComponent.h"
 #include "MovePlayerComponent.h"
-#include "Game.h"
+#include "Renderer.h"
 #include "SphereColliderComponent.h"
 #include "CountDownComponent.h" 
 
@@ -12,12 +12,12 @@ Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey)
 
 	scale = VGet(0.01f, 0.01f, 0.01f);
 	//モデルを保存し描画するComponentを実装(後々使用するsuperBallのモデルはScaleを変更するためここでSetする)
-	modelComponent = new ModelComponent(this);
-	superModelId = Game::GetInstance()->LoadModel("Resouce/model/superBall.mv1");
+	modelComponent = new ModelComponent(this,100);
+	superModelId = Renderer::GetInstance()->LoadModel("Resouce/model/superBall.mv1");
 	modelComponent->SetModel(normalModelId);
 	modelComponent->SetModelScale(scale);
 
-	normalModelId = Game::GetInstance()->LoadModel("Resouce/model/ball.mv1");
+	normalModelId = Renderer::GetInstance()->LoadModel("Resouce/model/ball.mv1");
 	modelComponent->SetModel(normalModelId);
 	modelComponent->SetModelScale(scale);
 

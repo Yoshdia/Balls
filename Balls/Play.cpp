@@ -1,9 +1,9 @@
 #include"DxLib.h"
 #include "Play.h"
-#include "Game.h"
+#include "Collider.h"
 #include "Wall.h"
 #include "WallSpawner.h"
-
+#include "InputKey.h"
 
 Play::Play(WallSpawner* wallSpawn):
 	Scene(wallSpawn)
@@ -20,7 +20,7 @@ Play::~Play()
 void Play::Update(float deltaTime)
 {
 	wallSpawner->WallSpawn(deltaTime);
-	gameEnd = Game::GetInstance()->CollisionCall();
+	gameEnd = Collider::GetInstance()->CollisionCall();
 	if (gameEnd)
 	{
 		wallSpawner->WallStop();
@@ -37,7 +37,7 @@ void Play::Render()
 
 sceneName Play::SceneChange()
 {
-	if (Game::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1||gameEnd)
+	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1||gameEnd)
 	{
 		return sceneName::clear;
 	}

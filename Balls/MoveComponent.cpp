@@ -36,7 +36,8 @@ void MoveComponent::Move()
 
 void MoveComponent::Move(float deltaTime)
 {
-	float gameSpeed = Game::GetInstance()->GetGameSpeed();
+	//float gameSpeed = Game::GetInstance()->GetGameSpeed();
+	float gameSpeed = 1.0f;
 	position = ownerActor->GetPosition();
 
 	VECTOR distance = moveDistance;

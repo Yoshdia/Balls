@@ -1,5 +1,4 @@
 #pragma once
-#include "Game.h"
 #include "Actor.h"
 #include "DxLib.h"
 #include "BoxColliderComponent.h"

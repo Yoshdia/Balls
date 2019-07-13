@@ -1,5 +1,5 @@
 #include "DxLib.h"
-#include "Game.h"
+#include "InputKey.h"
 #include "MovePlayerComponent.h"
 #include "Actor.h"
 
@@ -27,13 +27,14 @@ void MovePlayerComponent::Update(float deltaTime)
 	if (!moving)
 	{
 		//インスタンス生成時に受け取ったmoveInputKeyが入力されたとき
-		if (Game::GetInstance()->GetAllInputKey()[moveInputeKey] == 1)
+		if (InputKey::GetInstance()->GetAllInputKey()[moveInputeKey] == 1)
 		{
 			//移動予定地の計算
 			targetPos = middlePos + (MovingDistanceSum/2*nextMoveDirection);
 			//残り移動距離
 			movement = targetPos-position.x;
-			float gameSpeed = Game::GetInstance()->GetGameSpeed();
+			//float gameSpeed = Game::GetInstance()->GetGameSpeed();
+			float gameSpeed = 1.0f;
 			//1fに移動する距離
 			moveDistance.x = (movement * MovingRequiredTime)*deltaTime*gameSpeed;
 			//MoveComponent内のgameSpeedが一定以上まで上昇すると移動距離が合計移動距離を上回ることがあるため上限値を設定

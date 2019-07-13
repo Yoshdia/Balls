@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "ActorManager.h"
 #include "Actor.h"
 #include "Component.h"
 #include <algorithm>
@@ -12,13 +12,13 @@ Actor::Actor()
 	, scale(OriginScale)
 	, rotation(OriginQua)
 {
-	Game::GetInstance()->AddActor(this);
+	ActorManager::GetInstance()->AddActor(this);
 	actorNumber++;
 }
 
 Actor::~Actor()
 {
-	Game::GetInstance()->RemoveActor(this);
+	ActorManager::GetInstance()->RemoveActor(this);
 	while (!myComponents.empty())
 	{
 		delete myComponents.back();

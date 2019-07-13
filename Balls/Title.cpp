@@ -1,5 +1,5 @@
 #include"DxLib.h"
-#include "Game.h"
+#include "InputKey.h"
 #include "Title.h"
 
 Title::Title(WallSpawner* wallSpawn):
@@ -23,7 +23,7 @@ void Title::Render()
 
 sceneName Title::SceneChange()
 {
-	if (Game::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1)
+	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1)
 	{
 		return sceneName::play;
 	}
