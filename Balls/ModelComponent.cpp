@@ -14,7 +14,7 @@ ModelComponent::ModelComponent(Actor * owner, int setProcessNumber, VECTOR scale
 	, modelId(-1)
 {
 	Renderer::GetInstance()->AddModel(this);
-	int modeld = Renderer::GetInstance()->LoadModel(fileName);
+	modelId = Renderer::GetInstance()->LoadModel(fileName);
 	SetModel(modelId);
 	SetModelScale(scale);
 }

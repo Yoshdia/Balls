@@ -20,7 +20,7 @@ public:
 	//‚·‚×‚Ä‚Ìwall‚ğ‰Šúó‘Ô‚É–ß‚·
 	void WallClear();
 private:
-	float count;
+	float count=0;
 	const float SpawnTime = 60;
 	float spawnTime;
 	int RandamSpawnWallMax = 200;

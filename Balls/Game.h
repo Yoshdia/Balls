@@ -31,6 +31,11 @@ public:
 private:
 	Scene *scene;
 
+	//Dxlib関数にあるそれぞれの設定を行う関数
+	void DxlibWindowSetting();
+	void DxlibCameraSetting();
+	void DxlibLightSetting();
+
 	//シングルトンクラスの生成と解放
 	void CreateSingleTons();
 	void DeleteSingleTons();

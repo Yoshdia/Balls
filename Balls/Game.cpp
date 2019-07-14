@@ -19,33 +19,20 @@
 void Game::MainProcess()
 {
 	//Dxlib初期化処理
-	if (DxLib_Init() == -1)
-	{
-		return;
-	}
-	//スクリーンモードの変更。true=ウィンドウモード
-	ChangeWindowMode(true);
-	//画面モードの変更
-	SetGraphMode(ScreenWidth, ScreenHeight, 32);
-	//描画先グラフィック領域を裏に
-	SetDrawScreen(DX_SCREEN_BACK);
+	if (DxLib_Init() == -1) { return; }
+	DxlibWindowSetting();
+	DxlibCameraSetting();
+	DxlibLightSetting();
+
+	CreateSingleTons();
 
 	wallSpawner = new WallSpawner;
-	//最初のシーンを作成
-	scene = new Play(wallSpawner);
-
-	//カメラの視野範囲を設定
-	SetCameraNearFar(nearCameraPos, farCameraPos);
-	//カメラの場所を設定
-	SetCameraPositionAndTarget_UpVecY(CameraPos, VGet(0, 0, 0));
-	//ライトの向きを設定
-	SetLightDirection(VGet(0, -1, 2));
-	//int secondLight = CreateDirLightHandle(VGet(1,-1,2));
-	//int thirdLight = CreateDirLightHandle(VGet(-1, -1, 2));
-
+	new Ground(VGet(0, -2.0f, 0));
 	new Player(leftPlayerPos, Game::MoveDirection::Left, KEY_INPUT_SPACE);
 	new Player(rightPlayerPos, Game::MoveDirection::Right, KEY_INPUT_RETURN);
-	new Ground(VGet(0, -2.0f, 0));
+
+	//最初のシーンを作成
+	scene = new Play(wallSpawner);
 
 	//deltaTimeの計測
 	DWORD nowTick, prevTick;
@@ -79,6 +66,32 @@ void Game::MainProcess()
 	DxLib_End();
 
 	return;
+}
+
+void Game::DxlibWindowSetting()
+{
+	//スクリーンモードの変更。true=ウィンドウモード
+	ChangeWindowMode(true);
+	//画面モードの変更
+	SetGraphMode(ScreenWidth, ScreenHeight, 32);
+	//描画先グラフィック領域を裏に
+	SetDrawScreen(DX_SCREEN_BACK);
+}
+
+void Game::DxlibCameraSetting()
+{
+	//カメラの視野範囲を設定
+	SetCameraNearFar(nearCameraPos, farCameraPos);
+	//カメラの場所を設定
+	SetCameraPositionAndTarget_UpVecY(CameraPos, VGet(0, 0, 0));
+}
+
+void Game::DxlibLightSetting()
+{
+	//ライトの向きを設定
+	SetLightDirection(VGet(0, -1, 2));
+	//int secondLight = CreateDirLightHandle(VGet(1,-1,2));
+	//int thirdLight = CreateDirLightHandle(VGet(-1, -1, 2));
 }
 
 void Game::CreateSingleTons()

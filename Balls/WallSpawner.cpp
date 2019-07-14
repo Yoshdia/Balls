@@ -47,7 +47,7 @@ void WallSpawner::WallSpawn(float deltaTime)
 	{
 		plusSpeed = 10;
 	}
-	count+=deltaTime*80;
+	count += deltaTime * 80;
 	if (count >= spawnTime - plusSpeed)
 	{
 		VECTOR wallPos;
