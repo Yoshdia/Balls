@@ -1,48 +1,38 @@
 #include "DxLib.h"
 #include "WallSpawner.h"
-#include "AddSpeedWall.h"
-#include "AddPointWall.h"
-#include "JammerWall.h"
-#include "SuperWall.h"
+//#include "AddSpeedWall.h"
+//#include "AddPointWall.h"
+//#include "JammerWall.h"
+//#include "SuperWall.h"
+#include "WallCreateAndHaver.h"
+#include "Wall.h"
+
+const int WallSpawner::WallRandMax = 100;
+const float WallSpawner::AddPointRand = 5*0.01;
+const float WallSpawner::AddSpeedRand = (WallSpawner::AddPointRand + 5)*0.01;
+const float WallSpawner::SpawnTime = 60;
 
 WallSpawner::WallSpawner()
 {
 	spawnTime = SpawnTime;
 	count = 0;
 
-	for (int num = 0; num < 50; num++)
-	{
-		walls[num] = new JammerWall();
-		walls[num]->SetState(Actor::ActiveState::Paused);
-	}
-	for (int num = 0; num < 5; num++)
-	{
-		addSpeedWalls[num] = new AddSpeedWall();
-		addSpeedWalls[num]->SetState(Actor::ActiveState::Paused);
-	}
-	for (int num = 0; num < 5; num++)
-	{
-		addPointWalls[num] = new AddPointWall();
-		addPointWalls[num]->SetState(Actor::ActiveState::Paused);
-	}
-	for (int num = 0; num < 5; num++)
-	{
-		superWalls[num] = new SuperWall();
-		superWalls[num]->SetState(Actor::ActiveState::Paused);
-	}
+	wallCreateAndHaver = new WallCreateAndHaver();
+	wallCreateAndHaver->CreatePauseWalls();
 }
-
 
 WallSpawner::~WallSpawner()
 {
-	//Wall達の解放はGame内で行う
+	delete wallCreateAndHaver;
 }
 
 void WallSpawner::WallSpawn(float deltaTime)
 {
 	//float gameSpeed = Game::GetInstance()->GetGameSpeed();
 	float gameSpeed = 1.0f;
+	//設置速度から減算する値
 	float plusSpeed = (gameSpeed - 1) * 50;
+	//壁の設置速度の上限
 	if (plusSpeed > 10)
 	{
 		plusSpeed = 10;
@@ -50,104 +40,55 @@ void WallSpawner::WallSpawn(float deltaTime)
 	count += deltaTime * 80;
 	if (count >= spawnTime - plusSpeed)
 	{
-		VECTOR wallPos;
-		int rand = GetRand(1);
-		wallPos = CreateWallPositionCreateSuperWall(rand);
-		CreateSuperWall(rand,1);
-
-		Wall* posingWall = nullptr;
-		posingWall = GetPausingWall();
-		posingWall->ResetWall(wallPos);
-
-		rand = GetRand(1);
-		wallPos = CreateWallPositionCreateSuperWall(rand);
-		CreateSuperWall(rand,-1);
-		//反転させる
-		wallPos.x *= -1;
-		posingWall = GetPausingWall();
-		posingWall->ResetWall(wallPos);
-
+		WallsSpawn();
 		count = 0;
 	}
 }
 
+void WallSpawner::WallsSpawn()
+{
+	VECTOR wallPos;
+	int rand = GetRand(1);
+	wallPos = CreateWallPositionCreateSuperWall(rand);
+	CreateSuperWall(rand, 1);
+
+	Wall* posingWall = nullptr;
+	posingWall = GetRandomWall();
+	posingWall->ResetWall(wallPos);
+
+	rand = GetRand(1);
+	wallPos = CreateWallPositionCreateSuperWall(rand);
+	CreateSuperWall(rand, -1);
+	//反転させる
+	wallPos.x *= -1;
+	posingWall = GetRandomWall();
+	posingWall->ResetWall(wallPos);
+}
+
+Wall * WallSpawner::GetRandomWall()
+{
+	//100までの乱数を取得
+	int rand = GetRand(WallRandMax);
+	//一定の確立でAddPointWall、AddSpeedWall生成しそれ以外はJammerWallを生成する
+	if (rand < WallRandMax*AddPointRand)
+	{
+		return wallCreateAndHaver->GetPausingWall(BoxColliderComponent::ColliderTag::AddPointWall);
+	}
+	else if (rand < WallRandMax*AddSpeedRand)
+	{
+		return wallCreateAndHaver->GetPausingWall(BoxColliderComponent::ColliderTag::AddSpeedWall);
+	}
+	return wallCreateAndHaver->GetPausingWall(BoxColliderComponent::ColliderTag::JammerWall);
+}
+
 void WallSpawner::WallStop()
 {
-	for (auto wall : walls)
-	{
-		wall->StopMove();
-	}
-	for (auto wall : addPointWalls)
-	{
-		wall->StopMove();
-	}
-	for (auto wall : addPointWalls)
-	{
-		wall->StopMove();
-	}
-	for (auto wall : superWalls)
-	{
-		wall->StopMove();
-	}
+	wallCreateAndHaver->AllWallsStop();
 }
 
 void WallSpawner::WallClear()
 {
-	for (auto wall : walls)
-	{
-		wall->ClearWall();
-	}
-	for (auto wall : addPointWalls)
-	{
-		wall->ClearWall();
-	}
-	for (auto wall : addPointWalls)
-	{
-		wall->ClearWall();
-	}
-	for (auto wall : superWalls)
-	{
-		wall->ClearWall();
-	}
-}
-
-Wall * WallSpawner::GetPausingWall()
-{
-	int range = GetRand(RandamSpawnWallMax);
-	if (range>RandamSpawnWallMax - 3)
-	{
-		for (int num = 0; num < 5; num++)
-		{
-			Actor::ActiveState state = addSpeedWalls[num]->GetState();
-			if (state == Actor::ActiveState::Paused)
-			{
-				return addSpeedWalls[num];
-			}
-		}
-	}
-	else if (range > RandamSpawnWallMax - 10)
-	{
-		for (int num = 0; num < 5; num++)
-		{
-			Actor::ActiveState state = addPointWalls[num]->GetState();
-			if (state == Actor::ActiveState::Paused)
-			{
-				return addPointWalls[num];
-			}
-		}
-	}
-	else
-	{
-		for (int num = 0; num < 50; num++)
-		{
-			Actor::ActiveState state = walls[num]->GetState();
-			if (state == Actor::ActiveState::Paused)
-			{
-				return walls[num];
-			}
-		}
-	}
-	return new JammerWall();
+	wallCreateAndHaver->AllWallsClear();
 }
 
 VECTOR WallSpawner::CreateWallPositionCreateSuperWall(int rand)
@@ -158,7 +99,7 @@ VECTOR WallSpawner::CreateWallPositionCreateSuperWall(int rand)
 	return wallPos;
 }
 
-void WallSpawner::CreateSuperWall(int rand,int rightOrLeft)
+void WallSpawner::CreateSuperWall(int rand, int rightOrLeft)
 {
 	int random = GetRand(50);
 	if (random > 10)
@@ -169,18 +110,9 @@ void WallSpawner::CreateSuperWall(int rand,int rightOrLeft)
 	wallPos.x *= rightOrLeft;
 	if (rand == 0)
 	{
-		wallPos.x += 2*rightOrLeft;
+		wallPos.x += 2 * rightOrLeft;
 	}
 
-	for (int num = 0; num < 5; num++)
-	{
-		Actor::ActiveState state = superWalls[num]->GetState();
-		if (state == Actor::ActiveState::Paused)
-		{
-			superWalls[num]->ResetWall(wallPos);
-			return;
-		}
-	}
-	SuperWall* super=new SuperWall();
-	super->ResetWall(wallPos);
+	Wall* superWall = wallCreateAndHaver->GetPausingWall(BoxColliderComponent::ColliderTag::SuperWall);
+	superWall->ResetWall(wallPos);
 }

@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "Player.h"
 #include "Title.h"
+
 #include "Play.h"
 #include "Clear.h"
 
@@ -25,11 +26,7 @@ void Game::MainProcess()
 	DxlibLightSetting();
 
 	CreateSingleTons();
-
-	wallSpawner = new WallSpawner;
-	new Ground(VGet(0, -2.0f, 0));
-	new Player(leftPlayerPos, Game::MoveDirection::Left, KEY_INPUT_SPACE);
-	new Player(rightPlayerPos, Game::MoveDirection::Right, KEY_INPUT_RETURN);
+	CreateFirstActors();
 
 	//Å‰‚ÌƒV[ƒ“‚ðì¬
 	scene = new Play(wallSpawner);
@@ -110,6 +107,14 @@ void Game::DeleteSingleTons()
 	Renderer::GetInstance()->Delete();
 	Collider::GetInstance()->ShutDown();
 	Collider::GetInstance()->Delete();
+}
+
+void Game::CreateFirstActors()
+{
+	wallSpawner = new WallSpawner;
+	new Ground(VGet(0, -2.0f, 0));
+	new Player(leftPlayerPos, Game::MoveDirection::Left, KEY_INPUT_SPACE);
+	new Player(rightPlayerPos, Game::MoveDirection::Right, KEY_INPUT_RETURN);
 }
 
 bool Game::ScreenUpdate()

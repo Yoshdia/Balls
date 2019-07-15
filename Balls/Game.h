@@ -40,6 +40,9 @@ private:
 	void CreateSingleTons();
 	void DeleteSingleTons();
 
+	//最初に登場するActor達を生成する関数
+	void CreateFirstActors();
+
 	//画面の更新。エラーが起きた場合ゲームを終了する
 	bool ScreenUpdate();
 
