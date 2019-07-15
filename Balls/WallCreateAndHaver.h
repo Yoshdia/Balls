@@ -3,6 +3,7 @@
 class Wall;
 #include"BoxColliderComponent.h"
 
+//‘SWall‚ğ¶¬‚µŠ‚·‚éFactoryƒNƒ‰ƒX
 class WallCreateAndHaver
 {
 public:

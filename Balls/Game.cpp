@@ -3,6 +3,7 @@
 #include "ActorManager.h"
 #include "Renderer.h"
 #include "Collider.h"
+#include "GameSpeedManager.h"
 
 #include "Scene.h"
 #include "Player.h"
@@ -34,8 +35,6 @@ void Game::MainProcess()
 	//deltaTimeの計測
 	DWORD nowTick, prevTick;
 	prevTick = timeGetTime();
-
-	gameSpeed = 1.0f;
 
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_ESCAPE] == 0)
@@ -97,6 +96,7 @@ void Game::CreateSingleTons()
 	ActorManager::GetInstance()->Create();
 	Renderer::GetInstance()->Create();
 	Collider::GetInstance()->Create();
+	GameSpeedManager::GetInstance()->Create();
 }
 
 void Game::DeleteSingleTons()
@@ -107,6 +107,7 @@ void Game::DeleteSingleTons()
 	Renderer::GetInstance()->Delete();
 	Collider::GetInstance()->ShutDown();
 	Collider::GetInstance()->Delete();
+	GameSpeedManager::GetInstance()->Delete();
 }
 
 void Game::CreateFirstActors()
@@ -139,7 +140,7 @@ void Game::SceneChange()
 	case(sceneName::play):
 		delete scene;
 		scene = new Play(wallSpawner);
-		gameSpeed = 1.0f;
+		GameSpeedManager::GetInstance()->ResetGameSpeed();
 		break;
 	case(sceneName::clear):
 		scene = new Clear(wallSpawner);

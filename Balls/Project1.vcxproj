@@ -161,6 +161,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CountDownComponent.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameSpeedManager.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="InputKey.cpp" />
     <ClCompile Include="JammerWall.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="CountDownComponent.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameSpeedManager.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="InputKey.h" />
     <ClInclude Include="JammerWall.h" />

@@ -26,8 +26,6 @@ public:
 
 	void ShutDown();
 
-	float GetGameSpeed() { return gameSpeed; }
-	void AddGameSpeed() { gameSpeed += PlusSpeed; }
 private:
 	Scene *scene;
 
@@ -50,9 +48,6 @@ private:
 	void SceneChange();
 	//時間計測
 	void DeltaTimeSet(DWORD &nowTick, DWORD &prevTick);
-
-	const float PlusSpeed = 0.01f;;
-	float gameSpeed;
 
 	//スクリーンサイズ
 	const int ScreenWidth = 1080;

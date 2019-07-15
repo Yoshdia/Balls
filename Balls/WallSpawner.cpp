@@ -1,15 +1,12 @@
 #include "DxLib.h"
 #include "WallSpawner.h"
-//#include "AddSpeedWall.h"
-//#include "AddPointWall.h"
-//#include "JammerWall.h"
-//#include "SuperWall.h"
+#include "GameSpeedManager.h"
 #include "WallCreateAndHaver.h"
 #include "Wall.h"
 
 const int WallSpawner::WallRandMax = 100;
-const float WallSpawner::AddPointRand = 5*0.01;
-const float WallSpawner::AddSpeedRand = (WallSpawner::AddPointRand + 5)*0.01;
+const float WallSpawner::AddPointRand = (float)(5*0.01);
+const float WallSpawner::AddSpeedRand = (float)((WallSpawner::AddPointRand + 5)*0.01);
 const float WallSpawner::SpawnTime = 60;
 
 WallSpawner::WallSpawner()
@@ -28,8 +25,7 @@ WallSpawner::~WallSpawner()
 
 void WallSpawner::WallSpawn(float deltaTime)
 {
-	//float gameSpeed = Game::GetInstance()->GetGameSpeed();
-	float gameSpeed = 1.0f;
+	float gameSpeed = GameSpeedManager::GetInstance()->GetGameSpeed();
 	//設置速度から減算する値
 	float plusSpeed = (gameSpeed - 1) * 50;
 	//壁の設置速度の上限

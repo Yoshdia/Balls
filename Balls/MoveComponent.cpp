@@ -1,7 +1,7 @@
 #include "DxLib.h"
 #include "MoveComponent.h"
 #include "Actor.h"
-#include "Game.h"
+#include "GameSpeedManager.h"
 
 
 MoveComponent::MoveComponent(Actor * owner, int processNumber, VECTOR distance, VECTOR rotateSpeed) :
@@ -36,8 +36,8 @@ void MoveComponent::Move()
 
 void MoveComponent::Move(float deltaTime)
 {
-	//float gameSpeed = Game::GetInstance()->GetGameSpeed();
-	float gameSpeed = 1.0f;
+	float gameSpeed = GameSpeedManager::GetInstance()->GetGameSpeed();
+	
 	position = ownerActor->GetPosition();
 
 	VECTOR distance = moveDistance;

@@ -2,6 +2,7 @@
 #include "InputKey.h"
 #include "MovePlayerComponent.h"
 #include "Actor.h"
+#include "GameSpeedManager.h"
 
 const float MovePlayerComponent::MovingRequiredTime = 10.0f;
 const float MovePlayerComponent::MovingDistanceSum = 2.0f;
@@ -33,8 +34,7 @@ void MovePlayerComponent::Update(float deltaTime)
 			targetPos = middlePos + (MovingDistanceSum/2*nextMoveDirection);
 			//c‚èˆÚ“®‹——£
 			movement = targetPos-position.x;
-			//float gameSpeed = Game::GetInstance()->GetGameSpeed();
-			float gameSpeed = 1.0f;
+			float gameSpeed = GameSpeedManager::GetInstance()->GetGameSpeed();
 			//1f‚ÉˆÚ“®‚·‚é‹——£
 			moveDistance.x = (movement * MovingRequiredTime)*deltaTime*gameSpeed;
 			//MoveComponent“à‚ÌgameSpeed‚ªˆê’èˆÈã‚Ü‚Åã¸‚·‚é‚ÆˆÚ“®‹——£‚ª‡ŒvˆÚ“®‹——£‚ğã‰ñ‚é‚±‚Æ‚ª‚ ‚é‚½‚ßãŒÀ’l‚ğİ’è

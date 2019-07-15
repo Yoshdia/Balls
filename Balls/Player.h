@@ -4,8 +4,8 @@
 #include "Game.h"
 #include "Actor.h"
 
-class 	SphereColliderComponent;
-class 	MovePlayerComponent;
+class SphereColliderComponent;
+class MovePlayerComponent;
 class ModelComponent;
 class CountDownComponent;
 
