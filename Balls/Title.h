@@ -6,7 +6,7 @@ class Title :
 	public Scene
 {
 public:
-	Title(WallSpawner* wallSpawn);
+	Title(WallSpawner* wallSpawn, Score* score);
 	~Title();
 
 	void Update(float deltaTime);

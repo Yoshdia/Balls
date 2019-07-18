@@ -9,12 +9,13 @@ enum sceneName
 };
 
 #include "WallSpawner.h"
+#include "Score.h"
 
 //Scene基底クラス
 class Scene
 {
 public:
-	Scene(WallSpawner* pSpawn) { wallSpawner = pSpawn; };
+	Scene(WallSpawner* pSpawn, Score* pScore) { wallSpawner = pSpawn; score = pScore; };
 	virtual ~Scene() {};
 	//更新
 	virtual void Update(float deltaTime) {};
@@ -24,4 +25,5 @@ public:
 	virtual sceneName SceneChange() = 0;
 protected:
 	WallSpawner* wallSpawner;
+	Score* score;
 };

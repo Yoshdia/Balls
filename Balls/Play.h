@@ -10,7 +10,7 @@ class Play :
 private:
 
 public:
-	Play(WallSpawner* wallSpawn);
+	Play(WallSpawner* wallSpawn, Score* score);
 	~Play();
 
 	void Update(float deltaTime);

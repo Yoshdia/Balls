@@ -4,9 +4,10 @@
 #include "Wall.h"
 #include "WallSpawner.h"
 #include "InputKey.h"
+#include "GameSpeedManager.h"
 
-Play::Play(WallSpawner* wallSpawn):
-	Scene(wallSpawn)
+Play::Play(WallSpawner* wallSpawn, Score* score):
+	Scene(wallSpawn,score)
 {
 	count = 0;
 	gameEnd = false;
@@ -21,10 +22,6 @@ void Play::Update(float deltaTime)
 {
 	wallSpawner->WallSpawn(deltaTime);
 	gameEnd = Collider::GetInstance()->CollisionCall();
-	if (gameEnd)
-	{
-		wallSpawner->WallStop();
-	}
 }
 
 void Play::Render()
@@ -39,6 +36,10 @@ sceneName Play::SceneChange()
 {
 	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1||gameEnd)
 	{
+		//gameSpeedのリセット
+		GameSpeedManager::GetInstance()->ResetGameSpeed();
+		//全てのWallを停止させる
+		wallSpawner->WallStop();
 		return sceneName::clear;
 	}
 	return sceneName::noChange;

@@ -8,9 +8,10 @@
 #include "Scene.h"
 #include "Player.h"
 #include "Title.h"
-
 #include "Play.h"
 #include "Clear.h"
+
+#include "Score.h"
 
 #include "Ground.h"
 #include "WallSpawner.h"
@@ -30,7 +31,7 @@ void Game::MainProcess()
 	CreateFirstActors();
 
 	//Å‰‚ÌƒV[ƒ“‚ðì¬
-	scene = new Play(wallSpawner);
+	scene = new Play(wallSpawner,score);
 
 	//deltaTime‚ÌŒv‘ª
 	DWORD nowTick, prevTick;
@@ -53,6 +54,8 @@ void Game::MainProcess()
 
 	delete wallSpawner;
 	wallSpawner = nullptr;
+	delete score;
+	score = nullptr;
 	delete scene;
 	scene = nullptr;
 
@@ -113,6 +116,7 @@ void Game::DeleteSingleTons()
 void Game::CreateFirstActors()
 {
 	wallSpawner = new WallSpawner;
+	score = new Score;
 	new Ground(VGet(0, -2.0f, 0));
 	new Player(leftPlayerPos, Game::MoveDirection::Left, KEY_INPUT_SPACE);
 	new Player(rightPlayerPos, Game::MoveDirection::Right, KEY_INPUT_RETURN);
@@ -135,15 +139,14 @@ void Game::SceneChange()
 	{
 	case(sceneName::title):
 		delete scene;
-		scene = new Title(wallSpawner);
+		scene = new Title(wallSpawner, score);
 		break;
 	case(sceneName::play):
 		delete scene;
-		scene = new Play(wallSpawner);
-		GameSpeedManager::GetInstance()->ResetGameSpeed();
+		scene = new Play(wallSpawner, score);
 		break;
 	case(sceneName::clear):
-		scene = new Clear(wallSpawner);
+		scene = new Clear(wallSpawner, score);
 		break;
 	}
 }

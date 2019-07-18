@@ -7,6 +7,7 @@ class Camera;
 class BoxColliderComponent;
 class SphereColliderComponent;
 class WallSpawner;
+class Score;
 
 //ƒQ[ƒ€‘S‘Ì‚Ìˆ—
 class Game
@@ -65,6 +66,7 @@ private:
 	const VECTOR rightPlayerPos = VGet(1, 0, 0);
 
 	 WallSpawner* wallSpawner;
+	 Score* score;
 
 	//ŠÔ
 	float deltaTime;

@@ -6,7 +6,7 @@ class Clear :
 	public Scene
 {
 public:
-	Clear(WallSpawner* wallSpawn);
+	Clear(WallSpawner* wallSpawn, Score* score);
 	~Clear();
 
 	void Update(float deltaTime);

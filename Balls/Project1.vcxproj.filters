@@ -37,6 +37,12 @@
     <Filter Include="ソース ファイル\Actor\Walls">
       <UniqueIdentifier>{94c47bb3-7b9a-41a2-9e4f-8efb685a2c33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Actor\Walls\Wall">
+      <UniqueIdentifier>{b1cbc5bb-fc47-45ea-a895-6d435ce1c118}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Actor\Walls\Wall">
+      <UniqueIdentifier>{868d6f4e-1638-425c-9d1f-ebd15a005f2f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -81,22 +87,7 @@
     <ClCompile Include="Ground.cpp">
       <Filter>ソース ファイル\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="Wall.cpp">
-      <Filter>ソース ファイル\Actor\Walls</Filter>
-    </ClCompile>
     <ClCompile Include="WallSpawner.cpp">
-      <Filter>ソース ファイル\Actor\Walls</Filter>
-    </ClCompile>
-    <ClCompile Include="AddSpeedWall.cpp">
-      <Filter>ソース ファイル\Actor\Walls</Filter>
-    </ClCompile>
-    <ClCompile Include="AddPointWall.cpp">
-      <Filter>ソース ファイル\Actor\Walls</Filter>
-    </ClCompile>
-    <ClCompile Include="SuperWall.cpp">
-      <Filter>ソース ファイル\Actor\Walls</Filter>
-    </ClCompile>
-    <ClCompile Include="JammerWall.cpp">
       <Filter>ソース ファイル\Actor\Walls</Filter>
     </ClCompile>
     <ClCompile Include="CountDownComponent.cpp">
@@ -118,6 +109,24 @@
       <Filter>ソース ファイル\Actor</Filter>
     </ClCompile>
     <ClCompile Include="GameSpeedManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="AddPointWall.cpp">
+      <Filter>ソース ファイル\Actor\Walls\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="AddSpeedWall.cpp">
+      <Filter>ソース ファイル\Actor\Walls\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="JammerWall.cpp">
+      <Filter>ソース ファイル\Actor\Walls\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="SuperWall.cpp">
+      <Filter>ソース ファイル\Actor\Walls\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>ソース ファイル\Actor\Walls\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -167,21 +176,6 @@
     <ClInclude Include="WallSpawner.h">
       <Filter>ヘッダー ファイル\Actor\Walls</Filter>
     </ClInclude>
-    <ClInclude Include="Wall.h">
-      <Filter>ヘッダー ファイル\Actor\Walls</Filter>
-    </ClInclude>
-    <ClInclude Include="AddPointWall.h">
-      <Filter>ヘッダー ファイル\Actor\Walls</Filter>
-    </ClInclude>
-    <ClInclude Include="AddSpeedWall.h">
-      <Filter>ヘッダー ファイル\Actor\Walls</Filter>
-    </ClInclude>
-    <ClInclude Include="SuperWall.h">
-      <Filter>ヘッダー ファイル\Actor\Walls</Filter>
-    </ClInclude>
-    <ClInclude Include="JammerWall.h">
-      <Filter>ヘッダー ファイル\Actor\Walls</Filter>
-    </ClInclude>
     <ClInclude Include="CountDownComponent.h">
       <Filter>ヘッダー ファイル\Component</Filter>
     </ClInclude>
@@ -205,6 +199,24 @@
     </ClInclude>
     <ClInclude Include="Clear.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="AddPointWall.h">
+      <Filter>ヘッダー ファイル\Actor\Walls\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="AddSpeedWall.h">
+      <Filter>ヘッダー ファイル\Actor\Walls\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="JammerWall.h">
+      <Filter>ヘッダー ファイル\Actor\Walls\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="SuperWall.h">
+      <Filter>ヘッダー ファイル\Actor\Walls\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>ヘッダー ファイル\Actor\Walls\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,8 +2,8 @@
 #include "InputKey.h"
 #include "Title.h"
 
-Title::Title(WallSpawner* wallSpawn):
-	Scene(wallSpawn)
+Title::Title(WallSpawner* wallSpawn, Score* score):
+	Scene(wallSpawn,score)
 {
 }
 

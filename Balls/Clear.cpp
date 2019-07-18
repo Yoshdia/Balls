@@ -4,8 +4,8 @@
 
 
 
-Clear::Clear(WallSpawner* wallSpawn):
-	Scene(wallSpawn)
+Clear::Clear(WallSpawner* wallSpawn, Score* score):
+	Scene(wallSpawn,score)
 {
 }
 
@@ -27,6 +27,7 @@ sceneName Clear::SceneChange()
 {
 	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1)
 	{
+		//‘S‚Ä‚Ì•Ç‚ðƒNƒŠƒA‚·‚é
 		wallSpawner->WallClear();
 		return sceneName::title;
 	}
