@@ -1,8 +1,9 @@
 #include "CountDownComponent.h"
 
-CountDownComponent::CountDownComponent(int max)
+CountDownComponent::CountDownComponent(int max) :
+	nowCount(max),
+	maxCount(max)
 {
-	maxCount = max;
 }
 
 CountDownComponent::~CountDownComponent()

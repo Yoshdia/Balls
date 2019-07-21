@@ -6,5 +6,6 @@ class JammerWall :
 public:
 	JammerWall();
 	~JammerWall();
+	void OnCollision();
 };
 

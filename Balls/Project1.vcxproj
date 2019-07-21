@@ -155,11 +155,13 @@
     <ClCompile Include="ActorManager.cpp" />
     <ClCompile Include="AddPointWall.cpp" />
     <ClCompile Include="AddSpeedWall.cpp" />
+    <ClCompile Include="BlockEffect.cpp" />
     <ClCompile Include="BoxColliderComponent.cpp" />
     <ClCompile Include="Clear.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CountDownComponent.cpp" />
+    <ClCompile Include="EffectFactory.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameSpeedManager.cpp" />
     <ClCompile Include="Ground.cpp" />
@@ -185,11 +187,13 @@
     <ClInclude Include="ActorManager.h" />
     <ClInclude Include="AddPointWall.h" />
     <ClInclude Include="AddSpeedWall.h" />
+    <ClInclude Include="BlockEffect.h" />
     <ClInclude Include="BoxColliderComponent.h" />
     <ClInclude Include="Clear.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CountDownComponent.h" />
+    <ClInclude Include="EffectFactory.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameSpeedManager.h" />
     <ClInclude Include="Ground.h" />

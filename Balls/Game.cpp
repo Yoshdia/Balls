@@ -12,6 +12,7 @@
 #include "Clear.h"
 
 #include "Score.h"
+#include "EffectFactory.h"
 
 #include "Ground.h"
 #include "WallSpawner.h"
@@ -36,7 +37,7 @@ void Game::MainProcess()
 	//deltaTimeの計測
 	DWORD nowTick, prevTick;
 	prevTick = timeGetTime();
-
+	
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_ESCAPE] == 0)
 	{
@@ -50,8 +51,8 @@ void Game::MainProcess()
 		scene->Render();
 
 		SceneChange();
-	}
-
+}
+	
 	delete wallSpawner;
 	wallSpawner = nullptr;
 	delete score;
@@ -98,8 +99,9 @@ void Game::CreateSingleTons()
 	InputKey::GetInstance()->Create();
 	ActorManager::GetInstance()->Create();
 	Renderer::GetInstance()->Create();
-	Collider::GetInstance()->Create();
 	GameSpeedManager::GetInstance()->Create();
+	EffectFactory::GetInstance()->Create();
+	Collider::GetInstance()->Create();
 }
 
 void Game::DeleteSingleTons()
@@ -111,6 +113,7 @@ void Game::DeleteSingleTons()
 	Collider::GetInstance()->ShutDown();
 	Collider::GetInstance()->Delete();
 	GameSpeedManager::GetInstance()->Delete();
+	EffectFactory::GetInstance()->Delete();
 }
 
 void Game::CreateFirstActors()

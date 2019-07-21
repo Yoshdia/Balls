@@ -48,9 +48,10 @@ protected:
 	//Actorが所持しているComponent
 	std::vector<class Component*> myComponents;//mComponents;
 	static int actorNumber;/*mNo*/
-	//座標、向き、大きさを指定されなかった場合の初期値
-	const VECTOR OriginPos = VGet(0, 0, 0);
-	const VECTOR OriginQua = VGet(0, 0, 0);
-	const VECTOR OriginScale = VGet(0,0,0);
 
 };
+
+	//座標、向き、大きさを指定されなかった場合の初期値
+	static const VECTOR OriginPos = VGet(0, 0, 0);
+	static const VECTOR OriginQua = VGet(0, 0, 0);
+	static const VECTOR OriginScale = VGet(0,0,0);

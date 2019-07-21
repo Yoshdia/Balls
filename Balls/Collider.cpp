@@ -81,6 +81,7 @@ bool Collider::CollisionCall()
 				{
 					box->OnCollision();
 					ball->OnCollision();
+					
 					continue;
 				}
 				//Player‚ª‹­‰»ó‘Ô‚¾‚Á‚½ê‡A•Ç‚ğPause‚É‚·‚é
