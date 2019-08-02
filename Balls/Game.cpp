@@ -20,7 +20,7 @@
 #include <mmsystem.h>
 #pragma comment (lib, "winmm.lib") 
 
-#include"GrainBackGround.h"
+#include"DeepestSpawner.h"
 
 void Game::MainProcess()
 {
@@ -40,15 +40,7 @@ void Game::MainProcess()
 	DWORD nowTick, prevTick;
 	prevTick = timeGetTime();
 	
-	GrainBackGround* one=new GrainBackGround();
-	one->ResetBackGround(VGet(10, 2, 50), VGet(4, 0, 0));
-
-	GrainBackGround* two=new GrainBackGround();
-	two->ResetBackGround(VGet(2, 2, 50), VGet(-4, 0, 0));
-
-	GrainBackGround* three=new GrainBackGround();
-	three->ResetBackGround(VGet(6, 4, 50), VGet(0, 0, 0));
-
+	DeepestSpawner* deepest = new DeepestSpawner();
 
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_ESCAPE] == 0)
@@ -58,6 +50,7 @@ void Game::MainProcess()
 		ActorManager::GetInstance()->ActorUpdate(deltaTime);
 
 		scene->Update(deltaTime);
+		deepest->SpawnerUpdate(deltaTime);
 
 		Renderer::GetInstance()->DrawModel();
 		scene->Render();
@@ -65,6 +58,8 @@ void Game::MainProcess()
 		SceneChange();
 }
 	
+	delete deepest;
+	deepest = nullptr;
 	delete wallSpawner;
 	wallSpawner = nullptr;
 	delete score;

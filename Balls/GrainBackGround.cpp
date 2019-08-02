@@ -19,7 +19,7 @@ GrainBackGround::GrainBackGround()
 	scale = VGet(0.001f, 0.001f, 0.001f);
 	ModelComponent* modelComponent;
 	modelComponent = new ModelComponent(this, 150, scale, "Resouce/model/normalSphere.mv1");
-
+	SetState(Actor::ActiveState::Paused);
 }
 
 GrainBackGround::~GrainBackGround()
@@ -31,19 +31,25 @@ void GrainBackGround::ResetBackGround(VECTOR pos, VECTOR target)
 	SetPosition(pos);
 	targetPos = target;
 	z = 0;
+	SetState(Actor::ActiveState::Active);
 	//moveComponent->SetMoveSpeed(CalculateVelocity(pos, target));
 	//offset = pos;
 	//this->target = VSub(target, pos);
 	//b = tan(30 * (360 / (3.14f * 2)));
 	//a = (target.y - b * target.x) / -(target.x * target.x);
 	//ab = 0;
-	scale = VGet(1,1,1)*(GetRand(10)*0.01f);
+	scale = VGet(1,1,1)*(GetRand(10)*0.001f);
 }
 
 void GrainBackGround::UpdateActor(float deltaTime)
 {
 	SetY();
-	moveComponent->SetMoveSpeed(VGet(SetX(), 0, z*3));
+	moveComponent->SetMoveSpeed(VGet(SetX()*1, 0, z*5));
+
+	if (position.z < 10)
+	{
+		SetState(Actor::ActiveState::Paused);
+	}
 }
 
 float GrainBackGround::SetX()
@@ -94,6 +100,7 @@ void GrainBackGround::SetY()
 			z = 0;
 		}
 	}
+
 }
 
 //VECTOR GrainBackGround::CalculateVelocity(const VECTOR& pointA,const VECTOR& pointB)

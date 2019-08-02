@@ -161,10 +161,12 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CountDownComponent.cpp" />
+    <ClCompile Include="DeepestSpawner.cpp" />
     <ClCompile Include="EffectFactory.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameSpeedManager.cpp" />
     <ClCompile Include="GrainBackGround.cpp" />
+    <ClCompile Include="GrainBackGroundHaver.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="InputKey.cpp" />
     <ClCompile Include="JammerWall.cpp" />
@@ -194,10 +196,12 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CountDownComponent.h" />
+    <ClInclude Include="DeepestSpawner.h" />
     <ClInclude Include="EffectFactory.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameSpeedManager.h" />
     <ClInclude Include="GrainBackGround.h" />
+    <ClInclude Include="GrainBackGroundHaver.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="InputKey.h" />
     <ClInclude Include="JammerWall.h" />

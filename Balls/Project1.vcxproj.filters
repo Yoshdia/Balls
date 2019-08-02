@@ -49,6 +49,12 @@
     <Filter Include="ヘッダー ファイル\Actor\Effect">
       <UniqueIdentifier>{573d763b-8930-4db4-aa9e-2b0c8880da0f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Actor\BackGround">
+      <UniqueIdentifier>{d62c13f3-c466-45b8-ac61-7e04d1509055}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Actor\BackGround">
+      <UniqueIdentifier>{39eb2fae-afa8-4ffb-af13-00b64f970009}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -138,10 +144,16 @@
     <ClCompile Include="BlockEffect.cpp">
       <Filter>ソース ファイル\Actor\Effect</Filter>
     </ClCompile>
+    <ClCompile Include="GrainBackGround.cpp">
+      <Filter>ソース ファイル\Actor\BackGround</Filter>
+    </ClCompile>
     <ClCompile Include="EffectFactory.cpp">
+      <Filter>ソース ファイル\Actor\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="GrainBackGroundHaver.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="GrainBackGround.cpp">
+    <ClCompile Include="DeepestSpawner.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -236,10 +248,16 @@
     <ClInclude Include="BlockEffect.h">
       <Filter>ヘッダー ファイル\Actor\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="GrainBackGround.h">
+      <Filter>ヘッダー ファイル\Actor\BackGround</Filter>
+    </ClInclude>
     <ClInclude Include="EffectFactory.h">
+      <Filter>ヘッダー ファイル\Actor\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="GrainBackGroundHaver.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="GrainBackGround.h">
+    <ClInclude Include="DeepestSpawner.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

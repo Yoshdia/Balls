@@ -6,6 +6,7 @@
 #include "InputKey.h"
 #include "GameSpeedManager.h"
 
+
 Play::Play(WallSpawner* wallSpawn, Score* score):
 	Scene(wallSpawn,score)
 {
