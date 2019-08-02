@@ -40,7 +40,15 @@ void Game::MainProcess()
 	DWORD nowTick, prevTick;
 	prevTick = timeGetTime();
 	
-	new GrainBackGround();
+	GrainBackGround* one=new GrainBackGround();
+	one->ResetBackGround(VGet(10, 2, 50), VGet(4, 0, 0));
+
+	GrainBackGround* two=new GrainBackGround();
+	two->ResetBackGround(VGet(2, 2, 50), VGet(-4, 0, 0));
+
+	GrainBackGround* three=new GrainBackGround();
+	three->ResetBackGround(VGet(6, 4, 50), VGet(0, 0, 0));
+
 
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_ESCAPE] == 0)

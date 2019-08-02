@@ -28,7 +28,7 @@ private:
 	float SetX();
 	void SetY();
 
-	float y;
+	float z;
 	
 };
 

@@ -3,14 +3,14 @@
 #include "ModelComponent.h"
 #include <math.h>
 
-// 正規化(ベクトルの長さを1にする)
-void normalize(float& x, float& y, float& z)
-{
-	float mag = 1 / (sqrt(x*x + y * y + z * z));
-	x *= mag;
-	y *= mag;
-	z *= mag;
-}
+//// 正規化(ベクトルの長さを1にする)
+//void normalize(float& x, float& y, float& z)
+//{
+//	float mag = 1 / (sqrt(x*x + y * y + z * z));
+//	x *= mag;
+//	y *= mag;
+//	z *= mag;
+//}
 
 GrainBackGround::GrainBackGround()
 {
@@ -20,7 +20,6 @@ GrainBackGround::GrainBackGround()
 	ModelComponent* modelComponent;
 	modelComponent = new ModelComponent(this, 150, scale, "Resouce/model/normalSphere.mv1");
 
-	ResetBackGround(VGet(0, 0, 0), VGet(5, 5, 0));
 }
 
 GrainBackGround::~GrainBackGround()
@@ -31,19 +30,20 @@ void GrainBackGround::ResetBackGround(VECTOR pos, VECTOR target)
 {
 	SetPosition(pos);
 	targetPos = target;
-	y = 0;
+	z = 0;
 	//moveComponent->SetMoveSpeed(CalculateVelocity(pos, target));
 	//offset = pos;
 	//this->target = VSub(target, pos);
 	//b = tan(30 * (360 / (3.14f * 2)));
 	//a = (target.y - b * target.x) / -(target.x * target.x);
 	//ab = 0;
+	scale = VGet(1,1,1)*(GetRand(10)*0.01f);
 }
 
 void GrainBackGround::UpdateActor(float deltaTime)
 {
 	SetY();
-	moveComponent->SetMoveSpeed(VGet(SetX(), y, 0));
+	moveComponent->SetMoveSpeed(VGet(SetX(), 0, z*3));
 }
 
 float GrainBackGround::SetX()
@@ -70,28 +70,28 @@ float GrainBackGround::SetX()
 
 void GrainBackGround::SetY()
 {
-	bool up = position.x < targetPos.x ? true : false;
+	bool up = position.z < targetPos.z ? true : false;
 
 	if (up)
 	{
-		if (targetPos.y > position.y)
+		if (targetPos.z > position.z)
 		{
-			y += 0.01f;
+			z += 0.01f;
 		}
 		else
 		{
-			y = 0;
+			z = 0;
 		}
 	}
 	else
 	{
-		if (targetPos.y < position.y)
+		if (targetPos.z < position.z)
 		{
-			y -= 0.01f;
+			z -= 0.01f;
 		}
 		else
 		{
-			y = 0;
+			z = 0;
 		}
 	}
 }
