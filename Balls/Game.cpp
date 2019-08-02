@@ -20,6 +20,8 @@
 #include <mmsystem.h>
 #pragma comment (lib, "winmm.lib") 
 
+#include"GrainBackGround.h"
+
 void Game::MainProcess()
 {
 	//Dxlib初期化処理
@@ -38,6 +40,8 @@ void Game::MainProcess()
 	DWORD nowTick, prevTick;
 	prevTick = timeGetTime();
 	
+	new GrainBackGround();
+
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_ESCAPE] == 0)
 	{
