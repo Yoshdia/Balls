@@ -15,5 +15,20 @@ public:
 private:
 	VECTOR targetPos;
 	MoveComponent* moveComponent;
+	//float throwAngle;
+	//VECTOR CalculateVelocity(const VECTOR& pointA, const VECTOR& pointB);
+	//VECTOR Determine();
+
+	//VECTOR offset;
+	//VECTOR target;
+	//float a;
+	//float b;
+	//float ab;
+
+	float SetX();
+	void SetY();
+
+	float y;
+	
 };
 
