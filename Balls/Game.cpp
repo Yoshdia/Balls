@@ -34,12 +34,12 @@ void Game::MainProcess()
 	CreateFirstActors();
 
 	//最初のシーンを作成
-	scene = new Play(deepestSpawner,score);
+	scene = new Play(deepestSpawner, score);
 
 	//deltaTimeの計測
 	DWORD nowTick, prevTick;
 	prevTick = timeGetTime();
-	
+
 	DeepestSpawner* deepest = new DeepestSpawner();
 
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
@@ -55,8 +55,8 @@ void Game::MainProcess()
 		scene->Render();
 
 		SceneChange();
-}
-	
+	}
+
 	delete deepest;
 	deepest = nullptr;
 	delete deepestSpawner;
@@ -181,10 +181,16 @@ void Game::ShutDown()
 	DxLib::DxLib_End();
 }
 
-VECTOR operator*(const VECTOR vec, const float flo)
+VECTOR operator*(const VECTOR& vec, const float& flo)
 {
 	VECTOR vector;
 	vector = VGet(vec.x*flo, vec.y*flo, vec.z*flo);
 	return vector;
 }
 
+VECTOR operator*(const VECTOR & vec, const VECTOR & multi)
+{
+	VECTOR vector;
+	vector = VGet(vec.x*multi.x, vec.y*multi.y, vec.z*multi.z);
+	return vector;
+}

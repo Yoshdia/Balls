@@ -1,5 +1,5 @@
 #include "GrainBackGround.h"
-#include "MoveComponent.h"
+#include "HeadForTargetComponent.h"
 #include "ModelComponent.h"
 #include <math.h>
 
@@ -14,7 +14,7 @@
 
 GrainBackGround::GrainBackGround()
 {
-	moveComponent = new MoveComponent(this, 120, VGet(0, 0, 0), VGet(0, 0, 0));
+	headForTarget = new HeadForTargetComponent(this, 120, VGet(0, 0, 0), VGet(0, 0, 0));
 
 	scale = VGet(0.001f, 0.001f, 0.001f);
 	ModelComponent* modelComponent;
@@ -30,8 +30,7 @@ GrainBackGround::~GrainBackGround()
 void GrainBackGround::ResetBackGround(VECTOR pos, VECTOR target)
 {
 	SetPosition(pos);
-	targetPos = target;
-	z = 0;
+	headForTarget->SetTargetPos(target);
 	SetState(Actor::ActiveState::Active);
 	//moveComponent->SetMoveSpeed(CalculateVelocity(pos, target));
 	//offset = pos;
@@ -39,7 +38,7 @@ void GrainBackGround::ResetBackGround(VECTOR pos, VECTOR target)
 	//b = tan(30 * (360 / (3.14f * 2)));
 	//a = (target.y - b * target.x) / -(target.x * target.x);
 	//ab = 0;
-	scale = VGet(1,1,1)*(GetRand(10)*0.001f);
+	scale = VGet(1, 1, 1)*(GetRand(10)*0.001f);
 	moving = true;
 }
 
@@ -47,8 +46,8 @@ void GrainBackGround::UpdateActor(float deltaTime)
 {
 	if (moving)
 	{
-	SetY();
-	moveComponent->SetMoveSpeed(VGet(SetX()*1, 0, z*5));
+		headForTarget->SetMoveSpeed(VGet(0.05f, 0.0f, 5.0f));
+		headForTarget->HeadForTarget(deltaTime);
 	}
 
 	if (position.z < -10)
@@ -60,63 +59,12 @@ void GrainBackGround::UpdateActor(float deltaTime)
 void GrainBackGround::StopMove()
 {
 	moving = false;
-	moveComponent->SetMoveSpeed(VGet(0, 0, 0));
+	headForTarget->MoveComponent::SetMoveSpeed(VGet(0, 0, 0));
 }
 
 void GrainBackGround::MoveReStart()
 {
 	moving = true;
-}
-
-float GrainBackGround::SetX()
-{
-	bool right = position.x < targetPos.x ? true : false;
-	float x = 0;
-
-	if (right)
-	{
-		if (targetPos.x > position.x)
-		{
-			x= 1;
-		}
-	}
-	else
-	{
-		if (targetPos.x < position.x)
-		{
-			x= -1;
-		}
-	}
-	return x;
-}
-
-void GrainBackGround::SetY()
-{
-	bool up = position.z < targetPos.z ? true : false;
-
-	if (up)
-	{
-		if (targetPos.z > position.z)
-		{
-			z += 0.01f;
-		}
-		else
-		{
-			z = 0;
-		}
-	}
-	else
-	{
-		if (targetPos.z < position.z)
-		{
-			z -= 0.01f;
-		}
-		else
-		{
-			z = 0;
-		}
-	}
-
 }
 
 //VECTOR GrainBackGround::CalculateVelocity(const VECTOR& pointA,const VECTOR& pointB)

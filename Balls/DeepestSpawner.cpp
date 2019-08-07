@@ -31,6 +31,8 @@ DeepestSpawner::DeepestSpawner()
 	wallCount = 0;
 	wallCreateAndHaver = new WallCreateAndHaver();
 	wallCreateAndHaver->CreatePauseWalls();
+
+
 }
 
 
@@ -96,7 +98,8 @@ void DeepestSpawner::SetGrain()
 		float y = (float)(sin(num * 60));
 		VECTOR circleOnPos = VGet(x, y, 0)*Radius;
 		VECTOR grainPos = VAdd(grainMiddlePos, circleOnPos);
-		grain->ResetBackGround(grainPos, circleOnPos);
+		VECTOR targetPos = VGet(x, y, -20)*Radius;
+		grain->ResetBackGround(grainPos, targetPos);
 	}
 }
 

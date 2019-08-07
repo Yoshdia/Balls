@@ -73,4 +73,5 @@ private:
 };
 
 //VECTOR‚Æfloat‚ÌæZŒ‹‰Ê‚ğ•Ô‚·
-VECTOR operator*(const VECTOR vec, const float flo);
+VECTOR operator*(const VECTOR& vec, const float& flo);
+VECTOR operator*(const VECTOR& vec, const VECTOR& multi);

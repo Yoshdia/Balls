@@ -153,6 +153,9 @@
     <ClCompile Include="DeepestSpawner.cpp">
       <Filter>ソース ファイル\Actor\BackGround</Filter>
     </ClCompile>
+    <ClCompile Include="HeadForTargetComponent.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -253,6 +256,9 @@
     </ClInclude>
     <ClInclude Include="GrainBackGroundHaver.h">
       <Filter>ヘッダー ファイル\Actor\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadForTargetComponent.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

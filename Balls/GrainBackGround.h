@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Actor.h"
-class MoveComponent;
+class HeadForTargetComponent;
 
 class GrainBackGround :
 	public Actor
@@ -17,12 +17,8 @@ public:
 	void MoveReStart();
 private:
 	VECTOR targetPos;
-	MoveComponent* moveComponent;
+	HeadForTargetComponent* headForTarget;
 
-	float SetX();
-	void SetY();
-
-	float z;
 	bool moving;
 };
 
