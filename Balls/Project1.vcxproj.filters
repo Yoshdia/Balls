@@ -99,9 +99,6 @@
     <ClCompile Include="Ground.cpp">
       <Filter>ソース ファイル\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="WallSpawner.cpp">
-      <Filter>ソース ファイル\Actor\Walls</Filter>
-    </ClCompile>
     <ClCompile Include="CountDownComponent.cpp">
       <Filter>ソース ファイル\Component</Filter>
     </ClCompile>
@@ -151,10 +148,10 @@
       <Filter>ソース ファイル\Actor\Effect</Filter>
     </ClCompile>
     <ClCompile Include="GrainBackGroundHaver.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Actor\BackGround</Filter>
     </ClCompile>
     <ClCompile Include="DeepestSpawner.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Actor\BackGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -199,9 +196,6 @@
     </ClInclude>
     <ClInclude Include="SphereColliderComponent.h">
       <Filter>ヘッダー ファイル\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="WallSpawner.h">
-      <Filter>ヘッダー ファイル\Actor\Walls</Filter>
     </ClInclude>
     <ClInclude Include="CountDownComponent.h">
       <Filter>ヘッダー ファイル\Component</Filter>
@@ -254,11 +248,11 @@
     <ClInclude Include="EffectFactory.h">
       <Filter>ヘッダー ファイル\Actor\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="GrainBackGroundHaver.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="DeepestSpawner.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Actor\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="GrainBackGroundHaver.h">
+      <Filter>ヘッダー ファイル\Actor\BackGround</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

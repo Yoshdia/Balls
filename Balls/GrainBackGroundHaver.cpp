@@ -33,3 +33,24 @@ GrainBackGround * GrainBackGroundHaver::GetPauseGrain()
 
 	return new GrainBackGround();
 }
+
+void GrainBackGroundHaver::AllGrainsStop()
+{
+	for (auto back : grain)
+	{
+		back->StopMove();
+	}
+}
+
+void GrainBackGroundHaver::AllGrainReStart()
+{
+	for (auto back : grain)
+	{
+		Actor::ActiveState backState = back->GetState();
+		if (backState == Actor::ActiveState::Active)
+		{
+			back->MoveReStart();
+		}
+	}
+}
+

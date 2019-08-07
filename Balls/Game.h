@@ -6,7 +6,7 @@ class Camera;
 
 class BoxColliderComponent;
 class SphereColliderComponent;
-class WallSpawner;
+class DeepestSpawner;
 class Score;
 
 //ƒQ[ƒ€‘S‘Ì‚Ìˆ—
@@ -65,7 +65,7 @@ private:
 	const VECTOR leftPlayerPos = VGet(-1, 0, 0);
 	const VECTOR rightPlayerPos = VGet(1, 0, 0);
 
-	 WallSpawner* wallSpawner;
+	DeepestSpawner* deepestSpawner;
 	 Score* score;
 
 	//ŠÔ

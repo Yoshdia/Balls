@@ -1,5 +1,4 @@
 #include "WallCreateAndHaver.h"
-#include "WallSpawner.h"
 #include "AddSpeedWall.h"
 #include "AddPointWall.h"
 #include "JammerWall.h"

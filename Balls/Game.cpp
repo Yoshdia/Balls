@@ -15,7 +15,7 @@
 #include "EffectFactory.h"
 
 #include "Ground.h"
-#include "WallSpawner.h"
+#include "DeepestSpawner.h"
 //DeltaTimeの計測に必要
 #include <mmsystem.h>
 #pragma comment (lib, "winmm.lib") 
@@ -34,7 +34,7 @@ void Game::MainProcess()
 	CreateFirstActors();
 
 	//最初のシーンを作成
-	scene = new Play(wallSpawner,score);
+	scene = new Play(deepestSpawner,score);
 
 	//deltaTimeの計測
 	DWORD nowTick, prevTick;
@@ -50,7 +50,6 @@ void Game::MainProcess()
 		ActorManager::GetInstance()->ActorUpdate(deltaTime);
 
 		scene->Update(deltaTime);
-		deepest->SpawnerUpdate(deltaTime);
 
 		Renderer::GetInstance()->DrawModel();
 		scene->Render();
@@ -60,8 +59,8 @@ void Game::MainProcess()
 	
 	delete deepest;
 	deepest = nullptr;
-	delete wallSpawner;
-	wallSpawner = nullptr;
+	delete deepestSpawner;
+	deepestSpawner = nullptr;
 	delete score;
 	score = nullptr;
 	delete scene;
@@ -125,7 +124,7 @@ void Game::DeleteSingleTons()
 
 void Game::CreateFirstActors()
 {
-	wallSpawner = new WallSpawner;
+	deepestSpawner = new DeepestSpawner;
 	score = new Score;
 	new Ground(VGet(0, -2.0f, 0));
 	new Player(leftPlayerPos, Game::MoveDirection::Left, KEY_INPUT_SPACE);
@@ -149,14 +148,14 @@ void Game::SceneChange()
 	{
 	case(sceneName::title):
 		delete scene;
-		scene = new Title(wallSpawner, score);
+		scene = new Title(deepestSpawner, score);
 		break;
 	case(sceneName::play):
 		delete scene;
-		scene = new Play(wallSpawner, score);
+		scene = new Play(deepestSpawner, score);
 		break;
 	case(sceneName::clear):
-		scene = new Clear(wallSpawner, score);
+		scene = new Clear(deepestSpawner, score);
 		break;
 	}
 }

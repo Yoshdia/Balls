@@ -1,6 +1,5 @@
 #pragma once
 #include "Scene.h"
-class WallSpawner;
 class Player;
 
 //PlayÉVÅ[Éì
@@ -10,7 +9,7 @@ class Play :
 private:
 
 public:
-	Play(WallSpawner* wallSpawn, Score* score);
+	Play(DeepestSpawner* deepestSpawner, Score* score);
 	~Play();
 
 	void Update(float deltaTime);

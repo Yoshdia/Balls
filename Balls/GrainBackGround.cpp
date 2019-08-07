@@ -20,6 +20,7 @@ GrainBackGround::GrainBackGround()
 	ModelComponent* modelComponent;
 	modelComponent = new ModelComponent(this, 150, scale, "Resouce/model/normalSphere.mv1");
 	SetState(Actor::ActiveState::Paused);
+	moving = false;
 }
 
 GrainBackGround::~GrainBackGround()
@@ -39,17 +40,32 @@ void GrainBackGround::ResetBackGround(VECTOR pos, VECTOR target)
 	//a = (target.y - b * target.x) / -(target.x * target.x);
 	//ab = 0;
 	scale = VGet(1,1,1)*(GetRand(10)*0.001f);
+	moving = true;
 }
 
 void GrainBackGround::UpdateActor(float deltaTime)
 {
+	if (moving)
+	{
 	SetY();
 	moveComponent->SetMoveSpeed(VGet(SetX()*1, 0, z*5));
+	}
 
 	if (position.z < -10)
 	{
 		SetState(Actor::ActiveState::Paused);
 	}
+}
+
+void GrainBackGround::StopMove()
+{
+	moving = false;
+	moveComponent->SetMoveSpeed(VGet(0, 0, 0));
+}
+
+void GrainBackGround::MoveReStart()
+{
+	moving = true;
 }
 
 float GrainBackGround::SetX()

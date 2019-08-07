@@ -2,13 +2,12 @@
 #include "Play.h"
 #include "Collider.h"
 #include "Wall.h"
-#include "WallSpawner.h"
 #include "InputKey.h"
 #include "GameSpeedManager.h"
 
 
-Play::Play(WallSpawner* wallSpawn, Score* score):
-	Scene(wallSpawn,score)
+Play::Play(DeepestSpawner* deepestSpawner, Score* score):
+	Scene(deepestSpawner,score)
 {
 	count = 0;
 	gameEnd = false;
@@ -21,7 +20,7 @@ Play::~Play()
 
 void Play::Update(float deltaTime)
 {
-	wallSpawner->WallSpawn(deltaTime);
+	deepestSpawner->SpawnerUpdate(deltaTime);
 	gameEnd = Collider::GetInstance()->CollisionCall();
 }
 
@@ -40,7 +39,7 @@ sceneName Play::SceneChange()
 		//gameSpeedのリセット
 		GameSpeedManager::GetInstance()->ResetGameSpeed();
 		//全てのWallを停止させる
-		wallSpawner->WallStop();
+		deepestSpawner->StopDeepestObject();
 		return sceneName::clear;
 	}
 	return sceneName::noChange;

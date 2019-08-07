@@ -4,8 +4,8 @@
 
 
 
-Clear::Clear(WallSpawner* wallSpawn, Score* score):
-	Scene(wallSpawn,score)
+Clear::Clear(DeepestSpawner* deepestSpawner, Score* score):
+	Scene(deepestSpawner,score)
 {
 }
 
@@ -28,7 +28,7 @@ sceneName Clear::SceneChange()
 	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1)
 	{
 		//‘S‚Ä‚Ì•Ç‚ðƒNƒŠƒA‚·‚é
-		wallSpawner->WallClear();
+		deepestSpawner->ClearDeepestObject();
 		return sceneName::title;
 	}
 	return sceneName::noChange;

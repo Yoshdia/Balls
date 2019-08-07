@@ -12,23 +12,17 @@ public:
 
 	void ResetBackGround(VECTOR pos,VECTOR target);
 	void UpdateActor(float deltaTime);
+	void StopMove();
+
+	void MoveReStart();
 private:
 	VECTOR targetPos;
 	MoveComponent* moveComponent;
-	//float throwAngle;
-	//VECTOR CalculateVelocity(const VECTOR& pointA, const VECTOR& pointB);
-	//VECTOR Determine();
-
-	//VECTOR offset;
-	//VECTOR target;
-	//float a;
-	//float b;
-	//float ab;
 
 	float SetX();
 	void SetY();
 
 	float z;
-	
+	bool moving;
 };
 

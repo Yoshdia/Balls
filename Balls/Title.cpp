@@ -2,8 +2,8 @@
 #include "InputKey.h"
 #include "Title.h"
 
-Title::Title(WallSpawner* wallSpawn, Score* score):
-	Scene(wallSpawn,score)
+Title::Title(DeepestSpawner* deepestSpawner, Score* score):
+	Scene(deepestSpawner,score)
 {
 }
 
@@ -25,6 +25,7 @@ sceneName Title::SceneChange()
 {
 	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1)
 	{
+		deepestSpawner->ReStartDeepestObject();
 		return sceneName::play;
 	}
 	return sceneName::noChange;

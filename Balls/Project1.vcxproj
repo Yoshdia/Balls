@@ -183,7 +183,6 @@
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="WallCreateAndHaver.cpp" />
-    <ClCompile Include="WallSpawner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
@@ -219,7 +218,6 @@
     <ClInclude Include="Title.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="WallCreateAndHaver.h" />
-    <ClInclude Include="WallSpawner.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

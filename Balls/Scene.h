@@ -8,14 +8,14 @@ enum sceneName
 	clear,
 };
 
-#include "WallSpawner.h"
+#include "DeepestSpawner.h"
 #include "Score.h"
 
 //Scene基底クラス
 class Scene
 {
 public:
-	Scene(WallSpawner* pSpawn, Score* pScore) { wallSpawner = pSpawn; score = pScore; };
+	Scene(DeepestSpawner* pDeepestSpawn, Score* pScore) { deepestSpawner = pDeepestSpawn; score = pScore; };
 	virtual ~Scene() {};
 	//更新
 	virtual void Update(float deltaTime) {};
@@ -24,6 +24,6 @@ public:
 	//それぞれのSceneで別シーンに移動する条件と名前を指定できる
 	virtual sceneName SceneChange() = 0;
 protected:
-	WallSpawner* wallSpawner;
-	Score* score;
+	DeepestSpawner* deepestSpawner;
+		Score* score;
 };
