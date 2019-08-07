@@ -46,7 +46,7 @@ void GrainBackGround::UpdateActor(float deltaTime)
 	SetY();
 	moveComponent->SetMoveSpeed(VGet(SetX()*1, 0, z*5));
 
-	if (position.z < 10)
+	if (position.z < -10)
 	{
 		SetState(Actor::ActiveState::Paused);
 	}

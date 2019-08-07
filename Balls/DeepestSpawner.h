@@ -13,6 +13,8 @@ private:
 	void GrainSpawn(float deltaTime);
 	GrainBackGroundHaver* grains;
 	VECTOR myPos;
+	VECTOR grainMiddlePos;
+	static const float grainHeight;
 	float count;
 	bool rightMoving;
 	static const float Radius;
