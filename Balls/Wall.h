@@ -3,7 +3,7 @@
 #include "DxLib.h"
 #include "BoxColliderComponent.h"
 
-class MoveComponent;
+class HeadForTargetComponent;
 class Wall :
 	public Actor
 {
@@ -14,7 +14,7 @@ public:
 	void UpdateActor(float deltaTime);
 
 	//座標をセット、stateをActiveにして走らせる
-	void ResetWall(VECTOR pos);
+	void ResetWall(VECTOR pos,VECTOR target);
 	//座標を画面外にセットし、stateをPauseにして待機状態にさせる
 	void ClearWall();
 
@@ -22,7 +22,7 @@ public:
 	void OnCollision();
 	const VECTOR InitPos = VGet(-10, -10, -10);
 protected:
-	MoveComponent * moveComponent;
+	HeadForTargetComponent * headForTarget;
 	BoxColliderComponent* boxCollider;
 	const VECTOR moveSpeed = VGet(0, 0, -60.0f);
 };

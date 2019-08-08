@@ -55,6 +55,12 @@
     <Filter Include="ヘッダー ファイル\Actor\BackGround">
       <UniqueIdentifier>{39eb2fae-afa8-4ffb-af13-00b64f970009}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Component\Move">
+      <UniqueIdentifier>{59d67936-649b-4e95-abe5-c9db17f0a7f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Component\Move">
+      <UniqueIdentifier>{f9c24aa3-74f9-47d8-a691-0da258a2e41c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -83,12 +89,6 @@
     </ClCompile>
     <ClCompile Include="Title.cpp">
       <Filter>ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveComponent.cpp">
-      <Filter>ソース ファイル\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="MovePlayerComponent.cpp">
-      <Filter>ソース ファイル\Component</Filter>
     </ClCompile>
     <ClCompile Include="BoxColliderComponent.cpp">
       <Filter>ソース ファイル\Component</Filter>
@@ -151,10 +151,16 @@
       <Filter>ソース ファイル\Actor\BackGround</Filter>
     </ClCompile>
     <ClCompile Include="DeepestSpawner.cpp">
-      <Filter>ソース ファイル\Actor\BackGround</Filter>
+      <Filter>ソース ファイル\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveComponent.cpp">
+      <Filter>ソース ファイル\Component\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="MovePlayerComponent.cpp">
+      <Filter>ソース ファイル\Component\Move</Filter>
     </ClCompile>
     <ClCompile Include="HeadForTargetComponent.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Component\Move</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,12 +190,6 @@
     </ClInclude>
     <ClInclude Include="Title.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="MovePlayerComponent.h">
-      <Filter>ヘッダー ファイル\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveComponent.h">
-      <Filter>ヘッダー ファイル\Component</Filter>
     </ClInclude>
     <ClInclude Include="Ground.h">
       <Filter>ヘッダー ファイル\Actor</Filter>
@@ -251,14 +251,20 @@
     <ClInclude Include="EffectFactory.h">
       <Filter>ヘッダー ファイル\Actor\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="DeepestSpawner.h">
-      <Filter>ヘッダー ファイル\Actor\BackGround</Filter>
-    </ClInclude>
     <ClInclude Include="GrainBackGroundHaver.h">
       <Filter>ヘッダー ファイル\Actor\BackGround</Filter>
     </ClInclude>
+    <ClInclude Include="DeepestSpawner.h">
+      <Filter>ヘッダー ファイル\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="MovePlayerComponent.h">
+      <Filter>ヘッダー ファイル\Component\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveComponent.h">
+      <Filter>ヘッダー ファイル\Component\Move</Filter>
+    </ClInclude>
     <ClInclude Include="HeadForTargetComponent.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Component\Move</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

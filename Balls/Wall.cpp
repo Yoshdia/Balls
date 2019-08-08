@@ -1,6 +1,6 @@
 #include "Wall.h"
 #include "ModelComponent.h"
-#include "MoveComponent.h"
+#include "HeadForTargetComponent.h"
 #include "Renderer.h"
 
 Wall::Wall(BoxColliderComponent::ColliderTag tag,const std::string& modelFileName)
@@ -11,7 +11,7 @@ Wall::Wall(BoxColliderComponent::ColliderTag tag,const std::string& modelFileNam
 	ModelComponent * modelComponent;
 	modelComponent = new ModelComponent(this,200, scale, modelFileName);
 
-	moveComponent = new MoveComponent(this, 102, moveSpeed,VGet(0,0,0));
+	headForTarget = new HeadForTargetComponent(this, 102, moveSpeed,VGet(0,0,0));
 
 	boxCollider = new BoxColliderComponent(this, 150, 0.02f, tag);
 	boxCollider->SetIsCollision(false);
@@ -23,6 +23,7 @@ Wall::~Wall()
 
 void Wall::UpdateActor(float deltaTime)
 {
+	headForTarget->HeadForTarget(deltaTime);
 	if (position.z <= -2)
 	{
 		boxCollider->SetIsCollision(false);
@@ -38,12 +39,14 @@ void Wall::UpdateActor(float deltaTime)
 }
 
 
-void Wall::ResetWall(VECTOR pos)
+void Wall::ResetWall(VECTOR pos, VECTOR target)
 {
 	position = pos;
+
 	state = Actor::ActiveState::Active;
 	boxCollider->SetIsCollision(false);
-	moveComponent->SetMoveSpeed(moveSpeed);
+	headForTarget->SetTargetPos(target);
+	headForTarget->SetMoveSpeed(moveSpeed);
 }
 
 void Wall::ClearWall()
@@ -55,7 +58,7 @@ void Wall::ClearWall()
 
 void Wall::StopMove()
 {
-	moveComponent->SetMoveSpeed(VGet(0,0,0));
+	headForTarget->SetMoveSpeed(VGet(0,0,0));
 }
 
 void Wall::OnCollision()

@@ -6,7 +6,7 @@ HeadForTargetComponent::HeadForTargetComponent(Actor * owner, int processNumber,
 	:MoveComponent(owner,processNumber,distance,rotateSpeed)
 	,targetPos(VGet(0,0,0))
 	,ownerPos(VGet(0,0,0))
-	,moveSpeed(VGet(0,0,0))
+	,moveSpeed(distance)
 {
 }
 
