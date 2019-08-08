@@ -24,6 +24,6 @@ public:
 protected:
 	HeadForTargetComponent * headForTarget;
 	BoxColliderComponent* boxCollider;
-	const VECTOR moveSpeed = VGet(0, 0, -60.0f);
+	static const VECTOR moveSpeed ;
 };
 

@@ -12,6 +12,8 @@
 //	z *= mag;
 //}
 
+const VECTOR GrainBackGround::MoveSpeed = VGet(1.0f, 0.0f, 5.0f);
+
 GrainBackGround::GrainBackGround()
 {
 	headForTarget = new HeadForTargetComponent(this, 120, VGet(0, 0, 0), VGet(0, 0, 0));
@@ -46,7 +48,7 @@ void GrainBackGround::UpdateActor(float deltaTime)
 {
 	if (moving)
 	{
-		headForTarget->SetMoveSpeed(VGet(0.05f, 0.0f, 5.0f));
+		headForTarget->SetMoveSpeed(MoveSpeed);
 		headForTarget->HeadForTarget(deltaTime);
 	}
 

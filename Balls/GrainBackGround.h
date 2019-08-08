@@ -18,6 +18,7 @@ public:
 private:
 	VECTOR targetPos;
 	HeadForTargetComponent* headForTarget;
+	static const VECTOR MoveSpeed;
 
 	bool moving;
 };

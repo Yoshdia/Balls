@@ -19,7 +19,7 @@ const int DeepestSpawner::WallRandMax = 100;
 const float DeepestSpawner::AddPointRand = (float)(5 * 0.01);
 const float DeepestSpawner::AddSpeedRand = (float)((DeepestSpawner::AddPointRand + 5)*0.01);
 const float DeepestSpawner::SpawnTime = 60;
-const VECTOR DeepestSpawner::StartRunPos = VGet(1, 0, 100);
+const VECTOR DeepestSpawner::StartRunPos = VGet(1, 0, 200);
 
 DeepestSpawner::DeepestSpawner()
 {
@@ -31,10 +31,7 @@ DeepestSpawner::DeepestSpawner()
 	wallCount = 0;
 	wallCreateAndHaver = new WallCreateAndHaver();
 	wallCreateAndHaver->CreatePauseWalls();
-
-
 }
-
 
 DeepestSpawner::~DeepestSpawner()
 {
@@ -55,6 +52,7 @@ void DeepestSpawner::SpawnerUpdate(float deltaTime)
 
 	GrainSpawn(deltaTime);
 	WallSpawn(deltaTime);
+	DrawSphere3D(myPos, 5, 32, GetColor(255, 255, 255), GetColor(255, 255, 255), TRUE);
 }
 
 void DeepestSpawner::StopDeepestObject()
@@ -116,21 +114,28 @@ void DeepestSpawner::WallSpawn(float deltaTime)
 void DeepestSpawner::SetWall()
 {
 	VECTOR wallPos;
+	VECTOR targetPos;
 	int rand = GetRand(1);
 	wallPos = CreateWallPositionCreateSuperWall(rand);
+	targetPos=wallPos;
+	wallPos = VAdd(wallPos, myPos);
+	targetPos.z = -12;
 	CreateSuperWall(rand, 1);
 
 	Wall* posingWall = nullptr;
 	posingWall = GetRandomWall();
-	posingWall->ResetWall(wallPos);
+	posingWall->ResetWall(wallPos, targetPos);
 
 	rand = GetRand(1);
 	wallPos = CreateWallPositionCreateSuperWall(rand);
-	CreateSuperWall(rand, -1);
 	//”½“]‚³‚¹‚é
 	wallPos.x *= -1;
+	targetPos = wallPos;
+	wallPos = VAdd(wallPos, myPos);
+	targetPos.z = -12;
+	CreateSuperWall(rand, -1);
 	posingWall = GetRandomWall();
-	posingWall->ResetWall(wallPos);
+	posingWall->ResetWall(wallPos, targetPos);
 }
 
 Wall * DeepestSpawner::GetRandomWall()
@@ -164,13 +169,16 @@ void DeepestSpawner::CreateSuperWall(int rand, int rightOrLeft)
 	{
 		return;
 	}
-	VECTOR wallPos = StartRunPos;
+	VECTOR wallPos =StartRunPos;
 	wallPos.x *= rightOrLeft;
 	if (rand == 0)
 	{
 		wallPos.x += 2 * rightOrLeft;
 	}
+	wallPos = VAdd(wallPos, myPos);
+	VECTOR targetPos = wallPos;
+	targetPos.z = -12;
 
 	Wall* superWall = wallCreateAndHaver->GetPausingWall(BoxColliderComponent::ColliderTag::SuperWall);
-	superWall->ResetWall(wallPos);
+	superWall->ResetWall(wallPos, targetPos);
 }
