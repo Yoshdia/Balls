@@ -89,6 +89,11 @@ void DeepestSpawner::SetGrain()
 {
 	VECTOR grainMiddlePos = myPos;
 	grainMiddlePos.y += GrainHeight;
+	SquareGrain(grainMiddlePos);
+}
+
+void DeepestSpawner::SphereGrain(VECTOR grainMiddlePos)
+{
 	for (int num = 1; num <= 12; num++)
 	{
 		GrainBackGround* grain = grainCreateAndHaver->GetPauseGrain();
@@ -99,6 +104,10 @@ void DeepestSpawner::SetGrain()
 		VECTOR targetPos = VGet(x, y, -20)*Radius;
 		grain->ResetBackGround(grainPos, targetPos);
 	}
+}
+
+void DeepestSpawner::SquareGrain(VECTOR grainMiddlePos)
+{
 }
 
 void DeepestSpawner::WallSpawn(float deltaTime)

@@ -31,6 +31,9 @@ private:
 	void GrainSpawn(float deltaTime);
 	//設置
 	void SetGrain();
+	void SphereGrain(VECTOR grainMiddlePos);
+	void SquareGrain(VECTOR grainMiddlePos);
+
 	//grainを産み出すインターバル
 	float grainCount;
 
