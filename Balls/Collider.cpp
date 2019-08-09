@@ -104,7 +104,7 @@ bool Collider::CollisionBallWall(SphereColliderComponent * sphere, BoxColliderCo
 	BoxInfo boxInfo = box->GetIndo();
 
 	//ìØÇ∂ç¿ïWÇ…Ç¢ÇÈÇ©
-	if (boxInfo.position.x == sphereInfo.position.x)
+	if ((int)boxInfo.position.x == (int)sphereInfo.position.x)
 	{
 		return true;
 	}

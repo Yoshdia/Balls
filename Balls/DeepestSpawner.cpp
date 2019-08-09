@@ -15,11 +15,13 @@ const float DeepestSpawner::Radius = 6;
 const float DeepestSpawner::GrainHeight = 2;
 const float DeepestSpawner::SpawnGrainTime = 12;
 
+const float DeepestSpawner::squareHeight = 10;
+
 const int DeepestSpawner::WallRandMax = 100;
 const float DeepestSpawner::AddPointRand = (float)(5 * 0.01);
 const float DeepestSpawner::AddSpeedRand = (float)((DeepestSpawner::AddPointRand + 5)*0.01);
 const float DeepestSpawner::SpawnTime = 60;
-const VECTOR DeepestSpawner::StartRunPos = VGet(1, 0, 200);
+const VECTOR DeepestSpawner::StartRunPos = VGet(1, 0, 100);
 
 DeepestSpawner::DeepestSpawner()
 {
@@ -78,18 +80,27 @@ void DeepestSpawner::GrainSpawn(float deltaTime)
 		myPos.x -= 0.01f;
 	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_2])
 		myPos.x += 0.01f;
-	if (grainCount >= SpawnGrainTime-plusSpeed)
+	if (grainCount >= SpawnGrainTime - plusSpeed)
 	{
 		grainCount = 0;
 		SetGrain();
 	}
 }
 
+#include"InputKey.h"
+
 void DeepestSpawner::SetGrain()
 {
 	VECTOR grainMiddlePos = myPos;
 	grainMiddlePos.y += GrainHeight;
-	SquareGrain(grainMiddlePos);
+	if(InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_3])
+	SphereGrain(grainMiddlePos);
+	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_4])
+	{
+
+	SquareGrain(grainMiddlePos,1);
+	SquareGrain(grainMiddlePos,-1);
+	}
 }
 
 void DeepestSpawner::SphereGrain(VECTOR grainMiddlePos)
@@ -106,8 +117,18 @@ void DeepestSpawner::SphereGrain(VECTOR grainMiddlePos)
 	}
 }
 
-void DeepestSpawner::SquareGrain(VECTOR grainMiddlePos)
+void DeepestSpawner::SquareGrain(VECTOR grainMiddlePos, char plusOrMinas)
 {
+	for (int num = 0; num < 7; num++)
+	{
+		GrainBackGround* grain = grainCreateAndHaver->GetPauseGrain();
+		float x = squareHeight / 2*plusOrMinas;
+		float y = (-squareHeight/8)+num;
+		VECTOR squareOnPos = VGet(x, y, 0);
+		VECTOR grainPos = VAdd(myPos, squareOnPos);
+		VECTOR targetPos = VGet(x, y, -12);
+		grain->ResetBackGround(grainPos, targetPos);
+	}
 }
 
 void DeepestSpawner::WallSpawn(float deltaTime)
@@ -126,7 +147,7 @@ void DeepestSpawner::SetWall()
 	VECTOR targetPos;
 	int rand = GetRand(1);
 	wallPos = CreateWallPositionCreateSuperWall(rand);
-	targetPos=wallPos;
+	targetPos = wallPos;
 	wallPos = VAdd(wallPos, myPos);
 	targetPos.z = -12;
 	CreateSuperWall(rand, 1);
@@ -178,14 +199,14 @@ void DeepestSpawner::CreateSuperWall(int rand, int rightOrLeft)
 	{
 		return;
 	}
-	VECTOR wallPos =StartRunPos;
+	VECTOR wallPos = StartRunPos;
 	wallPos.x *= rightOrLeft;
 	if (rand == 0)
 	{
 		wallPos.x += 2 * rightOrLeft;
 	}
-	wallPos = VAdd(wallPos, myPos);
 	VECTOR targetPos = wallPos;
+	wallPos = VAdd(wallPos, myPos);
 	targetPos.z = -12;
 
 	Wall* superWall = wallCreateAndHaver->GetPausingWall(BoxColliderComponent::ColliderTag::SuperWall);

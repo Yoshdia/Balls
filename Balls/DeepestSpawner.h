@@ -32,7 +32,7 @@ private:
 	//設置
 	void SetGrain();
 	void SphereGrain(VECTOR grainMiddlePos);
-	void SquareGrain(VECTOR grainMiddlePos);
+	void SquareGrain(VECTOR grainMiddlePos,char plusOrMinas);
 
 	//grainを産み出すインターバル
 	float grainCount;
@@ -42,6 +42,8 @@ private:
 	//grainを円状に産み出す際の半径
 	static const float Radius;
 	static const float SpawnGrainTime;
+
+	static const float squareHeight;
 
 	//wallを確保しているクラス
 	WallCreateAndHaver* wallCreateAndHaver;

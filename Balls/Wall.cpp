@@ -3,7 +3,7 @@
 #include "HeadForTargetComponent.h"
 #include "Renderer.h"
 
-const VECTOR Wall::moveSpeed = VGet(1.0f, 0, 30.0f);
+const VECTOR Wall::moveSpeed = VGet(5.0f, 0, 30.0f);
 
 Wall::Wall(BoxColliderComponent::ColliderTag tag,const std::string& modelFileName)
 {

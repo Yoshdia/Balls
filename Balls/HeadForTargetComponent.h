@@ -15,6 +15,7 @@ public:
 	void SetTargetPos(const VECTOR& target);
 	//ターゲットに向かう処理、毎F呼ぶ
 	void HeadForTarget(float deltaTime);
+	//using MoveComponent::SetMoveSpeed;
 private:
 	VECTOR ownerPos;
 	VECTOR targetPos;
