@@ -25,6 +25,32 @@ private:
 	//GameSpeesクラスから受け取ったgameSpeedから計算した加速秒数
 	float plusSpeed;
 
+	enum GrainShade
+	{
+		sphere,
+		square,
+	};
+	GrainShade grainShade;
+
+	//移動中かどうか
+	bool moving;
+	//movingフラグが建っているときに実行され続ける関数
+	void Move();
+	//movingフラグが倒れているときに実行される、次移動する先を決定する関数
+	void CreateMovePlan();
+	//関数を呼ぶカウント
+	int createMovePlanCnt;
+	//最大数
+	static const int CreateMovePlanCntMax;
+	//次回移動する座標
+	float targetPositionX;
+	//AdjacentTargetXを何回まで移動可能にするか
+	static const float MoveStage;
+	//1回で移動する大きさ
+	static const float AdjacentTargetX;
+	float CulculationX();
+	static const float movingSpeed;
+
 	//背景のgrainクラス
 	GrainBackGroundHaver* grainCreateAndHaver;
 	//背景のgrainを産み出す

@@ -23,16 +23,23 @@ const float DeepestSpawner::AddSpeedRand = (float)((DeepestSpawner::AddPointRand
 const float DeepestSpawner::SpawnTime = 60;
 const VECTOR DeepestSpawner::StartRunPos = VGet(1, 0, 100);
 
+const int DeepestSpawner::CreateMovePlanCntMax = 100;
+const float DeepestSpawner::MoveStage = 3.0f;
+const float DeepestSpawner::AdjacentTargetX = 7.0f/ MoveStage;
+const float DeepestSpawner::movingSpeed = 0.01f;
+
 DeepestSpawner::DeepestSpawner()
 {
 	grainCreateAndHaver = new GrainBackGroundHaver();
 	myPos = VGet(0, 0, 30);
 	grainCount = 0;
+	moving = false;
 
 	spawnTime = SpawnTime;
 	wallCount = 0;
 	wallCreateAndHaver = new WallCreateAndHaver();
 	wallCreateAndHaver->CreatePauseWalls();
+	grainShade = DeepestSpawner::GrainShade::sphere;
 }
 
 DeepestSpawner::~DeepestSpawner()
@@ -54,6 +61,15 @@ void DeepestSpawner::SpawnerUpdate(float deltaTime)
 
 	GrainSpawn(deltaTime);
 	WallSpawn(deltaTime);
+	if (moving)
+	{
+		Move();
+	}
+	else
+	{
+		CreateMovePlan();
+	}
+
 	DrawSphere3D(myPos, 5, 32, GetColor(255, 255, 255), GetColor(255, 255, 255), TRUE);
 }
 
@@ -73,13 +89,80 @@ void DeepestSpawner::ReStartDeepestObject()
 	grainCreateAndHaver->AllGrainReStart();
 }
 
+void DeepestSpawner::Move()
+{
+	if ((int)myPos.x == (int)targetPositionX)
+	{
+		moving = false;
+		return;
+	}
+	myPos.x += CulculationX() * movingSpeed;
+}
+
+void DeepestSpawner::CreateMovePlan()
+{
+	if (createMovePlanCnt < CreateMovePlanCntMax)
+	{
+		createMovePlanCnt++;
+	}
+	else
+	{
+		createMovePlanCnt = 0;
+		int rand = GetRand(7) - 3;
+		if (rand == 2)
+		{
+			grainCreateAndHaver->GrainColorChange(GrainBackGround::GrainColor::Red);
+		}
+		if (rand == 1)
+		{
+			grainShade = DeepestSpawner::GrainShade::sphere;
+		}
+		if (rand == -1)
+		{
+			grainShade = DeepestSpawner::GrainShade::square;
+		}
+		if (rand == -2)
+		{
+			grainCreateAndHaver->GrainColorChange(GrainBackGround::GrainColor::white);
+		}
+		targetPositionX = AdjacentTargetX * rand;
+		moving = true;
+	}
+}
+
+float DeepestSpawner::CulculationX()
+{
+	bool plus = myPos.x < targetPositionX ? true : false;
+	float plusPos = 1;
+
+	if (plus)
+	{
+		if (myPos.x < targetPositionX)
+		{
+			plusPos *= 1;
+		}
+		else
+		{
+			plusPos *= 0;
+		}
+	}
+	else
+	{
+		if (myPos.x > targetPositionX)
+		{
+			plusPos *= -1;
+		}
+		else
+		{
+			plusPos *= 0;
+		}
+	}
+	return plusPos;
+}
+
 void DeepestSpawner::GrainSpawn(float deltaTime)
 {
 	grainCount++;
-	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_1])
-		myPos.x -= 0.01f;
-	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_2])
-		myPos.x += 0.01f;
 	if (grainCount >= SpawnGrainTime - plusSpeed)
 	{
 		grainCount = 0;
@@ -91,17 +174,16 @@ void DeepestSpawner::SetGrain()
 {
 	VECTOR grainMiddlePos = myPos;
 	grainMiddlePos.y += GrainHeight;
-	if(InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_3])
-	SphereGrain(grainMiddlePos);
-	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_4])
+	switch (grainShade)
 	{
-	SquareGrain(grainMiddlePos,1);
-	SquareGrain(grainMiddlePos,-1);
+	case(GrainShade::sphere):
+		SphereGrain(grainMiddlePos); 
+		break;
+	case(GrainShade::square):	
+		SquareGrain(grainMiddlePos, 1);
+		SquareGrain(grainMiddlePos, -1); 
+		break;
 	}
-	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_5])
-		grainCreateAndHaver->GrainColorChange(GrainBackGround::GrainColor::Red);
-	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_6])
-		grainCreateAndHaver->GrainColorChange(GrainBackGround::GrainColor::white);
 }
 
 void DeepestSpawner::SphereGrain(VECTOR grainMiddlePos)
