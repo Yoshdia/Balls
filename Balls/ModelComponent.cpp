@@ -2,6 +2,11 @@
 #include "Actor.h"
 #include "Renderer.h"
 
+ const int ModelComponent::DrawPlayerNumber=300;
+ const int ModelComponent::DrawWallNumber=200;
+ const int ModelComponent::DrawBoxEffectNumber=250;
+ const int ModelComponent::DrawGrainNumber=50;
+
 ModelComponent::ModelComponent(Actor * owner, int setProcessNumber)
 	:Component(owner, setProcessNumber)
 	, modelId(-1)

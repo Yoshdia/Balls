@@ -167,7 +167,6 @@
     <ClCompile Include="GameSpeedManager.cpp" />
     <ClCompile Include="GrainBackGround.cpp" />
     <ClCompile Include="GrainBackGroundHaver.cpp" />
-    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="HeadForTargetComponent.cpp" />
     <ClCompile Include="InputKey.cpp" />
     <ClCompile Include="JammerWall.cpp" />
@@ -202,7 +201,6 @@
     <ClInclude Include="GameSpeedManager.h" />
     <ClInclude Include="GrainBackGround.h" />
     <ClInclude Include="GrainBackGroundHaver.h" />
-    <ClInclude Include="Ground.h" />
     <ClInclude Include="HeadForTargetComponent.h" />
     <ClInclude Include="InputKey.h" />
     <ClInclude Include="JammerWall.h" />

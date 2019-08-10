@@ -1,5 +1,4 @@
 #include "GrainBackGroundHaver.h"
-#include "GrainBackGround.h"
 
 
 GrainBackGroundHaver::GrainBackGroundHaver()
@@ -51,6 +50,14 @@ void GrainBackGroundHaver::AllGrainReStart()
 		{
 			back->MoveReStart();
 		}
+	}
+}
+
+void GrainBackGroundHaver::GrainColorChange(GrainBackGround::GrainColor color)
+{
+	for (auto back : grain)
+	{
+		back->ColorChange(color);
 	}
 }
 

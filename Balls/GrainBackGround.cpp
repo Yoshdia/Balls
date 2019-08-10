@@ -1,6 +1,7 @@
 #include "GrainBackGround.h"
 #include "HeadForTargetComponent.h"
 #include "ModelComponent.h"
+#include "Renderer.h"
 #include <math.h>
 
 //// ³‹K‰»(ƒxƒNƒgƒ‹‚Ì’·‚³‚ð1‚É‚·‚é)
@@ -19,10 +20,18 @@ GrainBackGround::GrainBackGround()
 	headForTarget = new HeadForTargetComponent(this, 120, VGet(0, 0, 0), VGet(0, 0, 0));
 
 	scale = VGet(0.001f, 0.001f, 0.001f);
-	ModelComponent* modelComponent;
-	modelComponent = new ModelComponent(this, 150, scale, "Resouce/model/normalSphere.mv1");
 	SetState(Actor::ActiveState::Paused);
 	moving = false;
+
+	modelComponent = new ModelComponent(this, ModelComponent::DrawGrainNumber);
+	redModel = Renderer::GetInstance()->LoadModel("Resouce/model/normalRedSphere.mv1");
+	modelComponent->SetModel(redModel);
+	modelComponent->SetModelScale(scale);
+
+	whiteModel = Renderer::GetInstance()->LoadModel("Resouce/model/normalSphere.mv1");
+	modelComponent->SetModel(whiteModel);
+	modelComponent->SetModelScale(scale);
+
 }
 
 GrainBackGround::~GrainBackGround()
@@ -67,6 +76,15 @@ void GrainBackGround::StopMove()
 void GrainBackGround::MoveReStart()
 {
 	moving = true;
+}
+
+void GrainBackGround::ColorChange(GrainColor color)
+{
+	switch (color)
+	{
+	case(GrainColor::Red):modelComponent->SetModel(redModel); break;
+	case(GrainColor::white):modelComponent->SetModel(whiteModel); break;
+	}
 }
 
 //VECTOR GrainBackGround::CalculateVelocity(const VECTOR& pointA,const VECTOR& pointB)

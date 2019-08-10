@@ -11,7 +11,7 @@ Wall::Wall(BoxColliderComponent::ColliderTag tag,const std::string& modelFileNam
 
 	scale = VGet(0.01f, 0.01f, 0.001f);
 	ModelComponent * modelComponent;
-	modelComponent = new ModelComponent(this,200, scale, modelFileName);
+	modelComponent = new ModelComponent(this, ModelComponent::DrawWallNumber, scale, modelFileName);
 
 	headForTarget = new HeadForTargetComponent(this, 102, moveSpeed,VGet(0,0,0));
 

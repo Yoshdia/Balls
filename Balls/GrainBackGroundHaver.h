@@ -1,6 +1,6 @@
 #pragma once
 
-class GrainBackGround;
+#include "GrainBackGround.h"
 
 class GrainBackGroundHaver
 {
@@ -12,6 +12,8 @@ public:
 	void AllGrainsStop();
 
 	void AllGrainReStart();
+
+	void GrainColorChange(GrainBackGround::GrainColor color);
 private:
 	void Create();
 	GrainBackGround* grain[500];

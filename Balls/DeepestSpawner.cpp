@@ -87,8 +87,6 @@ void DeepestSpawner::GrainSpawn(float deltaTime)
 	}
 }
 
-#include"InputKey.h"
-
 void DeepestSpawner::SetGrain()
 {
 	VECTOR grainMiddlePos = myPos;
@@ -97,10 +95,13 @@ void DeepestSpawner::SetGrain()
 	SphereGrain(grainMiddlePos);
 	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_4])
 	{
-
 	SquareGrain(grainMiddlePos,1);
 	SquareGrain(grainMiddlePos,-1);
 	}
+	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_5])
+		grainCreateAndHaver->GrainColorChange(GrainBackGround::GrainColor::Red);
+	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_6])
+		grainCreateAndHaver->GrainColorChange(GrainBackGround::GrainColor::white);
 }
 
 void DeepestSpawner::SphereGrain(VECTOR grainMiddlePos)

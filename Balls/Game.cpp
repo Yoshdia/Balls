@@ -14,7 +14,6 @@
 #include "Score.h"
 #include "EffectFactory.h"
 
-#include "Ground.h"
 #include "DeepestSpawner.h"
 //DeltaTime‚ÌŒv‘ª‚É•K—v
 #include <mmsystem.h>
@@ -126,7 +125,6 @@ void Game::CreateFirstActors()
 {
 	deepestSpawner = new DeepestSpawner;
 	score = new Score;
-	new Ground(VGet(0, -2.0f, 0));
 	new Player(leftPlayerPos, Game::MoveDirection::Left, KEY_INPUT_SPACE);
 	new Player(rightPlayerPos, Game::MoveDirection::Right, KEY_INPUT_RETURN);
 }

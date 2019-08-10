@@ -12,7 +12,7 @@ Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey)
 
 	scale = VGet(0.01f, 0.01f, 0.01f);
 	//モデルを保存し描画するComponentを実装(後々使用するsuperBallのモデルもここでScaleをSetしておく)
-	modelComponent = new ModelComponent(this,100);
+	modelComponent = new ModelComponent(this,ModelComponent::DrawPlayerNumber);
 
 	superModelId = Renderer::GetInstance()->LoadModel("Resouce/model/superBall.mv1");
 	modelComponent->SetModel(superModelId);
@@ -23,7 +23,7 @@ Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey)
 	modelComponent->SetModelScale(scale);
 
 	MovePlayerComponent * movePlayerComponent;
-	movePlayerComponent = new MovePlayerComponent(this, 101, moveKey, next, VGet(5.0f, 0, 0));
+	movePlayerComponent = new MovePlayerComponent(this, ModelComponent::DrawPlayerNumber, moveKey, next, VGet(5.0f, 0, 0));
 
 	sphereCollider = new SphereColliderComponent(this, 150, 0.01f);
 

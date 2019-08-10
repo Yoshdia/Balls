@@ -2,6 +2,7 @@
 
 #include "Actor.h"
 class HeadForTargetComponent;
+class ModelComponent;
 
 class GrainBackGround :
 	public Actor
@@ -15,10 +16,22 @@ public:
 	void StopMove();
 
 	void MoveReStart();
+
+	enum GrainColor
+	{
+		Red,
+		white,
+	};
+	void ColorChange(GrainColor color);
 private:
 	VECTOR targetPos;
 	HeadForTargetComponent* headForTarget;
+	ModelComponent* modelComponent;
+
 	static const VECTOR MoveSpeed;
+
+	int redModel;
+	int whiteModel;
 
 	bool moving;
 };

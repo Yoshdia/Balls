@@ -11,7 +11,7 @@ BlockEffect::BlockEffect():
 {
 	countDownComponent = new CountDownComponent(LifeCntMax);
 
-	moveComponent = new MoveComponent(this, 150, VGet(0,0,0), VGet(0, 0, 30));
+	moveComponent = new MoveComponent(this, ModelComponent::DrawBoxEffectNumber, VGet(0,0,0), VGet(0, 0, 30));
 	
 	scale = VGet(0.005f, 0.005f, 0.005f);
 	ModelComponent* modelComponent;
