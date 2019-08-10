@@ -3,9 +3,13 @@
 class GrainBackGroundHaver;
 class WallCreateAndHaver;
 class Wall;
+#include "Actor.h"
+class HeadForTargetComponent;
+class CountDownComponent;
 
 //ステージの奥からwallやgrainを産み出すクラス
 class DeepestSpawner
+	:public Actor
 {
 public:
 	DeepestSpawner();
@@ -20,8 +24,6 @@ public:
 	//停止した後移動を再開させる
 	void ReStartDeepestObject();
 private:
-	//このクラスの中心座標
-	VECTOR myPos;
 	//GameSpeesクラスから受け取ったgameSpeedから計算した加速秒数
 	float plusSpeed;
 
@@ -32,24 +34,18 @@ private:
 	};
 	GrainShade grainShade;
 
-	//移動中かどうか
-	bool moving;
-	//movingフラグが建っているときに実行され続ける関数
-	void Move();
+	HeadForTargetComponent* headForTargetComponent;
+	CountDownComponent* countDownComponent;
 	//movingフラグが倒れているときに実行される、次移動する先を決定する関数
 	void CreateMovePlan();
-	//関数を呼ぶカウント
-	int createMovePlanCnt;
 	//最大数
 	static const int CreateMovePlanCntMax;
-	//次回移動する座標
-	float targetPositionX;
 	//AdjacentTargetXを何回まで移動可能にするか
 	static const float MoveStage;
 	//1回で移動する大きさ
-	static const float AdjacentTargetX;
-	float CulculationX();
-	static const float movingSpeed;
+	static const VECTOR AdjacentTarget;
+
+	static const VECTOR MovingSpeed;
 
 	//背景のgrainクラス
 	GrainBackGroundHaver* grainCreateAndHaver;

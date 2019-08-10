@@ -3,7 +3,7 @@
 #include "HeadForTargetComponent.h"
 #include "Renderer.h"
 
-const VECTOR Wall::moveSpeed = VGet(5.0f, 0, 30.0f);
+const VECTOR Wall::moveSpeed = VGet(5.0f, 5.0f, 30.0f);
 
 Wall::Wall(BoxColliderComponent::ColliderTag tag,const std::string& modelFileName)
 {
@@ -30,7 +30,7 @@ void Wall::UpdateActor(float deltaTime)
 	{
 		boxCollider->SetIsCollision(false);
 	}
-	else if (position.z <= 0)
+	else if (position.z <= 0.5f)
 	{
 		boxCollider->SetIsCollision(true);
 	}

@@ -10,6 +10,8 @@
 
 #include <math.h>
 #include "InputKey.h"
+#include "CountDownComponent.h"
+#include "HeadForTargetComponent.h"
 
 const float DeepestSpawner::Radius = 6;
 const float DeepestSpawner::GrainHeight = 2;
@@ -23,23 +25,25 @@ const float DeepestSpawner::AddSpeedRand = (float)((DeepestSpawner::AddPointRand
 const float DeepestSpawner::SpawnTime = 60;
 const VECTOR DeepestSpawner::StartRunPos = VGet(1, 0, 100);
 
-const int DeepestSpawner::CreateMovePlanCntMax = 100;
+const int DeepestSpawner::CreateMovePlanCntMax = 500;
 const float DeepestSpawner::MoveStage = 3.0f;
-const float DeepestSpawner::AdjacentTargetX = 7.0f/ MoveStage;
-const float DeepestSpawner::movingSpeed = 0.01f;
+const VECTOR DeepestSpawner::AdjacentTarget = VGet((7.0f/ MoveStage),5.0f,0);
+const VECTOR DeepestSpawner::MovingSpeed = VGet(1,1,0.0f);
 
 DeepestSpawner::DeepestSpawner()
 {
 	grainCreateAndHaver = new GrainBackGroundHaver();
-	myPos = VGet(0, 0, 30);
+	position = VGet(0, 0, 30);
 	grainCount = 0;
-	moving = false;
 
 	spawnTime = SpawnTime;
 	wallCount = 0;
 	wallCreateAndHaver = new WallCreateAndHaver();
 	wallCreateAndHaver->CreatePauseWalls();
 	grainShade = DeepestSpawner::GrainShade::sphere;
+
+	countDownComponent = new CountDownComponent(CreateMovePlanCntMax);
+	headForTargetComponent = new HeadForTargetComponent(this, 120, MovingSpeed, VGet(0, 0, 0));
 }
 
 DeepestSpawner::~DeepestSpawner()
@@ -61,16 +65,20 @@ void DeepestSpawner::SpawnerUpdate(float deltaTime)
 
 	GrainSpawn(deltaTime);
 	WallSpawn(deltaTime);
-	if (moving)
+	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_6])
 	{
-		Move();
+		position.y += 0.01f;
 	}
-	else
+	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_7])
 	{
-		CreateMovePlan();
+		position.y -= 0.01f;
 	}
 
-	DrawSphere3D(myPos, 5, 32, GetColor(255, 255, 255), GetColor(255, 255, 255), TRUE);
+		CreateMovePlan();
+		headForTargetComponent->HeadForTarget(deltaTime);
+	
+
+	DrawSphere3D(position, 5, 32, GetColor(255, 255, 255), GetColor(255, 255, 255), TRUE);
 }
 
 void DeepestSpawner::StopDeepestObject()
@@ -89,75 +97,34 @@ void DeepestSpawner::ReStartDeepestObject()
 	grainCreateAndHaver->AllGrainReStart();
 }
 
-void DeepestSpawner::Move()
-{
-	if ((int)myPos.x == (int)targetPositionX)
-	{
-		moving = false;
-		return;
-	}
-	myPos.x += CulculationX() * movingSpeed;
-}
-
 void DeepestSpawner::CreateMovePlan()
 {
-	if (createMovePlanCnt < CreateMovePlanCntMax)
+	if (countDownComponent->CountEnd())
 	{
-		createMovePlanCnt++;
-	}
-	else
-	{
-		createMovePlanCnt = 0;
-		int rand = GetRand(7) - 3;
-		if (rand == 2)
+		int randx = GetRand(7) - 3;
+		if (randx == 2)
 		{
 			grainCreateAndHaver->GrainColorChange(GrainBackGround::GrainColor::Red);
 		}
-		if (rand == 1)
+		if (randx == 1)
 		{
 			grainShade = DeepestSpawner::GrainShade::sphere;
 		}
-		if (rand == -1)
+		if (randx== -1)
 		{
 			grainShade = DeepestSpawner::GrainShade::square;
 		}
-		if (rand == -2)
+		if (randx == -2)
 		{
 			grainCreateAndHaver->GrainColorChange(GrainBackGround::GrainColor::white);
 		}
-		targetPositionX = AdjacentTargetX * rand;
-		moving = true;
+		int randy = GetRand(2)-1;
+		VECTOR targetPos = VGet(0, 0, 0);
+		targetPos.x= AdjacentTarget.x * randx;
+		targetPos.y = AdjacentTarget.y * randy;
+		headForTargetComponent->SetTargetPos(targetPos);
+		countDownComponent->ResetCount();
 	}
-}
-
-float DeepestSpawner::CulculationX()
-{
-	bool plus = myPos.x < targetPositionX ? true : false;
-	float plusPos = 1;
-
-	if (plus)
-	{
-		if (myPos.x < targetPositionX)
-		{
-			plusPos *= 1;
-		}
-		else
-		{
-			plusPos *= 0;
-		}
-	}
-	else
-	{
-		if (myPos.x > targetPositionX)
-		{
-			plusPos *= -1;
-		}
-		else
-		{
-			plusPos *= 0;
-		}
-	}
-	return plusPos;
 }
 
 void DeepestSpawner::GrainSpawn(float deltaTime)
@@ -172,7 +139,7 @@ void DeepestSpawner::GrainSpawn(float deltaTime)
 
 void DeepestSpawner::SetGrain()
 {
-	VECTOR grainMiddlePos = myPos;
+	VECTOR grainMiddlePos = position;
 	grainMiddlePos.y += GrainHeight;
 	switch (grainShade)
 	{
@@ -208,7 +175,7 @@ void DeepestSpawner::SquareGrain(VECTOR grainMiddlePos, char plusOrMinas)
 		float x = squareHeight / 2*plusOrMinas;
 		float y = (-squareHeight/8)+num;
 		VECTOR squareOnPos = VGet(x, y, 0);
-		VECTOR grainPos = VAdd(myPos, squareOnPos);
+		VECTOR grainPos = VAdd(position, squareOnPos);
 		VECTOR targetPos = VGet(x, y, -12);
 		grain->ResetBackGround(grainPos, targetPos);
 	}
@@ -231,7 +198,7 @@ void DeepestSpawner::SetWall()
 	int rand = GetRand(1);
 	wallPos = CreateWallPositionCreateSuperWall(rand);
 	targetPos = wallPos;
-	wallPos = VAdd(wallPos, myPos);
+	wallPos = VAdd(wallPos, position);
 	targetPos.z = -12;
 	CreateSuperWall(rand, 1);
 
@@ -244,7 +211,7 @@ void DeepestSpawner::SetWall()
 	//”½“]‚³‚¹‚é
 	wallPos.x *= -1;
 	targetPos = wallPos;
-	wallPos = VAdd(wallPos, myPos);
+	wallPos = VAdd(wallPos, position);
 	targetPos.z = -12;
 	CreateSuperWall(rand, -1);
 	posingWall = GetRandomWall();
@@ -289,7 +256,7 @@ void DeepestSpawner::CreateSuperWall(int rand, int rightOrLeft)
 		wallPos.x += 2 * rightOrLeft;
 	}
 	VECTOR targetPos = wallPos;
-	wallPos = VAdd(wallPos, myPos);
+	wallPos = VAdd(wallPos, position);
 	targetPos.z = -12;
 
 	Wall* superWall = wallCreateAndHaver->GetPausingWall(BoxColliderComponent::ColliderTag::SuperWall);

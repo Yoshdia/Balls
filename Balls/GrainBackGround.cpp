@@ -13,7 +13,7 @@
 //	z *= mag;
 //}
 
-const VECTOR GrainBackGround::MoveSpeed = VGet(1.0f, 0.0f, 5.0f);
+const VECTOR GrainBackGround::MoveSpeed = VGet(1.0f, 1.0f, 5.0f);
 
 GrainBackGround::GrainBackGround()
 {
