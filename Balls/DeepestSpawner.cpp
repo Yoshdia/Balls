@@ -25,9 +25,9 @@ const float DeepestSpawner::AddSpeedRand = (float)((DeepestSpawner::AddPointRand
 const float DeepestSpawner::SpawnTime = 60;
 const VECTOR DeepestSpawner::StartRunPos = VGet(1, 0, 100);
 
-const int DeepestSpawner::CreateMovePlanCntMax = 500;
+const int DeepestSpawner::CreateMovePlanCntMax = 600;
 const float DeepestSpawner::MoveStage = 3.0f;
-const VECTOR DeepestSpawner::AdjacentTarget = VGet((7.0f/ MoveStage),5.0f,0);
+const VECTOR DeepestSpawner::AdjacentTarget = VGet((7.0f/ MoveStage),3.0,0);
 const VECTOR DeepestSpawner::MovingSpeed = VGet(1,1,0.0f);
 
 DeepestSpawner::DeepestSpawner()
