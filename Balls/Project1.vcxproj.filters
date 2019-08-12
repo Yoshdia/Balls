@@ -159,6 +159,9 @@
     <ClCompile Include="HeadForTargetComponent.cpp">
       <Filter>ソース ファイル\Component\Move</Filter>
     </ClCompile>
+    <ClCompile Include="SlowlyChangeScaleComponent.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -259,6 +262,9 @@
     </ClInclude>
     <ClInclude Include="HeadForTargetComponent.h">
       <Filter>ヘッダー ファイル\Component\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="SlowlyChangeScaleComponent.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

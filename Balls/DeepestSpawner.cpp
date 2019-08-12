@@ -141,16 +141,17 @@ void DeepestSpawner::SetGrain()
 {
 	VECTOR grainMiddlePos = position;
 	grainMiddlePos.y += GrainHeight;
-	switch (grainShade)
-	{
-	case(GrainShade::sphere):
-		SphereGrain(grainMiddlePos); 
-		break;
-	case(GrainShade::square):	
-		SquareGrain(grainMiddlePos, 1);
-		SquareGrain(grainMiddlePos, -1); 
-		break;
-	}
+	//switch (grainShade)
+	//{
+	//case(GrainShade::sphere):
+	//	SphereGrain(grainMiddlePos); 
+	//	break;
+	//case(GrainShade::square):	
+	//	SquareGrain(grainMiddlePos, 1);
+	//	SquareGrain(grainMiddlePos, -1); 
+	//	break;
+	//}
+	GroundGrain(grainMiddlePos);
 }
 
 void DeepestSpawner::SphereGrain(VECTOR grainMiddlePos)
@@ -176,6 +177,21 @@ void DeepestSpawner::SquareGrain(VECTOR grainMiddlePos, char plusOrMinas)
 		float y = (-squareHeight/8)+num;
 		VECTOR squareOnPos = VGet(x, y, 0);
 		VECTOR grainPos = VAdd(position, squareOnPos);
+		VECTOR targetPos = VGet(x, y, -12);
+		grain->ResetBackGround(grainPos, targetPos);
+	}
+}
+
+void DeepestSpawner::GroundGrain(VECTOR grainMiddlePos)
+{
+	static int GroundGrainHeight = 7;
+	for (int num = 0; num < GroundGrainHeight; num++)
+	{
+		GrainBackGround* grain = grainCreateAndHaver->GetPauseGrain();
+		float x = num - (GroundGrainHeight / 2);
+		float y = -2;
+		VECTOR groundOnPos = VGet(x, y, 0);
+		VECTOR grainPos = (VAdd(position, groundOnPos));
 		VECTOR targetPos = VGet(x, y, -12);
 		grain->ResetBackGround(grainPos, targetPos);
 	}

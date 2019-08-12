@@ -4,10 +4,12 @@
 #include "Game.h"
 #include "Actor.h"
 
+
 class SphereColliderComponent;
 class MovePlayerComponent;
 class ModelComponent;
 class CountDownComponent;
+class SlowlyChangeScaleComponent;
 
 //画面手前で左右に移動する球。二つ生成される
 class Player:
@@ -22,15 +24,22 @@ public:
 	//衝突時はモデルを変更する
 	void OnCollision();
 private:	
-	ModelComponent * modelComponent;
 	SphereColliderComponent* sphereCollider;
 	CountDownComponent* countDownComponent;
+	CountDownComponent* superLikelyCountDownComponent;
+	SlowlyChangeScaleComponent* modelAndSlowlyChangeScaleComponent;
+	static const VECTOR normalModelScale;
+	static const VECTOR superModelScale;
+
 	int normalModelId;
 	int superModelId;
 	//Playerの状態変化
+	void LikelyChangeNormalModel();
 	void ChangeNormalModel();
 	void ChangeSuperModel();
 
-	const int superCountMax=180;
+	static const int superCountMax;
+	static const int superEndLikeryCount;
+	static const int superEndCount;
 };
 

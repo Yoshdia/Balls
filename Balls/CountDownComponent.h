@@ -8,9 +8,10 @@ public:
 	~CountDownComponent();
 
 	bool CountEnd();
-	void ResetCount() { nowCount = maxCount; }
+	void ResetCount();
 private:
 	int maxCount;
 	int nowCount;
+	bool updating;
 };
 

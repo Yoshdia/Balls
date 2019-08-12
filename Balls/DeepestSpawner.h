@@ -55,6 +55,7 @@ private:
 	void SetGrain();
 	void SphereGrain(VECTOR grainMiddlePos);
 	void SquareGrain(VECTOR grainMiddlePos,char plusOrMinas);
+	void GroundGrain(VECTOR grainMiddlePos);
 
 	//grainを産み出すインターバル
 	float grainCount;

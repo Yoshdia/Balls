@@ -19,7 +19,7 @@ GrainBackGround::GrainBackGround()
 {
 	headForTarget = new HeadForTargetComponent(this, 120, VGet(0, 0, 0), VGet(0, 0, 0));
 
-	scale = VGet(0.001f, 0.001f, 0.001f);
+	scale = VGet(0.01f, 0.001f, 0.01f);
 	SetState(Actor::ActiveState::Paused);
 	moving = false;
 
@@ -27,6 +27,7 @@ GrainBackGround::GrainBackGround()
 	redModel = Renderer::GetInstance()->LoadModel("Resouce/model/normalRedSphere.mv1");
 	modelComponent->SetModel(redModel);
 	modelComponent->SetModelScale(scale);
+
 
 	whiteModel = Renderer::GetInstance()->LoadModel("Resouce/model/normalSphere.mv1");
 	modelComponent->SetModel(whiteModel);
