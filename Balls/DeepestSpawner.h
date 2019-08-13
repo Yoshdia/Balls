@@ -67,6 +67,7 @@ private:
 	static const float SpawnGrainTime;
 
 	static const float squareHeight;
+	static const int GroundGrainHeight;
 
 	//wall‚ğŠm•Û‚µ‚Ä‚¢‚éƒNƒ‰ƒX
 	WallCreateAndHaver* wallCreateAndHaver;

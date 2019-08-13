@@ -23,17 +23,19 @@ const int DeepestSpawner::WallRandMax = 100;
 const float DeepestSpawner::AddPointRand = (float)(5 * 0.01);
 const float DeepestSpawner::AddSpeedRand = (float)((DeepestSpawner::AddPointRand + 5)*0.01);
 const float DeepestSpawner::SpawnTime = 60;
-const VECTOR DeepestSpawner::StartRunPos = VGet(1, 0, 100);
+const VECTOR DeepestSpawner::StartRunPos = VGet(1, 0, 0);
 
 const int DeepestSpawner::CreateMovePlanCntMax = 600;
 const float DeepestSpawner::MoveStage = 3.0f;
 const VECTOR DeepestSpawner::AdjacentTarget = VGet((7.0f / MoveStage), 3.0, 0);
 const VECTOR DeepestSpawner::MovingSpeed = VGet(1, 1, 0.0f);
 
+const int DeepestSpawner::GroundGrainHeight = 4;
+
 DeepestSpawner::DeepestSpawner()
 {
 	grainCreateAndHaver = new GrainBackGroundHaver();
-	position = VGet(0, 0, 30);
+	position = VGet(0, 0, 100);
 	grainCount = 0;
 
 	spawnTime = SpawnTime;
@@ -43,6 +45,7 @@ DeepestSpawner::DeepestSpawner()
 	grainShade = DeepestSpawner::GrainShade::sphere;
 
 	countDownComponent = new CountDownComponent(CreateMovePlanCntMax);
+	countDownComponent->ResetCount();
 	headForTargetComponent = new HeadForTargetComponent(this, 120, MovingSpeed, VGet(0, 0, 0));
 }
 
@@ -68,6 +71,8 @@ void DeepestSpawner::SpawnerUpdate(float deltaTime)
 
 	CreateMovePlan();
 	headForTargetComponent->HeadForTarget(deltaTime);
+
+	DrawSphere3D(position, 3, 255, GetColor(255, 255, 255), GetColor(255, 255, 255), TRUE);
 }
 
 void DeepestSpawner::StopDeepestObject()
@@ -93,7 +98,7 @@ void DeepestSpawner::CreateMovePlan()
 		int randx = GetRand(7) - 3;
 		if (randx == 2)
 		{
-			grainCreateAndHaver->GrainColorChange(GrainBackGround::GrainColor::Red);
+			//grainCreateAndHaver->GrainColorChange(GrainBackGround::GrainColor::Red);
 		}
 		if (randx == 1)
 		{
@@ -173,12 +178,11 @@ void DeepestSpawner::SquareGrain(VECTOR grainMiddlePos, char plusOrMinas)
 
 void DeepestSpawner::GroundGrain(VECTOR grainMiddlePos)
 {
-	static int GroundGrainHeight = 7;
 	for (int num = 0; num < GroundGrainHeight; num++)
 	{
 		GrainBackGround* grain = grainCreateAndHaver->GetPauseGrain();
-		float x = num - (GroundGrainHeight / 2);
-		float y = -2;
+		float x = ((num - (GroundGrainHeight / 2))*2)+(GroundGrainHeight / 4);
+		float y = -1.2f;
 		VECTOR groundOnPos = VGet(x, y, 0);
 		VECTOR grainPos = (VAdd(position, groundOnPos));
 		VECTOR targetPos = VGet(x, y, -12);

@@ -50,7 +50,6 @@ void GrainBackGround::ResetBackGround(VECTOR pos, VECTOR target)
 	//b = tan(30 * (360 / (3.14f * 2)));
 	//a = (target.y - b * target.x) / -(target.x * target.x);
 	//ab = 0;
-	scale = VGet(1, 1, 1)*(GetRand(10)*0.001f);
 	moving = true;
 }
 

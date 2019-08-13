@@ -27,7 +27,7 @@ void LineEffect::UpdateActor(float deltaTime)
 	endPos = position;
 	endPos.z += LineValue;
 	DrawLine3D(position, endPos, GetColor(255, 255, 255));
-	if (position.z < -10)
+	if (position.z < -LineValue*2)
 	{
 		SetState(Actor::ActiveState::Paused);
 	}
