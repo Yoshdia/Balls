@@ -4,14 +4,15 @@
 class CountDownComponent
 {
 public:
-	CountDownComponent(int max);
+	CountDownComponent(float max);
 	~CountDownComponent();
 
 	bool CountEnd();
 	void ResetCount();
+	void ResetCount(float resetCount);
 private:
-	int maxCount;
-	int nowCount;
+	float maxCount;
+	float nowCount;
 	bool updating;
 };
 

@@ -36,6 +36,8 @@ private:
 
 	HeadForTargetComponent* headForTargetComponent;
 	CountDownComponent* countDownComponent;
+	CountDownComponent* groundSpawnCountDown;
+	CountDownComponent* boxSpawnCountDown;
 	//movingフラグが倒れているときに実行される、次移動する先を決定する関数
 	void CreateMovePlan();
 	//最大数
@@ -51,20 +53,18 @@ private:
 	GrainBackGroundHaver* grainCreateAndHaver;
 	//背景のgrainを産み出す
 	void GrainSpawn(float deltaTime);
-	//設置
-	void SetGrain();
-	void SphereGrain(VECTOR grainMiddlePos);
-	void SquareGrain(VECTOR grainMiddlePos,char plusOrMinas);
+	//void SphereGrain(VECTOR grainMiddlePos);
+	//void SquareGrain(VECTOR grainMiddlePos,char plusOrMinas);
+	void MonotoneGrain(VECTOR grainMiddlePos);
 	void GroundGrain(VECTOR grainMiddlePos);
-
-	//grainを産み出すインターバル
-	float grainCount;
 
 	//grainを産み出すy座標 少し高くする
 	static const float GrainHeight;
 	//grainを円状に産み出す際の半径
 	static const float Radius;
-	static const float SpawnGrainTime;
+
+	static const float SpawnGroundTime;
+	static const float SpawnBoxTime;
 
 	static const float squareHeight;
 	static const int GroundGrainHeight;

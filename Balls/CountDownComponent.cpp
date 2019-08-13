@@ -1,6 +1,6 @@
 #include "CountDownComponent.h"
 
-CountDownComponent::CountDownComponent(int max) :
+CountDownComponent::CountDownComponent(float max) :
 	nowCount(max),
 	maxCount(max),
 	updating(false)
@@ -31,5 +31,12 @@ bool CountDownComponent::CountEnd()
 void CountDownComponent::ResetCount()
 {
 	updating = true;
+	nowCount = maxCount;
+}
+
+void CountDownComponent::ResetCount(float resetCount)
+{
+	updating = true;
+	maxCount = resetCount;
 	nowCount = maxCount;
 }

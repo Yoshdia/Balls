@@ -159,14 +159,26 @@
     <ClCompile Include="HeadForTargetComponent.cpp">
       <Filter>ソース ファイル\Component\Move</Filter>
     </ClCompile>
-    <ClCompile Include="SlowlyChangeScaleComponent.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>ソース ファイル\Actor\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxShape.cpp">
+      <Filter>ソース ファイル\Actor\BackGround</Filter>
     </ClCompile>
     <ClCompile Include="LineEffect.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Actor\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>ソース ファイル\Actor\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="SlowlyChangeScaleComponent.cpp">
+      <Filter>ソース ファイル\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereShape.cpp">
+      <Filter>ソース ファイル\Actor\BackGround</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -269,11 +281,23 @@
     <ClInclude Include="HeadForTargetComponent.h">
       <Filter>ヘッダー ファイル\Component\Move</Filter>
     </ClInclude>
-    <ClInclude Include="SlowlyChangeScaleComponent.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="BackGround.h">
+      <Filter>ヘッダー ファイル\Actor\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxShape.h">
+      <Filter>ヘッダー ファイル\Actor\BackGround</Filter>
     </ClInclude>
     <ClInclude Include="LineEffect.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Actor\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="SlowlyChangeScaleComponent.h">
+      <Filter>ヘッダー ファイル\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>ヘッダー ファイル\Actor\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereShape.h">
+      <Filter>ヘッダー ファイル\Actor\BackGround</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

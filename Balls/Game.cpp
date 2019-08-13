@@ -21,6 +21,7 @@
 
 
 
+
 void Game::MainProcess()
 {
 	//Dxlib初期化処理
@@ -39,14 +40,14 @@ void Game::MainProcess()
 	DWORD nowTick, prevTick;
 	prevTick = timeGetTime();
 
-	float boxHeight = ScreenHeight / 3;
+	float boxHeight = ScreenHeight / 3.0f;
 
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_ESCAPE] == 0)
 	{
-		DrawBox(0, 0, ScreenWidth, boxHeight*3, GetColor(100,100,200), TRUE);
-		DrawBox(0, 0, ScreenWidth, boxHeight*2, GetColor(100,100,220), TRUE);
-		DrawBox(0, 0, ScreenWidth, boxHeight*1, GetColor(100,100,255), TRUE);
+		DrawBox(0, 0, (float)ScreenWidth, boxHeight*3.0f, GetColor(150,150,150), TRUE);
+		DrawBox(0, 0, (float)ScreenWidth, boxHeight*2.0f, GetColor(100,100,100), TRUE);
+		DrawBox(0, 0, (float)ScreenWidth, boxHeight*1.0f, GetColor(50,50,50), TRUE);
 
 		DeltaTimeSet(nowTick, prevTick);
 				

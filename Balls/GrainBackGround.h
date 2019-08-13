@@ -1,38 +1,20 @@
 #pragma once
 
-#include "Actor.h"
-class HeadForTargetComponent;
+#include "BackGround.h"
+class BackGround;
 class ModelComponent;
 
 class GrainBackGround :
-	public Actor
+	public BackGround
 {
 public:
 	GrainBackGround();
 	~GrainBackGround();
 
-	void ResetBackGround(VECTOR pos,VECTOR target);
-	void UpdateActor(float deltaTime);
-	void StopMove();
-
-	void MoveReStart();
-
-	enum GrainColor
-	{
-		Red,
-		white,
-	};
-	void ColorChange(GrainColor color);
+	void ResetBackGround(VECTOR pos, VECTOR targetPos);
 private:
-	VECTOR targetPos;
-	HeadForTargetComponent* headForTarget;
+	void UpdateBack(float deltaTime);
 	ModelComponent* modelComponent;
-
 	static const VECTOR MoveSpeed;
-
-	int redModel;
-	int whiteModel;
-
-	bool moving;
 };
 

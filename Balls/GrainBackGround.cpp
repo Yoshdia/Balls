@@ -1,5 +1,4 @@
 #include "GrainBackGround.h"
-#include "HeadForTargetComponent.h"
 #include "ModelComponent.h"
 #include "Renderer.h"
 #include <math.h>
@@ -13,23 +12,16 @@
 //	z *= mag;
 //}
 
-const VECTOR GrainBackGround::MoveSpeed = VGet(1.0f, 1.0f, 5.0f);
+const VECTOR GrainBackGround::MoveSpeed= VGet(5, 5, 30.0f);
 
 GrainBackGround::GrainBackGround()
+	:BackGround(MoveSpeed)
 {
-	headForTarget = new HeadForTargetComponent(this, 120, VGet(0, 0, 0), VGet(0, 0, 0));
-
-	scale = VGet(0.01f, 0.001f, 0.01f);
-	SetState(Actor::ActiveState::Paused);
-	moving = false;
+	scale = VGet(0.01f, 0.001f, 0.06f);
 
 	modelComponent = new ModelComponent(this, ModelComponent::DrawGrainNumber);
-	redModel = Renderer::GetInstance()->LoadModel("Resouce/model/normalRedSphere.mv1");
-	modelComponent->SetModel(redModel);
-	modelComponent->SetModelScale(scale);
 
-
-	whiteModel = Renderer::GetInstance()->LoadModel("Resouce/model/normalSphere.mv1");
+	int whiteModel = Renderer::GetInstance()->LoadModel("Resouce/model/normalSphere.mv1");
 	modelComponent->SetModel(whiteModel);
 	modelComponent->SetModelScale(scale);
 
@@ -39,53 +31,22 @@ GrainBackGround::~GrainBackGround()
 {
 }
 
-void GrainBackGround::ResetBackGround(VECTOR pos, VECTOR target)
+void GrainBackGround::ResetBackGround(VECTOR pos, VECTOR targetPos)
 {
-	SetPosition(pos);
-	headForTarget->SetTargetPos(target);
-	SetState(Actor::ActiveState::Active);
+	BackGround::ResetBackGround(pos, targetPos);
+}
+
 	//moveComponent->SetMoveSpeed(CalculateVelocity(pos, target));
 	//offset = pos;
 	//this->target = VSub(target, pos);
 	//b = tan(30 * (360 / (3.14f * 2)));
 	//a = (target.y - b * target.x) / -(target.x * target.x);
 	//ab = 0;
-	moving = true;
-}
 
-void GrainBackGround::UpdateActor(float deltaTime)
+void GrainBackGround::UpdateBack(float deltaTime)
 {
-	if (moving)
-	{
-		headForTarget->SetMoveSpeed(MoveSpeed);
-		headForTarget->HeadForTarget(deltaTime);
-	}
-
-	if (position.z < -10)
-	{
-		SetState(Actor::ActiveState::Paused);
-	}
 }
 
-void GrainBackGround::StopMove()
-{
-	moving = false;
-	headForTarget->MoveComponent::SetMoveSpeed(VGet(0, 0, 0));
-}
-
-void GrainBackGround::MoveReStart()
-{
-	moving = true;
-}
-
-void GrainBackGround::ColorChange(GrainColor color)
-{
-	switch (color)
-	{
-	case(GrainColor::Red):modelComponent->SetModel(redModel); break;
-	case(GrainColor::white):modelComponent->SetModel(whiteModel); break;
-	}
-}
 
 //VECTOR GrainBackGround::CalculateVelocity(const VECTOR& pointA,const VECTOR& pointB)
 //{

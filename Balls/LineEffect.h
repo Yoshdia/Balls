@@ -11,10 +11,9 @@ public:
 
 	void ResetLine(VECTOR pos);
 	void UpdateActor(float deltaTime);
-
 private:
 	VECTOR endPos;
+	static const float zSpeed;
 	static const float LineValue;
-	static const VECTOR MoveSpeed;
 };
 

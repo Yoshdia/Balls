@@ -13,51 +13,87 @@ GrainBackGroundHaver::~GrainBackGroundHaver()
 
 void GrainBackGroundHaver::Create()
 {
-	for (int num = 0; num < 500; num++)
+	for (int num = 0; num < 200; num++)
 	{
-		grain[num] = new GrainBackGround();
+		ground[num] = new GrainBackGround();
+	}
+	for (int num = 0; num < 200; num++)
+	{
+		box[num] = new BoxShape();
+	}
+}
+
+void GrainBackGroundHaver::StopGrain(BackGround * back)
+{
+	back->StopMove();
+}
+
+void GrainBackGroundHaver::ReStartGrain(BackGround * back)
+{
+	Actor::ActiveState backState = back->GetState();
+	if (backState == Actor::ActiveState::Active)
+	{
+		back->MoveReStart();
 	}
 }
 
 GrainBackGround * GrainBackGroundHaver::GetPauseGrain()
 {
-	for (int num = 0; num < 500; num++)
+	GrainBackGround* groundNum=nullptr;
+	for (int num = 0; num < 200; num++)
 	{
-		if (grain[num]->GetState() == Actor::ActiveState::Paused)
+		if (ground[num]->GetState() == Actor::ActiveState::Paused)
 		{
-			return grain[num];
+			groundNum = ground[num];
+			break;
 		}
-
 	}
+	if(!groundNum)
+	{
+	groundNum = new GrainBackGround();	
+	}
+	return groundNum;
+}
 
-	return new GrainBackGround();
+BoxShape * GrainBackGroundHaver::GetPauseBox()
+{
+	BoxShape* boxNum = nullptr;
+	for (int num = 0; num < 200; num++)
+	{
+		if (box[num]->GetState() == Actor::ActiveState::Paused)
+		{
+			boxNum = box[num];
+			break;
+		}
+	}
+	if (!boxNum)
+	{
+		boxNum = new BoxShape();
+	}
+	return boxNum;
 }
 
 void GrainBackGroundHaver::AllGrainsStop()
 {
-	for (auto back : grain)
+	for (auto back : ground)
 	{
+		StopGrain(back);
 		back->StopMove();
+	}
+	for (auto back : box)
+	{
+		StopGrain(back);
 	}
 }
 
 void GrainBackGroundHaver::AllGrainReStart()
 {
-	for (auto back : grain)
+	for (auto back : ground)
 	{
-		Actor::ActiveState backState = back->GetState();
-		if (backState == Actor::ActiveState::Active)
-		{
-			back->MoveReStart();
-		}
+		ReStartGrain(back);
+	}
+	for (auto back : box)
+	{
+		ReStartGrain(back);
 	}
 }
-
-void GrainBackGroundHaver::GrainColorChange(GrainBackGround::GrainColor color)
-{
-	for (auto back : grain)
-	{
-		back->ColorChange(color);
-	}
-}
-
