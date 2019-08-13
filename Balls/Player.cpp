@@ -6,6 +6,7 @@
 #include "SphereColliderComponent.h"
 #include "CountDownComponent.h" 
 #include "SlowlyChangeScaleComponent.h"
+#include "HeadForTargetComponent.h"
 
 const VECTOR Player::normalModelScale = VGet(0.01f, 0.01f, 0.01f);
 //const VECTOR Player::normalModelScale = VGet(10, 10, 10);
@@ -15,10 +16,13 @@ const VECTOR Player::superModelScale = VGet(0.02f, 0.02f, 0.02f);
 const int Player::superCountMax=180;
 const int Player::superEndLikeryCount=50;
 const int Player::superEndCount= Player::superCountMax- Player::superEndLikeryCount;
+const VECTOR Player::MoveSpeed = VGet(5.0f, 0, 0);
 
 Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey)
 {
 	position = initPos;
+	firstPosition=initPos;
+	firstDirection = next;
 
 	scale = VGet(0.01f, 0.01f, 0.01f);
 	//モデルを保存し描画するComponentを実装(後々使用するsuperBallのモデルもここでScaleをSetしておく)
@@ -33,13 +37,14 @@ Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey)
 	modelAndSlowlyChangeScaleComponent->SetModel(normalModelId);
 	modelAndSlowlyChangeScaleComponent->SetModelScale(scale);
 
-	MovePlayerComponent * movePlayerComponent;
-	movePlayerComponent = new MovePlayerComponent(this, ModelComponent::DrawPlayerNumber, moveKey, next, VGet(5.0f, 0, 0));
+	movePlayerComponent = new MovePlayerComponent(this, ModelComponent::DrawPlayerNumber, moveKey, next, MoveSpeed);
 
 	sphereCollider = new SphereColliderComponent(this, 150, 0.01f);
 
 	countDownComponent = new CountDownComponent(superCountMax);
 	superLikelyCountDownComponent = new CountDownComponent(superEndCount);
+
+	headForFirstPosition = new HeadForTargetComponent(this, 200, VGet(0, 0, 0), VGet(0, 0, 0));
 }
 
 Player::~Player()
@@ -61,6 +66,34 @@ void Player::UpdateActor(float deltaTime)
 void Player::OnCollision()
 {
 	ChangeSuperModel();
+}
+
+void Player::StartMove()
+{
+	movePlayerComponent->StartCorutine();
+}
+
+void Player::StopMove()
+{
+	movePlayerComponent->StopCorutine();
+}
+
+void Player::SetFirstPosition()
+{
+	headForFirstPosition->SetMoveSpeed(VGet(1, 5, 0));
+	headForFirstPosition->SetTargetPos(firstPosition);
+}
+
+void Player::MoveFirstPosition(float deltaTime)
+{
+	headForFirstPosition->HeadForTarget(deltaTime);
+}
+
+void Player::SkipMoveFirstPosition()
+{
+	headForFirstPosition->SetMoveSpeed(VGet(0, 0, 0));
+	movePlayerComponent->SetMoveDirection(firstDirection);
+	SetPosition(firstPosition);
 }
 
 void Player::LikelyChangeNormalModel()

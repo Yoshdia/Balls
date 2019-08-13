@@ -2,9 +2,11 @@
 #include "InputKey.h"
 #include "Title.h"
 
-Title::Title(DeepestSpawner* deepestSpawner, Score* score):
-	Scene(deepestSpawner,score)
+Title::Title(DeepestSpawner* deepestSpawner, Player* pLeftPlayer,Player* pRightPlayer, Score* score):
+	Scene(deepestSpawner, pLeftPlayer, pRightPlayer, score)
 {
+	leftPlayer->SetFirstPosition();
+	rightPlayer->SetFirstPosition();
 }
 
 Title::~Title()
@@ -13,7 +15,8 @@ Title::~Title()
 
 void Title::Update(float deltaTime)
 {
-	
+	leftPlayer->MoveFirstPosition( deltaTime);
+	rightPlayer->MoveFirstPosition(deltaTime);
 }
 
 void Title::Render()
@@ -25,6 +28,8 @@ sceneName Title::SceneChange()
 {
 	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1)
 	{
+		leftPlayer->SkipMoveFirstPosition();
+		rightPlayer->SkipMoveFirstPosition();
 		deepestSpawner->ReStartDeepestObject();
 		return sceneName::play;
 	}

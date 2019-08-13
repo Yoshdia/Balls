@@ -33,12 +33,11 @@ void Game::MainProcess()
 	CreateFirstActors();
 
 	//最初のシーンを作成
-	scene = new Play(deepestSpawner, score);
+	scene = new Play(deepestSpawner, leftPlayer,rightPlayer,score);
 
 	//deltaTimeの計測
 	DWORD nowTick, prevTick;
 	prevTick = timeGetTime();
-
 
 
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
@@ -123,8 +122,8 @@ void Game::CreateFirstActors()
 {
 	deepestSpawner = new DeepestSpawner;
 	score = new Score;
-	new Player(leftPlayerPos, Game::MoveDirection::Left, KEY_INPUT_SPACE);
-	new Player(rightPlayerPos, Game::MoveDirection::Right, KEY_INPUT_RETURN);
+	leftPlayer=new Player(leftPlayerPos, Game::MoveDirection::Left, KEY_INPUT_SPACE);
+	rightPlayer=new Player(rightPlayerPos, Game::MoveDirection::Right, KEY_INPUT_RETURN);
 }
 
 bool Game::ScreenUpdate()
@@ -144,14 +143,14 @@ void Game::SceneChange()
 	{
 	case(sceneName::title):
 		delete scene;
-		scene = new Title(deepestSpawner, score);
+		scene = new Title(deepestSpawner, leftPlayer,rightPlayer,score);
 		break;
 	case(sceneName::play):
 		delete scene;
-		scene = new Play(deepestSpawner, score);
+		scene = new Play(deepestSpawner, leftPlayer, rightPlayer, score);
 		break;
 	case(sceneName::clear):
-		scene = new Clear(deepestSpawner, score);
+		scene = new Clear(deepestSpawner, leftPlayer, rightPlayer, score);
 		break;
 	}
 }

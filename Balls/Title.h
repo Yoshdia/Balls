@@ -6,7 +6,7 @@ class Title :
 	public Scene
 {
 public:
-	Title(DeepestSpawner* deepestSpawner, Score* score);
+	Title(DeepestSpawner* deepestSpawner, Player* pLeftPlayer,Player* pRightPlayer, Score* score);
 	~Title();
 
 	void Update(float deltaTime);

@@ -35,6 +35,7 @@ void HeadForTargetComponent::SetTargetPos(const VECTOR& target)
 void HeadForTargetComponent::SetMoveSpeed(const VECTOR& speed)
 {
 	moveSpeed = speed;
+	MoveComponent::SetMoveSpeed(speed);
 }
 
 float HeadForTargetComponent::CulculationVector(const float& pos,const float& target)

@@ -21,7 +21,7 @@ const float DeepestSpawner::squareHeight = 10;
 
 const int DeepestSpawner::WallRandMax = 100;
 const float DeepestSpawner::AddPointRand = (float)(5 * 0.01);
-const float DeepestSpawner::AddSpeedRand = (float)((DeepestSpawner::AddPointRand + 50)*0.01);
+const float DeepestSpawner::AddSpeedRand = (float)((DeepestSpawner::AddPointRand + 5)*0.01);
 const float DeepestSpawner::SpawnTime = 60;
 const VECTOR DeepestSpawner::StartRunPos = VGet(1, 0, 100);
 

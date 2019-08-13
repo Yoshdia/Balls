@@ -178,6 +178,7 @@
     <ClCompile Include="Play.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="SlowlyChangeScaleComponent.cpp" />
     <ClCompile Include="SphereColliderComponent.cpp" />

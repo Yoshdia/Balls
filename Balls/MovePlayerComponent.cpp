@@ -15,6 +15,7 @@ MovePlayerComponent::MovePlayerComponent(Actor * owner, int processNumber, char 
 	, moving(false)
 	,movement(MovingDistanceSum)
 	,middlePos((float)2*next)
+	,updating(false)
 {
 }
 
@@ -24,6 +25,10 @@ MovePlayerComponent::~MovePlayerComponent()
 
 void MovePlayerComponent::Update(float deltaTime)
 {
+	if (!updating)
+	{
+		return;
+	}
 	//ˆÚ“®’†‚Å‚È‚¢ê‡‚Ì‚Ý“ü—Í‚ðŽó‚¯•t‚¯‚é
 	if (!moving)
 	{
@@ -67,4 +72,11 @@ void MovePlayerComponent::Update(float deltaTime)
 		}
 	}
 	Rotate(deltaTime);
+}
+
+void MovePlayerComponent::StartCorutine()
+{
+	updating = true;
+	targetPos = ownerActor->GetPosition().x;
+	moving=false;
 }

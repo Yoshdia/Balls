@@ -60,6 +60,7 @@ bool Collider::CollisionCall()
 				continue;
 			}
 			bool end = CollisionBallWall(ball, box);
+			
 			if (end)
 			{
 				BoxColliderComponent::ColliderTag boxTag = box->GetTag();
@@ -90,6 +91,7 @@ bool Collider::CollisionCall()
 					box->OnCollision();
 					continue;
 				}
+				ball->OutOfScreen();
 				return end;
 			}
 		}

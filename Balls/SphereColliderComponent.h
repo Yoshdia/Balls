@@ -25,6 +25,7 @@ public:
 	CollisionTag GetTag() { return myTag; }
 	void OnCollision();
 	void Update(float deltaTime);
+	void OutOfScreen() ;
 private:
 	CollisionTag myTag;
 	void UpdatePosition();

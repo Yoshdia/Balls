@@ -4,8 +4,8 @@
 
 
 
-Clear::Clear(DeepestSpawner* deepestSpawner, Score* score):
-	Scene(deepestSpawner,score)
+Clear::Clear(DeepestSpawner* deepestSpawner, Player* pLeftPlayer,Player* pRightPlayer, Score* score):
+	Scene(deepestSpawner,pLeftPlayer,pRightPlayer,score)
 {
 }
 

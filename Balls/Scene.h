@@ -10,12 +10,13 @@ enum sceneName
 
 #include "DeepestSpawner.h"
 #include "Score.h"
+#include "Player.h"
 
 //Scene基底クラス
 class Scene
 {
 public:
-	Scene(DeepestSpawner* pDeepestSpawn, Score* pScore) { deepestSpawner = pDeepestSpawn; score = pScore; };
+	Scene(DeepestSpawner* pDeepestSpawn, Player* pLeftPlayer,Player* pRightPlayer,Score* pScore) ;
 	virtual ~Scene() {};
 	//更新
 	virtual void Update(float deltaTime) {};
@@ -26,4 +27,6 @@ public:
 protected:
 	DeepestSpawner* deepestSpawner;
 		Score* score;
+		Player* leftPlayer;
+		Player* rightPlayer;
 };

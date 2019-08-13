@@ -8,6 +8,7 @@ class BoxColliderComponent;
 class SphereColliderComponent;
 class DeepestSpawner;
 class Score;
+class Player;
 
 //ƒQ[ƒ€‘S‘Ì‚Ìˆ—
 class Game
@@ -67,6 +68,8 @@ private:
 
 	DeepestSpawner* deepestSpawner;
 	 Score* score;
+	 Player* leftPlayer;
+	 Player* rightPlayer;
 
 	//ŠÔ
 	float deltaTime;

@@ -5,11 +5,14 @@
 #include "InputKey.h"
 #include "GameSpeedManager.h"
 
-Play::Play(DeepestSpawner* deepestSpawner, Score* score):
-	Scene(deepestSpawner,score)
+Play::Play(DeepestSpawner* deepestSpawner, Player* pLeftPlayer, Player* pRightPlayer, Score* score) :
+	Scene(deepestSpawner, pLeftPlayer, pRightPlayer, score)
 {
 	count = 0;
 	gameEnd = false;
+	leftPlayer->StartMove();
+	rightPlayer->StartMove();
+	
 }
 
 
@@ -33,8 +36,10 @@ void Play::Render()
 
 sceneName Play::SceneChange()
 {
-	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1||gameEnd)
+	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1 || gameEnd)
 	{
+		leftPlayer->StopMove();
+		rightPlayer->StopMove();
 		//gameSpeedのリセット
 		GameSpeedManager::GetInstance()->ResetGameSpeed();
 		//全てのWallを停止させる

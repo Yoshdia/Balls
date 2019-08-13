@@ -12,7 +12,13 @@ public:
 	MovePlayerComponent(Actor* owner,int processNumber, char moveKey, Game::MoveDirection next,VECTOR rotateSpeed);
 	~MovePlayerComponent();
 	void Update(float deltaTime);
+
+	void StartCorutine();
+	void StopCorutine() { updating = false; }
+	void SetMoveDirection(Game::MoveDirection next) { nextMoveDirection = next; }
 protected:
+
+	bool updating;
 	//ŽŸ‚ÌˆÚ“®•ûŒü
 	Game::MoveDirection nextMoveDirection;
 	//ˆÚ“®—\’è’n“_

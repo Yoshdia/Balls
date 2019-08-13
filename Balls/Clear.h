@@ -6,7 +6,7 @@ class Clear :
 	public Scene
 {
 public:
-	Clear(DeepestSpawner* deepestSpawner, Score* score);
+	Clear(DeepestSpawner* deepestSpawner,Player* pLeftPlayer,Player* pRightPlayer, Score* score);
 	~Clear();
 
 	void Update(float deltaTime);

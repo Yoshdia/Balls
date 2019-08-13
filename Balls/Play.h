@@ -9,7 +9,7 @@ class Play :
 private:
 
 public:
-	Play(DeepestSpawner* deepestSpawner, Score* score);
+	Play(DeepestSpawner* deepestSpawner, Player* pLeftPlayer,Player* pRightPlayer, Score* score);
 	~Play();
 
 	void Update(float deltaTime);
