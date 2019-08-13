@@ -16,7 +16,7 @@ public:
 	~DeepestSpawner();
 
 	void SpawnerUpdate(float deltaTime);
-
+	void UpdateActor(float deltaTime);
 	//‚·‚×‚Ä‚ÌObject‚ÌˆÚ“®‚ğ’â~‚³‚¹¶¬‚à‚â‚ß‚³‚¹‚é
 	void StopDeepestObject();
 	//‚·‚×‚Ä‚ÌObject‚ğ‰Šúó‘Ô‚É–ß‚·

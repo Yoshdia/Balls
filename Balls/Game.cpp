@@ -39,13 +39,17 @@ void Game::MainProcess()
 	DWORD nowTick, prevTick;
 	prevTick = timeGetTime();
 
+	float boxHeight = ScreenHeight / 3;
 
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_ESCAPE] == 0)
 	{
+		DrawBox(0, 0, ScreenWidth, boxHeight*3, GetColor(100,100,200), TRUE);
+		DrawBox(0, 0, ScreenWidth, boxHeight*2, GetColor(100,100,220), TRUE);
+		DrawBox(0, 0, ScreenWidth, boxHeight*1, GetColor(100,100,255), TRUE);
+
 		DeltaTimeSet(nowTick, prevTick);
-		
-		
+				
 		InputKey::GetInstance()->UpdateKey();
 		ActorManager::GetInstance()->ActorUpdate(deltaTime);
 

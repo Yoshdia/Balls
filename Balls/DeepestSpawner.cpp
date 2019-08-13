@@ -23,7 +23,7 @@ const int DeepestSpawner::WallRandMax = 100;
 const float DeepestSpawner::AddPointRand = (float)(5 * 0.01);
 const float DeepestSpawner::AddSpeedRand = (float)((DeepestSpawner::AddPointRand + 5)*0.01);
 const float DeepestSpawner::SpawnTime = 60;
-const VECTOR DeepestSpawner::StartRunPos = VGet(1, 0, 0);
+const VECTOR DeepestSpawner::StartRunPos = VGet(1, 0, 10);
 
 const int DeepestSpawner::CreateMovePlanCntMax = 600;
 const float DeepestSpawner::MoveStage = 3.0f;
@@ -72,7 +72,12 @@ void DeepestSpawner::SpawnerUpdate(float deltaTime)
 	CreateMovePlan();
 	headForTargetComponent->HeadForTarget(deltaTime);
 
-	DrawSphere3D(position, 3, 255, GetColor(255, 255, 255), GetColor(255, 255, 255), TRUE);
+}
+
+void DeepestSpawner::UpdateActor(float deltaTime)
+{
+	DrawSphere3D(position, 5, 255, GetColor(255, 255, 255), GetColor(150, 150, 255), TRUE);
+
 }
 
 void DeepestSpawner::StopDeepestObject()
