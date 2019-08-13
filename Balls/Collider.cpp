@@ -50,6 +50,7 @@ void Collider::RemoveSphereCollider(SphereColliderComponent * sphere)
 
 bool Collider::CollisionCall()
 {
+	bool end = false;
 	for (auto ball : sphereCollider)
 	{
 		for (auto box : boxCollider)
@@ -59,9 +60,9 @@ bool Collider::CollisionCall()
 			{
 				continue;
 			}
-			bool end = CollisionBallWall(ball, box);
+			bool hit = CollisionBallWall(ball, box);
 			
-			if (end)
+			if (hit)
 			{
 				BoxColliderComponent::ColliderTag boxTag = box->GetTag();
 				//‰Á‘¬•Ç‚¾‚Á‚½ê‡AgameSpeed‚ð‰Á‘¬‚³‚¹‚é
@@ -92,11 +93,11 @@ bool Collider::CollisionCall()
 					continue;
 				}
 				ball->OutOfScreen();
-				return end;
+				end = true;
 			}
 		}
 	}
-	return false;
+	return end;
 }
 
 bool Collider::CollisionBallWall(SphereColliderComponent * sphere, BoxColliderComponent * box)

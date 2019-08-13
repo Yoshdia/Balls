@@ -6,7 +6,8 @@
 #include "GameSpeedManager.h"
 
 Play::Play(DeepestSpawner* deepestSpawner, Player* pLeftPlayer, Player* pRightPlayer, Score* score) :
-	Scene(deepestSpawner, pLeftPlayer, pRightPlayer, score)
+	Scene(deepestSpawner, pLeftPlayer, pRightPlayer, score),
+	endCount(0)
 {
 	count = 0;
 	gameEnd = false;
@@ -24,6 +25,10 @@ void Play::Update(float deltaTime)
 {
 	deepestSpawner->SpawnerUpdate(deltaTime);
 	gameEnd = Collider::GetInstance()->CollisionCall();
+	if (gameEnd)
+	{
+		endCount++;
+	}
 }
 
 void Play::Render()
@@ -36,7 +41,7 @@ void Play::Render()
 
 sceneName Play::SceneChange()
 {
-	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1 || gameEnd)
+	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1 || (gameEnd&&endCount>2))
 	{
 		leftPlayer->StopMove();
 		rightPlayer->StopMove();
