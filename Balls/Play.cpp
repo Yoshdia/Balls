@@ -5,7 +5,6 @@
 #include "InputKey.h"
 #include "GameSpeedManager.h"
 
-
 Play::Play(DeepestSpawner* deepestSpawner, Score* score):
 	Scene(deepestSpawner,score)
 {

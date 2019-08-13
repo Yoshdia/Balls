@@ -170,6 +170,7 @@
     <ClCompile Include="HeadForTargetComponent.cpp" />
     <ClCompile Include="InputKey.cpp" />
     <ClCompile Include="JammerWall.cpp" />
+    <ClCompile Include="LineEffect.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModelComponent.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="HeadForTargetComponent.h" />
     <ClInclude Include="InputKey.h" />
     <ClInclude Include="JammerWall.h" />
+    <ClInclude Include="LineEffect.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="ModelComponent.h" />
     <ClInclude Include="MoveComponent.h" />

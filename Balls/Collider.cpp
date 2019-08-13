@@ -67,7 +67,7 @@ bool Collider::CollisionCall()
 				if (boxTag == BoxColliderComponent::ColliderTag::AddSpeedWall)
 				{
 					box->OnCollision();
-
+					
 					continue;
 				}
 				//addPointWallだった場合、スコアを加算する

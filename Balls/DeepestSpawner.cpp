@@ -21,14 +21,14 @@ const float DeepestSpawner::squareHeight = 10;
 
 const int DeepestSpawner::WallRandMax = 100;
 const float DeepestSpawner::AddPointRand = (float)(5 * 0.01);
-const float DeepestSpawner::AddSpeedRand = (float)((DeepestSpawner::AddPointRand + 5)*0.01);
+const float DeepestSpawner::AddSpeedRand = (float)((DeepestSpawner::AddPointRand + 50)*0.01);
 const float DeepestSpawner::SpawnTime = 60;
 const VECTOR DeepestSpawner::StartRunPos = VGet(1, 0, 100);
 
 const int DeepestSpawner::CreateMovePlanCntMax = 600;
 const float DeepestSpawner::MoveStage = 3.0f;
-const VECTOR DeepestSpawner::AdjacentTarget = VGet((7.0f/ MoveStage),3.0,0);
-const VECTOR DeepestSpawner::MovingSpeed = VGet(1,1,0.0f);
+const VECTOR DeepestSpawner::AdjacentTarget = VGet((7.0f / MoveStage), 3.0, 0);
+const VECTOR DeepestSpawner::MovingSpeed = VGet(1, 1, 0.0f);
 
 DeepestSpawner::DeepestSpawner()
 {
@@ -65,20 +65,9 @@ void DeepestSpawner::SpawnerUpdate(float deltaTime)
 
 	GrainSpawn(deltaTime);
 	WallSpawn(deltaTime);
-	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_6])
-	{
-		position.y += 0.01f;
-	}
-	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_7])
-	{
-		position.y -= 0.01f;
-	}
 
-		CreateMovePlan();
-		headForTargetComponent->HeadForTarget(deltaTime);
-	
-
-	DrawSphere3D(position, 5, 32, GetColor(255, 255, 255), GetColor(255, 255, 255), TRUE);
+	CreateMovePlan();
+	headForTargetComponent->HeadForTarget(deltaTime);
 }
 
 void DeepestSpawner::StopDeepestObject()
@@ -110,7 +99,7 @@ void DeepestSpawner::CreateMovePlan()
 		{
 			grainShade = DeepestSpawner::GrainShade::sphere;
 		}
-		if (randx== -1)
+		if (randx == -1)
 		{
 			grainShade = DeepestSpawner::GrainShade::square;
 		}
@@ -118,9 +107,9 @@ void DeepestSpawner::CreateMovePlan()
 		{
 			grainCreateAndHaver->GrainColorChange(GrainBackGround::GrainColor::white);
 		}
-		int randy = GetRand(2)-1;
+		int randy = GetRand(2) - 1;
 		VECTOR targetPos = VGet(0, 0, 0);
-		targetPos.x= AdjacentTarget.x * randx;
+		targetPos.x = AdjacentTarget.x * randx;
 		targetPos.y = AdjacentTarget.y * randy;
 		headForTargetComponent->SetTargetPos(targetPos);
 		countDownComponent->ResetCount();
@@ -173,8 +162,8 @@ void DeepestSpawner::SquareGrain(VECTOR grainMiddlePos, char plusOrMinas)
 	for (int num = 0; num < 7; num++)
 	{
 		GrainBackGround* grain = grainCreateAndHaver->GetPauseGrain();
-		float x = squareHeight / 2*plusOrMinas;
-		float y = (-squareHeight/8)+num;
+		float x = squareHeight / 2 * plusOrMinas;
+		float y = (-squareHeight / 8) + num;
 		VECTOR squareOnPos = VGet(x, y, 0);
 		VECTOR grainPos = VAdd(position, squareOnPos);
 		VECTOR targetPos = VGet(x, y, -12);

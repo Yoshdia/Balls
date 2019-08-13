@@ -19,7 +19,7 @@
 #include <mmsystem.h>
 #pragma comment (lib, "winmm.lib") 
 
-#include"DeepestSpawner.h"
+
 
 void Game::MainProcess()
 {
@@ -39,12 +39,14 @@ void Game::MainProcess()
 	DWORD nowTick, prevTick;
 	prevTick = timeGetTime();
 
-	DeepestSpawner* deepest = new DeepestSpawner();
+
 
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_ESCAPE] == 0)
 	{
 		DeltaTimeSet(nowTick, prevTick);
+		
+		
 		InputKey::GetInstance()->UpdateKey();
 		ActorManager::GetInstance()->ActorUpdate(deltaTime);
 
@@ -56,10 +58,6 @@ void Game::MainProcess()
 		SceneChange();
 	}
 
-	delete deepest;
-	deepest = nullptr;
-	delete deepestSpawner;
-	deepestSpawner = nullptr;
 	delete score;
 	score = nullptr;
 	delete scene;

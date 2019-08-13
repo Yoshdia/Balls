@@ -162,6 +162,9 @@
     <ClCompile Include="SlowlyChangeScaleComponent.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="LineEffect.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -264,6 +267,9 @@
       <Filter>ヘッダー ファイル\Component\Move</Filter>
     </ClInclude>
     <ClInclude Include="SlowlyChangeScaleComponent.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="LineEffect.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
