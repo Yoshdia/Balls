@@ -13,7 +13,7 @@ Play::Play(DeepestSpawner* deepestSpawner, Player* pLeftPlayer, Player* pRightPl
 	gameEnd = false;
 	leftPlayer->StartMove();
 	rightPlayer->StartMove();
-	
+	score->ClearScore();
 }
 
 
@@ -24,7 +24,7 @@ Play::~Play()
 void Play::Update(float deltaTime)
 {
 	deepestSpawner->SpawnerUpdate(deltaTime);
-	gameEnd = Collider::GetInstance()->CollisionCall();
+	gameEnd = Collider::GetInstance()->CollisionCall(score);
 	if (gameEnd)
 	{
 		endCount++;
@@ -34,6 +34,8 @@ void Play::Update(float deltaTime)
 void Play::Render()
 {
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "Play");
+	int nowScore = score->GetScore();
+	DrawFormatString(0, 16, GetColor(255, 255, 255), "Score:%d", nowScore);
 	//3D‹óŠÔ‚Ì”F¯‚ÆƒJƒƒ‰‚Ì³í“®ì‚Ì‚½‚ß‚É’†‰›‚É10‚Ìü‚ğ•`‚­
 	//DrawLine3D(VGet(-5, 0, 0), VGet(5, 0, 0), GetColor(255, 255, 255));
 	//DrawLine3D(VGet(0, -5, 0), VGet(0, 5, 0), GetColor(255, 255, 255));

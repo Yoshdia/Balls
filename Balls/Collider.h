@@ -4,6 +4,7 @@
 
 class SphereColliderComponent;
 class BoxColliderComponent;
+class Score;
 
 //Sphere(player)やBox(wall)を所持し衝突判定まで行うシングルトンクラス
 class Collider
@@ -21,7 +22,7 @@ public:
 	void RemoveSphereCollider(SphereColliderComponent* sphere);
 
 	//衝突判定を行う関数を呼ぶ関数。戻り値は同じ　Playから呼ばれる
-	bool CollisionCall();
+	bool CollisionCall(Score* score);
 	//衝突判定を行う関数
 	bool CollisionBallWall(SphereColliderComponent * sphere, BoxColliderComponent * box);
 

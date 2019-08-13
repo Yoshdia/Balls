@@ -15,7 +15,7 @@ const VECTOR Player::superModelScale = VGet(0.02f, 0.02f, 0.02f);
 
 const int Player::superCountMax=180;
 const int Player::superEndLikeryCount=50;
-const int Player::superEndCount= Player::superCountMax- Player::superEndLikeryCount;
+const int Player::superEndCount= Player::superCountMax- (Player::superEndLikeryCount*1.5);
 const VECTOR Player::MoveSpeed = VGet(5.0f, 0, 0);
 
 Player::Player(VECTOR initPos, Game::MoveDirection next, char moveKey)

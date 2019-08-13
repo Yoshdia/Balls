@@ -1,6 +1,7 @@
 #include "Collider.h"
 #include "SphereColliderComponent.h"
 #include "BoxColliderComponent.h"
+#include "Score.h"
 
 Collider* Collider::collider = nullptr;
 
@@ -48,7 +49,7 @@ void Collider::RemoveSphereCollider(SphereColliderComponent * sphere)
 	}
 }
 
-bool Collider::CollisionCall()
+bool Collider::CollisionCall(Score* score)
 {
 	bool end = false;
 	for (auto ball : sphereCollider)
@@ -61,7 +62,8 @@ bool Collider::CollisionCall()
 				continue;
 			}
 			bool hit = CollisionBallWall(ball, box);
-			
+			score->AddScore(Score::PlusAvoidScore);
+
 			if (hit)
 			{
 				BoxColliderComponent::ColliderTag boxTag = box->GetTag();
@@ -70,13 +72,14 @@ bool Collider::CollisionCall()
 				{
 					box->OnCollision();
 					
+
 					continue;
 				}
 				//addPointWallだった場合、スコアを加算する
 				if (boxTag == BoxColliderComponent::ColliderTag::AddPointWall)
 				{
 					box->OnCollision();
-
+					score->AddScore(Score::PlusWallScore);
 					continue;
 				}
 				if (boxTag == BoxColliderComponent::ColliderTag::SuperWall)
@@ -90,6 +93,7 @@ bool Collider::CollisionCall()
 				if (ball->GetTag() == SphereColliderComponent::CollisionTag::SuperPlayer)
 				{
 					box->OnCollision();
+					score->AddScore(Score::PlusBreakScore);
 					continue;
 				}
 				ball->OutOfScreen();

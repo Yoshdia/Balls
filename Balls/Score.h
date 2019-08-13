@@ -2,17 +2,17 @@
 class Score
 {
 public:
-	struct ScoreTime
-	{
-		int time;
-		int score;
-	};
-	Score() { scoreTime = { 0,0 }; };
+	Score() { ClearScore(); };
 	~Score() {};
-	void PlusScore(int point) { scoreTime.time += point; };
-	void PlusTime() { scoreTime.score++; };
-	ScoreTime GetScore() { return scoreTime; }
+
+	void AddScore() { score++; }
+	void AddScore(int point) { score += point; }
+	const int& GetScore() { return score; }
+	void ClearScore() { score = 0; }
+	static const int PlusWallScore;
+	static const int PlusBreakScore;
+	static const int PlusAvoidScore;
 private:
-	ScoreTime scoreTime;
+	int score;
 };
 
