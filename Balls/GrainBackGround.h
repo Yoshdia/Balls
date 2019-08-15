@@ -8,7 +8,7 @@ class GrainBackGround :
 	public BackGround
 {
 public:
-	GrainBackGround();
+	GrainBackGround(const std::string & fileName,const VECTOR& modelScale);
 	~GrainBackGround();
 
 	void ResetBackGround(VECTOR pos, VECTOR targetPos);

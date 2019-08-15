@@ -14,14 +14,14 @@
 
 const VECTOR GrainBackGround::MoveSpeed= VGet(5, 5, 30.0f);
 
-GrainBackGround::GrainBackGround()
+GrainBackGround::GrainBackGround(const std::string & fileName, const VECTOR& modelScale)
 	:BackGround(MoveSpeed)
 {
-	scale = VGet(0.01f, 0.001f, 0.06f);
+	scale = modelScale;
 
 	modelComponent = new ModelComponent(this, ModelComponent::DrawGrainNumber);
 
-	int whiteModel = Renderer::GetInstance()->LoadModel("Resouce/model/normalSphere.mv1");
+	int whiteModel = Renderer::GetInstance()->LoadModel(fileName);
 	modelComponent->SetModel(whiteModel);
 	modelComponent->SetModelScale(scale);
 

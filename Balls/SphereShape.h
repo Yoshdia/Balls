@@ -7,7 +7,7 @@ public:
 	SphereShape();
 	~SphereShape();
 
-	void ResetSphere(VECTOR pos, float range,bool fill);
+	void ResetSphere(VECTOR pos, VECTOR targetPos,float range,bool fill);
 private:
 	void UpdateBack(float deltaTime);
 	float range;

@@ -15,11 +15,19 @@ void GrainBackGroundHaver::Create()
 {
 	for (int num = 0; num < 200; num++)
 	{
-		ground[num] = new GrainBackGround();
+		ground[num] = new GrainBackGround("Resouce/model/normalSphere.mv1", VGet(0.01f, 0.001f, 0.06f));
+	}	
+	for (int num = 0; num < 200; num++)
+	{
+		grain[num] = new GrainBackGround("Resouce/model/whiteSphere.mv1", VGet(0.002f, 0.002f, 0.002f));
 	}
 	for (int num = 0; num < 200; num++)
 	{
 		box[num] = new BoxShape();
+	}	
+	for (int num = 0; num < 10; num++)
+	{
+		sphere[num] = new SphereShape();
 	}
 }
 
@@ -37,7 +45,7 @@ void GrainBackGroundHaver::ReStartGrain(BackGround * back)
 	}
 }
 
-GrainBackGround * GrainBackGroundHaver::GetPauseGrain()
+GrainBackGround * GrainBackGroundHaver::GetPauseGround()
 {
 	GrainBackGround* groundNum=nullptr;
 	for (int num = 0; num < 200; num++)
@@ -50,9 +58,27 @@ GrainBackGround * GrainBackGroundHaver::GetPauseGrain()
 	}
 	if(!groundNum)
 	{
-	groundNum = new GrainBackGround();	
+	groundNum = new GrainBackGround("Resouce/model/normalSphere.mv1", VGet(0.01f, 0.001f, 0.06f));
 	}
 	return groundNum;
+}
+
+GrainBackGround * GrainBackGroundHaver::GetPauseGrain()
+{
+	GrainBackGround* grainNum = nullptr;
+	for (int num = 0; num < 200; num++)
+	{
+		if (grain[num]->GetState() == Actor::ActiveState::Paused)
+		{
+			grainNum = grain[num];
+			break;
+		}
+	}
+	if (!grainNum)
+	{
+		grainNum = new GrainBackGround("Resouce/model/normalSphere.mv1", VGet(0.002f, 0.002f, 0.002f));
+	}
+	return grainNum;
 }
 
 BoxShape * GrainBackGroundHaver::GetPauseBox()
@@ -73,14 +99,39 @@ BoxShape * GrainBackGroundHaver::GetPauseBox()
 	return boxNum;
 }
 
+SphereShape * GrainBackGroundHaver::GetPauseSphare()
+{
+	SphereShape* sphereNum = nullptr;
+	for (int num = 0; num < 10; num++)
+	{
+		if (sphere[num]->GetState() == Actor::ActiveState::Paused)
+		{
+			sphereNum = sphere[num];
+			break;
+		}
+	}
+	if (!sphereNum)
+	{
+		sphereNum = new SphereShape();
+	}
+	return sphereNum;
+}
+
 void GrainBackGroundHaver::AllGrainsStop()
 {
 	for (auto back : ground)
 	{
 		StopGrain(back);
-		back->StopMove();
+	}
+	for (auto back : grain)
+	{
+		StopGrain(back);
 	}
 	for (auto back : box)
+	{
+		StopGrain(back);
+	}
+	for (auto back : sphere)
 	{
 		StopGrain(back);
 	}
@@ -92,7 +143,15 @@ void GrainBackGroundHaver::AllGrainReStart()
 	{
 		ReStartGrain(back);
 	}
+	for (auto back : grain)
+	{
+		ReStartGrain(back);
+	}
 	for (auto back : box)
+	{
+		ReStartGrain(back);
+	}
+	for (auto back : sphere)
 	{
 		ReStartGrain(back);
 	}

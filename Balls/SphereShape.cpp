@@ -15,12 +15,13 @@ SphereShape::~SphereShape()
 {
 }
 
-void SphereShape::ResetSphere(VECTOR pos, float range,bool fill)
+void SphereShape::ResetSphere(VECTOR pos,VECTOR targetPos ,float range,bool fill)
 {
 	SetPosition(pos);	
 	SetState(Actor::ActiveState::Active);
 	this->range = range;
 	this->fill = fill;
+	ResetBackGround(pos, targetPos);
 }
 
 void SphereShape::UpdateBack(float deltaTime)
