@@ -20,6 +20,7 @@ private :
 	int count;
 	const int SpawnTime=100;
 	bool gameEnd;
+	bool ending;
 	int endCount;
 };
 

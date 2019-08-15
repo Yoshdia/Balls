@@ -11,6 +11,7 @@ Play::Play(DeepestSpawner* deepestSpawner, Player* pLeftPlayer, Player* pRightPl
 {
 	count = 0;
 	gameEnd = false;
+	ending = false;
 	leftPlayer->StartMove();
 	rightPlayer->StartMove();
 	score->ClearScore();
@@ -25,7 +26,12 @@ void Play::Update(float deltaTime)
 {
 	deepestSpawner->SpawnerUpdate(deltaTime);
 	gameEnd = Collider::GetInstance()->CollisionCall(score);
+	//gameEndフラグはCollisionCall無いで毎回初期化されているフラグを受け取っているためPlayの終わり以外で初期化されない二虞endingを建てる
 	if (gameEnd)
+	{
+		ending = true;
+	}
+	if (ending)
 	{
 		endCount++;
 	}
@@ -43,7 +49,7 @@ void Play::Render()
 
 sceneName Play::SceneChange()
 {
-	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1 || (gameEnd&&endCount>2))
+	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_0] == 1 || (ending&&endCount>20))
 	{
 		leftPlayer->StopMove();
 		rightPlayer->StopMove();
@@ -52,6 +58,7 @@ sceneName Play::SceneChange()
 		//全てのWallを停止させる
 		deepestSpawner->StopDeepestObject();
 		return sceneName::clear;
+		ending = false;
 	}
 	return sceneName::noChange;
 }
