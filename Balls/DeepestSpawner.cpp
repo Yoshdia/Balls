@@ -16,7 +16,7 @@
 const float DeepestSpawner::Radius = 6;
 const float DeepestSpawner::GrainHeight = 2;
 const float DeepestSpawner::SpawnGroundTime = 12;
-const float DeepestSpawner::SpawnBoxTime=20;
+const float DeepestSpawner::SpawnBoxTime=5;
 
 
 const float DeepestSpawner::squareHeight = 10;
@@ -191,17 +191,25 @@ void DeepestSpawner::GrainSpawn(float deltaTime)
 
 void DeepestSpawner::MonotoneGrain(VECTOR grainMiddlePos)
 {
-	float hh = (SpawnBoxTime - plusSpeed);
+	//float timeWidth = (SpawnBoxTime - plusSpeed);
+	//float width = 4;
+
+	float timeWidth = (SpawnBoxTime - plusSpeed);
+	if (timeWidth < 1)
+	{
+		timeWidth = 1;
+	}
+
 
 	for (int num = 0; num < 5; num++)
 	{
 		BoxShape* box = grainCreateAndHaver->GetPauseBox();
-		float x = -2;
-		float y = hh * num;
+		float x = -4;
+		float y = ((timeWidth+0.5f) *num)-2;
 		VECTOR boxPos = VGet(x, y, 0);
 		VECTOR grainPos = VAdd(position, boxPos);
 		VECTOR targetPos = VGet(x, y, -30);
-		box->ResetBox(grainPos, targetPos, VGet(0, hh, hh), false);
+		box->ResetBox(grainPos, targetPos, VGet(0, timeWidth, timeWidth), false);
 	}
 }
 

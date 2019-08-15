@@ -1,6 +1,7 @@
 #include "BoxShape.h"
 
-const VECTOR BoxShape::MoveSpeed = VGet(1.0f,1.0f,5.0f);
+//const VECTOR BoxShape::MoveSpeed = VGet(1.0f,1.0f,5.0f);
+const VECTOR BoxShape::MoveSpeed = VGet(5.0f, 5.0f, 30.0f);
 
 BoxShape::BoxShape():
 	Shape(MoveSpeed),

@@ -67,3 +67,4 @@ float HeadForTargetComponent::CulculationVector(const float& pos,const float& ta
 	}
 	return plusPos;
 }
+
