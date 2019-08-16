@@ -13,8 +13,8 @@ const VECTOR Player::normalModelScale = VGet(0.01f, 0.01f, 0.01f);
 const VECTOR Player::superModelScale = VGet(0.02f, 0.02f, 0.02f);
 //const VECTOR Player::superModelScale = VGet(10, 10, 10);
 
-const int Player::superCountMax=180;
-const int Player::superEndLikeryCount=50;
+const int Player::superCountMax=460;
+const int Player::superEndLikeryCount=100;
 const int Player::superEndCount= Player::superCountMax- (Player::superEndLikeryCount*1.5f);
 const VECTOR Player::MoveSpeed = VGet(5.0f, 0, 0);
 

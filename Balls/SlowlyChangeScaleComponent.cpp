@@ -5,7 +5,7 @@ SlowlyChangeScaleComponent::SlowlyChangeScaleComponent(Actor * owner, int update
 	ModelComponent(owner, updateOrder),
 	updating(false),
 	scale(OriginScale),
-	increaseScale(OriginScale)
+	increaseScale(VGet(0.00001f,0.00001f,0.00001f))
 {
 }
 
@@ -13,7 +13,7 @@ SlowlyChangeScaleComponent::SlowlyChangeScaleComponent(Actor * owner, int setPro
 	ModelComponent(owner, setProcessNumber, scale, fileName),
 	updating(false),
 	scale(OriginScale),
-	increaseScale(OriginScale)
+	increaseScale(VGet(0.001f, 0.001f, 0.001f))
 {
 }
 
