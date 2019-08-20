@@ -21,5 +21,8 @@ private:
 	VECTOR targetPos;
 	VECTOR moveSpeed;
 	float CulculationVector(const float& pos, const float& target);
+
+	float xxxxx;
+	float yyyyy;
 };
 

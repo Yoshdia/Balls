@@ -90,7 +90,8 @@ void Game::DxlibCameraSetting()
 	//ƒJƒƒ‰‚Ì‹–ì”ÍˆÍ‚ğİ’è
 	SetCameraNearFar(nearCameraPos, farCameraPos);
 	//ƒJƒƒ‰‚ÌêŠ‚ğİ’è
-	SetCameraPositionAndTarget_UpVecY(CameraPos, VGet(0, 0, 0));
+	//SetCameraPositionAndTarget_UpVecY(CameraPos, VGet(0, 0, 0));
+	SetCameraPositionAndAngle(CameraPos, 0.3, 0, 0.1);
 }
 
 void Game::DxlibLightSetting()

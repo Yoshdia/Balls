@@ -15,7 +15,7 @@ void GrainBackGroundHaver::Create()
 {
 	for (int num = 0; num < 200; num++)
 	{
-		ground[num] = new GrainBackGround("Resouce/model/normalSphere.mv1", VGet(0.01f, 0.001f, 0.06f));
+		ground[num] = new GrainBackGround("Resouce/model/mqo/ground.mv1", VGet(0.01f, 0.001f, 0.06f));
 	}	
 	for (int num = 0; num < 200; num++)
 	{

@@ -14,7 +14,7 @@
 
 const float DeepestSpawner::Radius = 8;
 const float DeepestSpawner::GrainHeight = 2;
-const float DeepestSpawner::SpawnGroundTime = 12;
+const float DeepestSpawner::SpawnGroundTime = 24;
 const float DeepestSpawner::SpawnBoxTime = 15;
 
 const float DeepestSpawner::SpawnRandomMaxCount = 100;
@@ -29,7 +29,7 @@ const VECTOR DeepestSpawner::StartRunPos = VGet(1, 0, 10);
 
 const int DeepestSpawner::CreateMovePlanCntMax = 600;
 const float DeepestSpawner::MoveStage = 3.0f;
-const VECTOR DeepestSpawner::AdjacentTarget = VGet((7.0f / MoveStage), 3.0, 0);
+const VECTOR DeepestSpawner::AdjacentTarget = VGet((12/* / MoveStage*/), 0, 0);
 const VECTOR DeepestSpawner::MovingSpeed = VGet(1, 1, 0.0f);
 
 const int DeepestSpawner::GroundGrainHeight = 4;
@@ -127,8 +127,8 @@ void DeepestSpawner::CreateMovePlan()
 		}
 		int randy = GetRand(2) - 1;
 		VECTOR targetPos = VGet(0, 0, 0);
-		targetPos.x = AdjacentTarget.x * randx;
-		targetPos.y = AdjacentTarget.y * randy;
+		targetPos.x = AdjacentTarget.x; //*randx;
+		targetPos.y = AdjacentTarget.y;// *randy;
 		headForTargetComponent->SetTargetPos(targetPos);
 		countDownComponent->ResetCount();
 	}
@@ -231,7 +231,7 @@ void DeepestSpawner::GroundGrain(VECTOR grainMiddlePos)
 		float y = -1.2f;
 		VECTOR groundOnPos = VGet(x, y, 0);
 		VECTOR grainPos = (VAdd(position, groundOnPos));
-		VECTOR targetPos = VGet(x, y, -30);
+		VECTOR targetPos = VGet(x, y-1, -30);
 		grain->ResetBackGround(grainPos, targetPos);
 	}
 }

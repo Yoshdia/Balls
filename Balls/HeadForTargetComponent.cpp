@@ -8,6 +8,8 @@ HeadForTargetComponent::HeadForTargetComponent(Actor * owner, int processNumber,
 	,ownerPos(VGet(0,0,0))
 	,moveSpeed(distance)
 {
+	xxxxx = 3;
+	yyyyy = 3;
 }
 
 HeadForTargetComponent::~HeadForTargetComponent()
@@ -20,7 +22,17 @@ void HeadForTargetComponent::HeadForTarget(float deltaTime)
 	float x=CulculationVector(ownerPos.x, targetPos.x);
 	float y=CulculationVector(ownerPos.y, targetPos.y);
 	float z=CulculationVector(ownerPos.z, targetPos.z);
-	VECTOR speed = VGet(x, y, z)*moveSpeed;
+	xxxxx -= 0.01f;
+	if (xxxxx < 0.01f)
+	{
+		xxxxx = 0.01f;
+	}
+	yyyyy -= 0.01f;
+	if (yyyyy < 1)
+	{
+		yyyyy == 0.01f;
+	}
+	VECTOR speed = VGet((xxxxx*xxxxx)*x, (yyyyy*yyyyy)*y, z*moveSpeed.z);
 	MoveComponent::SetMoveSpeed(speed);
 
 	Move(deltaTime);
@@ -29,7 +41,8 @@ void HeadForTargetComponent::HeadForTarget(float deltaTime)
 void HeadForTargetComponent::SetTargetPos(const VECTOR& target)
 {
 	targetPos = target;
-
+	xxxxx = 3;
+	yyyyy = 3;
 }
 
 void HeadForTargetComponent::SetMoveSpeed(const VECTOR& speed)
