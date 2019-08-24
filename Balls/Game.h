@@ -31,6 +31,8 @@ public:
 private:
 	Scene *scene;
 
+	Camera* camera;
+
 	//Dxlib関数にあるそれぞれの設定を行う関数
 	void DxlibWindowSetting();
 	void DxlibCameraSetting();
@@ -56,11 +58,8 @@ private:
 	const int ScreenHeight = 900;
 
 	//カメラの座標
-	const VECTOR CameraPos = VGet(0, 5, -10);
-	//カメラの視野範囲
-	const float nearCameraPos = 1;
-	const float farCameraPos = 1000;
-	const VECTOR LightPos = CameraPos;
+	static const VECTOR CameraPos;
+	static const VECTOR LightPos;
 
 	//プレイヤーの初期座標
 	const VECTOR leftPlayerPos = VGet(-1, 0, 0);

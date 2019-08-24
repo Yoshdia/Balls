@@ -14,13 +14,15 @@
 #include "Score.h"
 #include "EffectFactory.h"
 
+#include "Camera.h"
+
 #include "DeepestSpawner.h"
 //DeltaTimeの計測に必要
 #include <mmsystem.h>
 #pragma comment (lib, "winmm.lib") 
 
-
-
+const VECTOR Game::CameraPos =  VGet(0, 5, -10);
+const VECTOR Game::LightPos = CameraPos;
 
 void Game::MainProcess()
 {
@@ -45,6 +47,8 @@ void Game::MainProcess()
 	//画面更新時にエラーが起きた時か、Escapeキーが押されたら終了
 	while (ScreenUpdate() && InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_ESCAPE] == 0)
 	{
+		camera->Update();
+
 		DrawBox(0, 0, (float)ScreenWidth, boxHeight*3.0f, GetColor(150,150,150), TRUE);
 		DrawBox(0, 0, (float)ScreenWidth, boxHeight*2.0f, GetColor(100,100,100), TRUE);
 		DrawBox(0, 0, (float)ScreenWidth, boxHeight*1.0f, GetColor(50,50,50), TRUE);
@@ -62,6 +66,9 @@ void Game::MainProcess()
 		SceneChange();
 	}
 
+
+	delete camera;
+	camera = nullptr;
 	delete score;
 	score = nullptr;
 	delete scene;
@@ -87,11 +94,7 @@ void Game::DxlibWindowSetting()
 
 void Game::DxlibCameraSetting()
 {
-	//カメラの視野範囲を設定
-	SetCameraNearFar(nearCameraPos, farCameraPos);
-	//カメラの場所を設定
-	//SetCameraPositionAndTarget_UpVecY(CameraPos, VGet(0, 0, 0));
-	SetCameraPositionAndAngle(CameraPos, 0.3, 0, 0.1);
+
 }
 
 void Game::DxlibLightSetting()
@@ -127,6 +130,7 @@ void Game::DeleteSingleTons()
 void Game::CreateFirstActors()
 {
 	deepestSpawner = new DeepestSpawner;
+	camera = new Camera(CameraPos);
 	score = new Score;
 	leftPlayer=new Player(leftPlayerPos, Game::MoveDirection::Left, KEY_INPUT_SPACE);
 	rightPlayer=new Player(rightPlayerPos, Game::MoveDirection::Right, KEY_INPUT_RETURN);
