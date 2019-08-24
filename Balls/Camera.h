@@ -18,6 +18,7 @@ private:
 	static const float farCameraPos;
 	VECTOR position;
 	float rotate;
+
 	float targetRotate;
 	bool plusAddRotate;
 };

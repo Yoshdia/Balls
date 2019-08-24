@@ -11,6 +11,7 @@
 #include "InputKey.h"
 #include "CountDownComponent.h"
 #include "HeadForTargetComponent.h"
+#include "Camera.h"
 
 const float DeepestSpawner::Radius = 8;
 const float DeepestSpawner::GrainHeight = 2;
@@ -29,13 +30,14 @@ const VECTOR DeepestSpawner::StartRunPos = VGet(1, 0, 10);
 
 const int DeepestSpawner::CreateMovePlanCntMax = 600;
 const float DeepestSpawner::MoveStage = 3.0f;
-const VECTOR DeepestSpawner::AdjacentTarget = VGet((12/* / MoveStage*/), 0, 0);
+const VECTOR DeepestSpawner::AdjacentTarget = VGet((12 / MoveStage), 0, 0);
 const VECTOR DeepestSpawner::MovingSpeed = VGet(1, 1, 0.0f);
 
 const int DeepestSpawner::GroundGrainHeight = 4;
 
-DeepestSpawner::DeepestSpawner()
+DeepestSpawner::DeepestSpawner(Camera* pCamera)
 {
+	camera = pCamera;
 	grainCreateAndHaver = new GrainBackGroundHaver();
 	position = VGet(0, 0, 100);
 
@@ -83,7 +85,6 @@ void DeepestSpawner::SpawnerUpdate(float deltaTime)
 void DeepestSpawner::UpdateActor(float deltaTime)
 {
 	DrawSphere3D(position, 5, 255, GetColor(255, 255, 255), GetColor(150, 150, 255), TRUE);
-
 }
 
 void DeepestSpawner::StopDeepestObject()
@@ -112,17 +113,21 @@ void DeepestSpawner::CreateMovePlan()
 		if (randx == 2)
 		{
 			//grainCreateAndHaver->GrainColorChange(GrainBackGround::GrainColor::Red);
+			camera->ChangeRotate(0.2f);
 		}
 		if (randx == 1)
 		{
+			camera->ChangeRotate(0.1f);
 			grainShade = DeepestSpawner::GrainShade::sphere;
 		}
 		if (randx == -1)
 		{
+			camera->ChangeRotate(-0.1f);
 			grainShade = DeepestSpawner::GrainShade::square;
 		}
 		if (randx == -2)
 		{
+			camera->ChangeRotate(-0.2f);
 			//grainCreateAndHaver->GrainColorChange(GrainBackGround::GrainColor::white);
 		}
 		int randy = GetRand(2) - 1;
@@ -144,11 +149,11 @@ void DeepestSpawner::GrainSpawn(float deltaTime)
 		switch (grainShade)
 		{
 		case(GrainShade::sphere):
-			SphereGrain(grainMiddlePos);
+			//SphereGrain(grainMiddlePos);
 			break;
 		case(GrainShade::square):
-			MonotoneGrain(grainMiddlePos, 1);
-			MonotoneGrain(grainMiddlePos, -1);
+			//MonotoneGrain(grainMiddlePos, 1);
+			//MonotoneGrain(grainMiddlePos, -1);
 			break;
 		}
 	}
@@ -231,7 +236,7 @@ void DeepestSpawner::GroundGrain(VECTOR grainMiddlePos)
 		float y = -1.2f;
 		VECTOR groundOnPos = VGet(x, y, 0);
 		VECTOR grainPos = (VAdd(position, groundOnPos));
-		VECTOR targetPos = VGet(x, y-1, -30);
+		VECTOR targetPos = VGet(x, y - 1, -30);
 		grain->ResetBackGround(grainPos, targetPos);
 	}
 }

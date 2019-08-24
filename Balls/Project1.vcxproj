@@ -160,7 +160,6 @@
     <ClCompile Include="BoxColliderComponent.cpp" />
     <ClCompile Include="BoxShape.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Cameras.cpp" />
     <ClCompile Include="Clear.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -203,7 +202,6 @@
     <ClInclude Include="BoxColliderComponent.h" />
     <ClInclude Include="BoxShape.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Cameras.h" />
     <ClInclude Include="Clear.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Component.h" />

@@ -25,7 +25,7 @@ Play::~Play()
 void Play::Update(float deltaTime)
 {
 	deepestSpawner->SpawnerUpdate(deltaTime);
-	gameEnd = Collider::GetInstance()->CollisionCall(score);
+	//gameEnd = Collider::GetInstance()->CollisionCall(score);
 	//gameEndフラグはCollisionCall無いで毎回初期化されているフラグを受け取っているためPlayの終わり以外で初期化されない二虞endingを建てる
 	if (gameEnd)
 	{

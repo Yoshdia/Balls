@@ -129,8 +129,8 @@ void Game::DeleteSingleTons()
 
 void Game::CreateFirstActors()
 {
-	deepestSpawner = new DeepestSpawner;
 	camera = new Camera(CameraPos);
+	deepestSpawner = new DeepestSpawner(camera);
 	score = new Score;
 	leftPlayer=new Player(leftPlayerPos, Game::MoveDirection::Left, KEY_INPUT_SPACE);
 	rightPlayer=new Player(rightPlayerPos, Game::MoveDirection::Right, KEY_INPUT_RETURN);

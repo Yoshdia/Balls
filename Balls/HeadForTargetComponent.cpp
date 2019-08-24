@@ -3,13 +3,13 @@
 
 
 HeadForTargetComponent::HeadForTargetComponent(Actor * owner, int processNumber, VECTOR distance, VECTOR rotateSpeed)
-	:MoveComponent(owner,processNumber,distance,rotateSpeed)
-	,targetPos(VGet(0,0,0))
-	,ownerPos(VGet(0,0,0))
-	,moveSpeed(distance)
+	:MoveComponent(owner, processNumber, distance, rotateSpeed)
+	, targetPos(VGet(0, 0, 0))
+	, ownerPos(VGet(0, 0, 0))
+	, moveSpeed(distance)
+	,plusX(0)
 {
-	xxxxx = 3;
-	yyyyy = 3;
+	
 }
 
 HeadForTargetComponent::~HeadForTargetComponent()
@@ -19,20 +19,17 @@ HeadForTargetComponent::~HeadForTargetComponent()
 void HeadForTargetComponent::HeadForTarget(float deltaTime)
 {
 	ownerPos = ownerActor->GetPosition();
-	float x=CulculationVector(ownerPos.x, targetPos.x);
-	float y=CulculationVector(ownerPos.y, targetPos.y);
-	float z=CulculationVector(ownerPos.z, targetPos.z);
-	xxxxx -= 0.01f;
-	if (xxxxx < 0.01f)
+	float x=CulculationVector(ownerPos.x, targetPos.x,plusAddPosition[0]);
+	//float y=CulculationVector(ownerPos.y, targetPos.y);
+	float y = 0;
+	float z=CulculationVector(ownerPos.z, targetPos.z, plusAddPosition[2]);
+	plusX-=0.01;
+	if (plusX < 0)
 	{
-		xxxxx = 0.01f;
+		plusX = 0.1f;
 	}
-	yyyyy -= 0.01f;
-	if (yyyyy < 1)
-	{
-		yyyyy == 0.01f;
-	}
-	VECTOR speed = VGet((xxxxx*xxxxx)*x, (yyyyy*yyyyy)*y, z*moveSpeed.z);
+
+	VECTOR speed = VGet((plusX*plusX)*x, y, z*moveSpeed.z);
 	MoveComponent::SetMoveSpeed(speed);
 
 	Move(deltaTime);
@@ -41,8 +38,15 @@ void HeadForTargetComponent::HeadForTarget(float deltaTime)
 void HeadForTargetComponent::SetTargetPos(const VECTOR& target)
 {
 	targetPos = target;
-	xxxxx = 3;
-	yyyyy = 3;
+	plusX = 2.23;
+	
+	plusAddPosition[0] = position.x < target.x ? true : false;
+	plusAddPosition[1] = position.y < target.y ? true : false;
+	plusAddPosition[2] = position.z < target.z ? true : false;
+	if (plusAddPosition[0])
+	{
+		int a = 0;
+	}
 }
 
 void HeadForTargetComponent::SetMoveSpeed(const VECTOR& speed)
@@ -51,33 +55,52 @@ void HeadForTargetComponent::SetMoveSpeed(const VECTOR& speed)
 	MoveComponent::SetMoveSpeed(speed);
 }
 
-float HeadForTargetComponent::CulculationVector(const float& pos,const float& target)
+float HeadForTargetComponent::CulculationVector(float& pos,float& target, bool plusAddPosition)
 {
-	bool plus = pos < target ? true : false;
-	float plusPos = 1;
+	//bool plus = pos < target ? true : false;
+	//float plusPos = 1;
 
-	if (plus)
+	//if (plus)
+	//{
+	//	if (target > pos)
+	//	{
+	//		plusPos *= 1;
+	//	}
+	//	else
+	//	{
+	//		plusPos *= 0;
+	//	}
+	//}
+	//else
+	//{
+	//	if (target < pos)
+	//	{
+	//		plusPos *= -1;
+	//	}
+	//	else
+	//	{
+	//		plusPos *= 0;
+	//	}
+	//}
+	//return plusPos;
+
+	if (plusAddPosition)
 	{
-		if (target > pos)
+		if (pos > target)
 		{
-			plusPos *=1;
+			//pos = target;
+			return 0;
 		}
-		else
-		{
-			plusPos *= 0;
-		}
+		return 1;
 	}
 	else
 	{
-		if (target < pos)
+		if (pos < target)
 		{
-			plusPos *= -1;
+			//pos = target;
+			return 0;
 		}
-		else
-		{
-			plusPos *= 0;
-		}
+		return -1;
 	}
-	return plusPos;
 }
 

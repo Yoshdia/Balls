@@ -6,13 +6,14 @@ class Wall;
 #include "Actor.h"
 class HeadForTargetComponent;
 class CountDownComponent;
+class Camera;
 
 //ステージの奥からwallやgrainを産み出すクラス
 class DeepestSpawner
 	:public Actor
 {
 public:
-	DeepestSpawner();
+	DeepestSpawner(Camera* pCamera);
 	~DeepestSpawner();
 
 	void SpawnerUpdate(float deltaTime);
@@ -24,6 +25,7 @@ public:
 	//停止した後移動を再開させる
 	void ReStartDeepestObject();
 private:
+	Camera* camera;
 	//GameSpeesクラスから受け取ったgameSpeedから計算した加速秒数
 	float plusSpeed;
 

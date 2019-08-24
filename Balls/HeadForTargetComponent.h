@@ -20,9 +20,9 @@ private:
 	VECTOR ownerPos;
 	VECTOR targetPos;
 	VECTOR moveSpeed;
-	float CulculationVector(const float& pos, const float& target);
+	float CulculationVector(float& pos, float& target,bool plusAddPosition);
 
-	float xxxxx;
-	float yyyyy;
+	float plusX;
+	bool plusAddPosition[3];
 };
 
