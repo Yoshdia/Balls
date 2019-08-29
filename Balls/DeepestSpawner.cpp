@@ -150,11 +150,11 @@ void DeepestSpawner::GrainSpawn(float deltaTime)
 		switch (grainShade)
 		{
 		case(GrainShade::sphere):
-			//SphereGrain(grainMiddlePos);
+			SphereGrain(grainMiddlePos);
 			break;
 		case(GrainShade::square):
-			//MonotoneGrain(grainMiddlePos, 1);
-			//MonotoneGrain(grainMiddlePos, -1);
+			MonotoneGrain(grainMiddlePos, 1);
+			MonotoneGrain(grainMiddlePos, -1);
 			break;
 		}
 	}
