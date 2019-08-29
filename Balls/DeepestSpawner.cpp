@@ -15,7 +15,7 @@
 
 const float DeepestSpawner::Radius = 8;
 const float DeepestSpawner::GrainHeight = 2;
-const float DeepestSpawner::SpawnGroundTime = 24;
+const float DeepestSpawner::SpawnGroundTime = 10;
 const float DeepestSpawner::SpawnBoxTime = 15;
 
 const float DeepestSpawner::SpawnRandomMaxCount = 100;
@@ -30,8 +30,8 @@ const VECTOR DeepestSpawner::StartRunPos = VGet(1, 0, 10);
 
 const int DeepestSpawner::CreateMovePlanCntMax = 600;
 const float DeepestSpawner::MoveStage = 3.0f;
-const VECTOR DeepestSpawner::AdjacentTarget = VGet((10 / MoveStage), 0, 0);
-const VECTOR DeepestSpawner::MovingSpeed = VGet(1, 1, 0.0f);
+const VECTOR DeepestSpawner::AdjacentTarget = VGet((14 / MoveStage), 0, 0);
+const VECTOR DeepestSpawner::MovingSpeed = VGet(3, 1, 0.0f);
 
 const int DeepestSpawner::GroundGrainHeight = 4;
 

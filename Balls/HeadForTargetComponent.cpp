@@ -20,8 +20,8 @@ void HeadForTargetComponent::HeadForTarget(float deltaTime)
 {
 	ownerPos = ownerActor->GetPosition();
 	float x=CulculationVector(ownerPos.x, targetPos.x,plusAddPosition[0]);
-	float y=CulculationVector(ownerPos.y, targetPos.y,plusAddPosition[1]);
-	//float y = 0;
+	//float y=CulculationVector(ownerPos.y, targetPos.y,plusAddPosition[1]);
+	float y = 0;
 	float z=CulculationVector(ownerPos.z, targetPos.z, plusAddPosition[2]);
 	plusX-=0.01f;
 	if (plusX < 0)
@@ -29,7 +29,7 @@ void HeadForTargetComponent::HeadForTarget(float deltaTime)
 		plusX = 0.1f;
 	}
 
-	VECTOR speed = VGet((plusX*plusX)*x, y, z*moveSpeed.z);
+	VECTOR speed = VGet((plusX*plusX)*x,(plusX*plusX)* y, z*moveSpeed.z);
 	MoveComponent::SetMoveSpeed(speed);
 
 	Move(deltaTime);
@@ -38,7 +38,7 @@ void HeadForTargetComponent::HeadForTarget(float deltaTime)
 void HeadForTargetComponent::SetTargetPos(const VECTOR& target)
 {
 	targetPos = target;
-	plusX = 2.23f;
+	plusX = sqrt(moveSpeed.x);
 	
 	plusAddPosition[0] = false;
 	plusAddPosition[1] = false;
