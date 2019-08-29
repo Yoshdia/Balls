@@ -53,7 +53,7 @@ private:
 
 	static const int superCountMax;
 	static const int superEndLikeryCount;
-	static const int superEndCount;
+	static const float superEndCount;
 
 };
 

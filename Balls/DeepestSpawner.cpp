@@ -30,7 +30,7 @@ const VECTOR DeepestSpawner::StartRunPos = VGet(1, 0, 10);
 
 const int DeepestSpawner::CreateMovePlanCntMax = 600;
 const float DeepestSpawner::MoveStage = 3.0f;
-const VECTOR DeepestSpawner::AdjacentTarget = VGet((12 / MoveStage), 0, 0);
+const VECTOR DeepestSpawner::AdjacentTarget = VGet((10 / MoveStage), 0, 0);
 const VECTOR DeepestSpawner::MovingSpeed = VGet(1, 1, 0.0f);
 
 const int DeepestSpawner::GroundGrainHeight = 4;
@@ -53,7 +53,7 @@ DeepestSpawner::DeepestSpawner(Camera* pCamera)
 	groundSpawnCountDown->ResetCount();
 	boxSpawnCountDown = new CountDownComponent(SpawnBoxTime);
 	boxSpawnCountDown->ResetCount();
-	randomSpawnCountDown = new CountDownComponent(GetRand((int)SpawnRandomMaxCount));
+	randomSpawnCountDown = new CountDownComponent((float)GetRand((int)SpawnRandomMaxCount));
 	randomSpawnCountDown->ResetCount();
 	headForTargetComponent = new HeadForTargetComponent(this, 120, MovingSpeed, VGet(0, 0, 0));
 }
@@ -113,27 +113,28 @@ void DeepestSpawner::CreateMovePlan()
 		if (randx == 2)
 		{
 			//grainCreateAndHaver->GrainColorChange(GrainBackGround::GrainColor::Red);
-			camera->ChangeRotate(0.2f);
+			//camera->ChangeRotate(0.2f);
 		}
 		if (randx == 1)
 		{
-			camera->ChangeRotate(0.1f);
+			//camera->ChangeRotate(0.1f);
 			grainShade = DeepestSpawner::GrainShade::sphere;
 		}
 		if (randx == -1)
 		{
-			camera->ChangeRotate(-0.1f);
+			//camera->ChangeRotate(-0.1f);
 			grainShade = DeepestSpawner::GrainShade::square;
 		}
 		if (randx == -2)
 		{
-			camera->ChangeRotate(-0.2f);
+			//camera->ChangeRotate(-0.2f);
 			//grainCreateAndHaver->GrainColorChange(GrainBackGround::GrainColor::white);
 		}
+		camera->ChangeRotate(randx*0.1f);
 		int randy = GetRand(2) - 1;
 		VECTOR targetPos = VGet(0, 0, 0);
-		targetPos.x = AdjacentTarget.x; //*randx;
-		targetPos.y = AdjacentTarget.y;// *randy;
+		targetPos.x = AdjacentTarget.x*randx;
+		targetPos.y = AdjacentTarget.y *randy;
 		headForTargetComponent->SetTargetPos(targetPos);
 		countDownComponent->ResetCount();
 	}

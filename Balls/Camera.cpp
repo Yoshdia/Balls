@@ -4,7 +4,7 @@
 
 const float Camera::nearCameraPos = 1;
 const float Camera::farCameraPos = 1000;
-const float Camera::addRotate = 0.01f;
+const float Camera::addRotate = 0.001f;
 
 Camera::Camera(VECTOR cameraPos) :
 	position(cameraPos),
@@ -28,7 +28,7 @@ void Camera::Update()
 {
 	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_Z] > 0)
 	{
-		ChangeRotate(-0.1);
+		ChangeRotate(-0.1f);
 	}
 	if (InputKey::GetInstance()->GetAllInputKey()[KEY_INPUT_X] > 0)
 	{
@@ -53,14 +53,14 @@ void Camera::ChangeRotate(float rotate)
 
 void Camera::SetCameraPosition()
 {
-	SetCameraPositionAndAngle(position, 0.3, 0, rotate);
+	SetCameraPositionAndAngle(position, 0.3f, 0, rotate);
 }
 
 #include"main.h"
 
 bool Camera::HeadForTargetRotate()
 {
-	if (int(rotate * 10)  == int(targetRotate * 10))
+	if (int(rotate * 100)  == int(targetRotate * 100))
 	{
 		rotate = targetRotate;
 		return true;

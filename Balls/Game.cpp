@@ -49,9 +49,9 @@ void Game::MainProcess()
 	{
 		camera->Update();
 
-		DrawBox(0, 0, (float)ScreenWidth, boxHeight*3.0f, GetColor(150,150,150), TRUE);
-		DrawBox(0, 0, (float)ScreenWidth, boxHeight*2.0f, GetColor(100,100,100), TRUE);
-		DrawBox(0, 0, (float)ScreenWidth, boxHeight*1.0f, GetColor(50,50,50), TRUE);
+		DrawBox(0, 0, ScreenWidth, (int)(boxHeight*3.0f), GetColor(150,150,150), TRUE);
+		DrawBox(0, 0, ScreenWidth, (int)(boxHeight*2.0f), GetColor(100,100,100), TRUE);
+		DrawBox(0, 0, ScreenWidth, (int)(boxHeight*1.0f), GetColor(50,50,50), TRUE);
 
 		DeltaTimeSet(nowTick, prevTick);
 				
