@@ -30,7 +30,7 @@ void SphereColliderComponent::Update(float deltaTime)
 void SphereColliderComponent::OutOfScreen()
 {
 	EffectFactory::GetInstance()->PopEffect(ownerActor->GetPosition(), EffectFactory::Effects::Block);
-	ownerActor->SetPosition(VGet(0, 10, 0));
+	ownerActor->SetPosition(VGet(0, 15, 0));
 }
 
 void SphereColliderComponent::UpdatePosition()

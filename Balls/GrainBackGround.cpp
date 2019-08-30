@@ -12,7 +12,7 @@
 //	z *= mag;
 //}
 
-const VECTOR GrainBackGround::MoveSpeed= VGet(5.0f, 5, 30.0f);
+const VECTOR GrainBackGround::MoveSpeed= VGet(4.5, 5, 30.0f);
 
 GrainBackGround::GrainBackGround(const std::string & fileName, const VECTOR& modelScale)
 	:BackGround(MoveSpeed)

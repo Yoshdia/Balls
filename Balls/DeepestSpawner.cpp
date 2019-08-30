@@ -29,9 +29,8 @@ const float DeepestSpawner::SpawnTime = 60;
 const VECTOR DeepestSpawner::StartRunPos = VGet(1, 0, 10);
 
 const int DeepestSpawner::CreateMovePlanCntMax = 600;
-const float DeepestSpawner::MoveStage = 3.0f;
-const VECTOR DeepestSpawner::AdjacentTarget = VGet((14 / MoveStage), 0, 0);
-const VECTOR DeepestSpawner::MovingSpeed = VGet(3, 1, 0.0f);
+const VECTOR DeepestSpawner::AdjacentTarget = VGet((3.0f), 0, 0);
+const VECTOR DeepestSpawner::MovingSpeed = VGet(3.0f, 1, 0.0f);
 
 const int DeepestSpawner::GroundGrainHeight = 4;
 
@@ -109,7 +108,7 @@ void DeepestSpawner::CreateMovePlan()
 {
 	if (countDownComponent->CountEnd())
 	{
-		int randx = GetRand(7) - 3;
+		int randx = GetRand(5) - 2;
 		if (randx == 2)
 		{
 			//grainCreateAndHaver->GrainColorChange(GrainBackGround::GrainColor::Red);
