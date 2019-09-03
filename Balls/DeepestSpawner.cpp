@@ -89,8 +89,10 @@ void DeepestSpawner::UpdateActor(float deltaTime)
 void DeepestSpawner::StopDeepestObject()
 {
 	headForTargetComponent->SetMoveSpeed(VGet(0, 0, 0));
+	position = VGet(0,0,100);
 	wallCreateAndHaver->AllWallsStop();
 	grainCreateAndHaver->AllGrainsStop();
+	camera->ChangeRotate(0);
 }
 
 void DeepestSpawner::ClearDeepestObject()

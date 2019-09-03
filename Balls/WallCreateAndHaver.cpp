@@ -100,7 +100,7 @@ void WallCreateAndHaver::AllWallsStop()
 	{
 		wall->StopMove();
 	}
-	for (auto wall : addPointWalls)
+	for (auto wall : addSpeedWalls)
 	{
 		wall->StopMove();
 	}
