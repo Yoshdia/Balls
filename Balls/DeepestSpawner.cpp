@@ -54,7 +54,8 @@ DeepestSpawner::DeepestSpawner(Camera* pCamera)
 	boxSpawnCountDown->ResetCount();
 	randomSpawnCountDown = new CountDownComponent((float)GetRand((int)SpawnRandomMaxCount));
 	randomSpawnCountDown->ResetCount();
-	headForTargetComponent = new HeadForTargetComponent(this, 120, MovingSpeed, VGet(0, 0, 0));
+	headForTargetComponent = new HeadForTargetComponent(this, 120, OriginPos, VGet(0, 0, 0));
+	headForTargetComponent->SetTargetPos(VGet(0, 0, 100));
 }
 
 DeepestSpawner::~DeepestSpawner()
@@ -104,6 +105,7 @@ void DeepestSpawner::ReStartDeepestObject()
 {
 	headForTargetComponent->SetMoveSpeed(MovingSpeed);
 	grainCreateAndHaver->AllGrainReStart();
+	countDownComponent->ResetCount();
 }
 
 void DeepestSpawner::CreateMovePlan()

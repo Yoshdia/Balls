@@ -12,5 +12,8 @@ public:
 	void Update(float deltaTime);
 	void Render();
 	sceneName SceneChange();
+private:
+	int *titleImg;
+	int *enterImg;
 };
 

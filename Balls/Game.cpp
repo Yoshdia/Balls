@@ -23,6 +23,8 @@
 
 const VECTOR Game::CameraPos =  VGet(0, 5, -10);
 const VECTOR Game::LightPos = CameraPos;
+const int Game::ScreenWidth = 1080;
+const int Game::ScreenHeight = 900;
 
 void Game::MainProcess()
 {
@@ -36,7 +38,7 @@ void Game::MainProcess()
 	CreateFirstActors();
 
 	//Å‰‚ÌƒV[ƒ“‚ğì¬
-	scene = new Play(deepestSpawner, leftPlayer,rightPlayer,score);
+	scene = new Title(deepestSpawner, leftPlayer,rightPlayer,score);
 
 	//deltaTime‚ÌŒv‘ª
 	DWORD nowTick, prevTick;

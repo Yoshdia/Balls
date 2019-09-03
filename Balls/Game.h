@@ -28,6 +28,10 @@ public:
 
 	void ShutDown();
 
+	//スクリーンサイズ
+	static const int ScreenWidth ;
+	static const int ScreenHeight;
+
 private:
 	Scene *scene;
 
@@ -53,9 +57,7 @@ private:
 	//時間計測
 	void DeltaTimeSet(DWORD &nowTick, DWORD &prevTick);
 
-	//スクリーンサイズ
-	const int ScreenWidth = 1080;
-	const int ScreenHeight = 900;
+
 
 	//カメラの座標
 	static const VECTOR CameraPos;
